@@ -672,7 +672,7 @@ public partial class LegacyRunner : Node3D
 			throw Logger.Error($"Could not load skin; {exception.Message}");
 		}
 
-		string space = settings.Space == "skin" ? SkinProfile.Space : settings.Space;
+		string space = settings.Space == "skin" ? SkinProfile.GameSpace : settings.Space;
 
 		if (space != "void")
 		{

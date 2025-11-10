@@ -1,0 +1,51 @@
+[gd_scene load_steps=10 format=3 uid="uid://t8stmueifd3q"]
+
+[ext_resource type="Script" uid="uid://bqd3px7xcwow5" path="res://scripts/spaces/waves/Waves.gd" id="1_m5heb"]
+[ext_resource type="Shader" uid="uid://c0caw7os4jvr4" path="res://scripts/shaders/sky_noise_waves.gdshader" id="2_ewipa"]
+[ext_resource type="Script" uid="uid://8rok6tmd2gnu" path="res://scripts/spaces/waves/WorldEnvironment.gd" id="3_56okg"]
+[ext_resource type="Shader" uid="uid://1vvyfqyj0n87" path="res://scripts/shaders/water_ripple.gdshader" id="4_jaxqn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s7g12"]
+shader = ExtResource("2_ewipa")
+shader_parameter/opacity = 1.0
+shader_parameter/coverage = 1.0
+shader_parameter/background_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Sky" id="Sky_cqp65"]
+sky_material = SubResource("ShaderMaterial_s7g12")
+
+[sub_resource type="Environment" id="Environment_su0lf"]
+background_mode = 2
+sky = SubResource("Sky_cqp65")
+glow_enabled = true
+glow_intensity = 0.5
+glow_strength = 2.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_plddw"]
+render_priority = 0
+shader = ExtResource("4_jaxqn")
+shader_parameter/water_color = Color(0, 0, 0, 1)
+shader_parameter/fresnel_strength = 0.25
+shader_parameter/fresnel_color = Color(0.1, 0.05, 0.1, 1)
+shader_parameter/echo = 0.0
+shader_parameter/echo_color = Color(1, 0.2, 0.25, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_and4y"]
+material = SubResource("ShaderMaterial_plddw")
+size = Vector2(4000, 4000)
+
+[node name="Waves" type="Node3D"]
+script = ExtResource("1_m5heb")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_su0lf")
+script = ExtResource("3_56okg")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9659258, -0.25881904, 0, 0.25881904, 0.9659258, 0, 2, 0)
+fov = 70.0
+
+[node name="Water" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.01, 0)
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_and4y")

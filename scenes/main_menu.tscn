@@ -190,6 +190,7 @@ access = 2
 use_native_dialog = true
 
 [node name="Background" type="ColorRect" parent="."]
+visible = false
 z_index = -10
 material = SubResource("ShaderMaterial_2672j")
 layout_mode = 1

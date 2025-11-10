@@ -7,6 +7,8 @@ public partial class SceneManager : Node
 
     private static SubViewport backgroundViewport;
 
+    private static Node3D space;
+
     private static string activeScenePath;
 
     private static bool skipNextTransition = false;
@@ -26,6 +28,8 @@ public partial class SceneManager : Node
         backgroundContainer = Node.GetNode<SubViewportContainer>("Background");
 
         backgroundViewport = backgroundContainer.GetNode<SubViewport>("SubViewport");
+
+        space = backgroundContainer.GetNode<Node3D>("Waves");
 
         Load("res://scenes/loading.tscn", true);
 
@@ -84,6 +88,18 @@ public partial class SceneManager : Node
         }
 
         var node = ResourceLoader.Load<PackedScene>(path).Instantiate();
+
+        // temporary background space fix
+        if (Scene != null)
+        {
+            if (Scene.Name == "SceneMenu")
+            {
+                backgroundContainer.RemoveChild(space);
+            } else if (space.GetParent() != backgroundContainer) {
+                backgroundContainer.AddChild(space);
+            }
+        }
+        //
 
         activeScenePath = path;
         Scene = node;
