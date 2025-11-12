@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Godot;
 
-
 public partial class NoteRenderer : Renderer
 {
     private MultiMeshInstance3D noteMesh { get; set; }
@@ -84,9 +83,9 @@ public partial class NoteRenderer : Renderer
 
                 foreach (Mod mod in attempt.Mods)
                 {
-                    if (mod is IHitObjectModifier<Note> modifier)
+                    if (mod is IObjectRenderModifier<Note> modifier)
                     {
-                        modifier.ModifyHitObject(note, color, depth, attempt);
+                        modifier.ApplyRenderObject(note, color, depth, attempt);
                     }
                 }
             }

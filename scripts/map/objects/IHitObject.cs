@@ -20,4 +20,14 @@ public interface IHitObject : ITimelineObject
     ///// Hit window for the <see cref="IHitObject"/>
     ///// </summary>
     //int HitWindow { get; }
+
+    /// <summary>
+    /// Hit result of the <see cref="IHitObject"/>
+    /// </summary>
+    bool Hit { get; }
+
+    /// <summary>
+    /// Whether the <see cref="IHitObject"/> can be hit
+    /// </summary>
+    bool Hittable { get; }
 }

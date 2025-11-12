@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Godot;
 
-public struct Note : IHitObject, ITweenableObject<NoteTween>, IComparable<Note>
+public class Note : IHitObject, ITweenableObject<NoteTween>, IComparable<Note>
 {
     public int Id => (int)ObjectType.Note;
 
@@ -31,8 +31,6 @@ public struct Note : IHitObject, ITweenableObject<NoteTween>, IComparable<Note>
         X = x;
         Y = y;
     }
-
-    public override readonly string ToString() => $"({X}, {Y}) @{Millisecond}ms";
 
     public int CompareTo(Note other)
     {

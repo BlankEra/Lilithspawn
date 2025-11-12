@@ -3,7 +3,9 @@ using System;
 
 public class CameraSpin : CameraMode
 {
-    public override bool Rankable => false;
+    public override string Name => "Spin";
+
+    public override bool Rankable => true;
 
     public override void Process(Attempt attempt, Camera3D camera, Vector2 mouseDelta)
     {

@@ -3,6 +3,8 @@ using System;
 
 public class CameraLock : CameraMode
 {
+    public override string Name => "Lock";
+
     public override bool Rankable => true;
 
     public override void Process(Attempt attempt, Camera3D camera, Vector2 mouseDelta)

@@ -19,12 +19,21 @@ public partial class GameComponent : Node3D
     [Export]
     public Array<Renderer> Renderers { get; set; }
 
+    public HealthJudgement HealthProcessor { get; } = new HealthJudgement();
+
+    public HitJudgement HitJudgement { get; } = new HitJudgement();
+
     public bool Playing { get; private set; } = true;
 
     public Attempt CurrentAttempt { get; private set; } = new();
 
     public void Play(Attempt attempt)
     {
+        Input.MouseMode = CurrentAttempt.Settings.AbsoluteInput ? Input.MouseModeEnum.ConfinedHidden : Input.MouseModeEnum.Captured;
+        Input.UseAccumulatedInput = false;
+
+        HealthProcessor.ApplyAttempt(attempt);
+
         ApplySettings(attempt.Settings);
     }
 
@@ -35,15 +44,25 @@ public partial class GameComponent : Node3D
         // Automatically attempt to start the game if standalone
         if (Standalone)
         {
-            Input.MouseMode = CurrentAttempt.Settings.AbsoluteInput ? Input.MouseModeEnum.ConfinedHidden : Input.MouseModeEnum.Captured;
-            Input.UseAccumulatedInput = false;
+            // Play(MapManager.QueuedAttempt()]) -- MapManager will hold a Queue of attempts to play
         }
     }
 
     public override void _Process(double delta)
     {
-        // Modify Attempt based on game logic loop
-        // ProcessLogic(CurrentAttempt);
+        //  Psuedocode logic for the attempt
+        //  
+        //  bool[] hitResults = HitJudgment.ProcessHitJudgements(CurrentAttempt);
+        //  foreach (var result in hitResults)
+        //  {
+        //      HealthJudgment.ApplyHitObjectResult(result);
+        //      ScoreJudgment.ApplyHitObjectResult(result);
+        //  }
+        //
+        //  CurrentAttempt.Health = HealthJudgment.Health;
+        //  CurrentAttempt.Score = ScoreJudgment.Score;
+        //
+        //  if (HealthJudgment.IsFail) { Handle fail logic }
 
         // Update rendering (notes/objects) on attempt state
         foreach (var renderer in Renderers)
@@ -76,6 +95,8 @@ public partial class GameComponent : Node3D
 
     public override void _Input(InputEvent @event)
     {
+        if (!Playing || !Standalone) { return; }
+
         if (@event is InputEventMouseMotion eventMouseMotion && Playing)
         {
             CurrentAttempt.CameraMode.Process(CurrentAttempt, Camera, eventMouseMotion.Relative);
