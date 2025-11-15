@@ -1,7 +1,8 @@
-[gd_scene load_steps=63 format=3 uid="uid://do18270a428ma"]
+[gd_scene load_steps=64 format=3 uid="uid://do18270a428ma"]
 
 [ext_resource type="Shader" uid="uid://c7ldko1kfg2ho" path="res://scripts/shaders/noise_waves.gdshader" id="1_3wgol"]
 [ext_resource type="Script" uid="uid://ci5tsr20d66sa" path="res://scripts/ui/menu/MainMenu.gd" id="1_vr8o3"]
+[ext_resource type="Script" uid="uid://bqyhjsfnvfp4e" path="res://scripts/ui/menu/ImportDialog.gd" id="2_hl5e0"]
 [ext_resource type="Shader" uid="uid://cqqs8uux7hqyb" path="res://scripts/shaders/ui_blur.gdshader" id="4_1a85y"]
 [ext_resource type="FontFile" uid="uid://dotb3skhwouha" path="res://fonts/Roboto-Bold.ttf" id="5_hl5e0"]
 [ext_resource type="Theme" uid="uid://dhuhu3mmaew1a" path="res://theme/theme.tres" id="6_engjn"]
@@ -174,8 +175,9 @@ theme = SubResource("Theme_nlclj")
 ok_button_text = "Open"
 file_mode = 1
 access = 2
-filters = PackedStringArray("*.sspm", "*.phxm")
+filters = PackedStringArray("*.sspm", "*.phxm", "*.txt")
 use_native_dialog = true
+script = ExtResource("2_hl5e0")
 
 [node name="VideoDialog" type="FileDialog" parent="."]
 auto_translate_mode = 1
@@ -2367,7 +2369,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[connection signal="file_selected" from="ImportDialog" to="." method="_on_file_dialog_file_selected"]
+[connection signal="files_selected" from="ImportDialog" to="ImportDialog" method="_files_selected"]
 [connection signal="file_selected" from="VideoDialog" to="." method="_on_file_dialog_file_selected"]
 [connection signal="mouse_entered" from="Menus/Extras/SoundSpace" to="Menus/Extras/SoundSpace" method="_mouse_entered"]
 [connection signal="mouse_exited" from="Menus/Extras/SoundSpace" to="Menus/Extras/SoundSpace" method="_mouse_exited"]
