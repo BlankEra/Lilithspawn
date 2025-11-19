@@ -8,6 +8,12 @@ public partial class SkinManager : Node
 {
     public static SkinManager Instance { get; private set; }
 
+	[Signal]
+	public delegate void OnSavedEventHandler();
+
+	[Signal]
+	public delegate void OnLoadedEventHandler();
+
     public SkinProfile Skin { get; set; } = new SkinProfile();
 
     public override void _Ready()
@@ -23,6 +29,8 @@ public partial class SkinManager : Node
 		File.WriteAllText($"{Constants.USER_FOLDER}/skins/{settings.Skin}/colors.txt", skin.RawColors);
 		File.WriteAllText($"{Constants.USER_FOLDER}/skins/{settings.Skin}/space.txt", skin.GameSpaceName);
 		Logger.Log($"Saved skin {settings.Skin}");
+
+		Instance.EmitSignal(SignalName.OnSaved);
 	}
 
 	public static void Load()
@@ -87,5 +95,7 @@ public partial class SkinManager : Node
 
 		ToastNotification.Notify($"Loaded skin [{settings.Skin}]");
 		Logger.Log($"Loaded skin {settings.Skin}");
+
+		Instance.EmitSignal(SignalName.OnLoaded);
 	}
 }

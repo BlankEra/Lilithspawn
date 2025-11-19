@@ -25,9 +25,12 @@ public partial class SceneManager : Node
         }
 
         Node = this;
+        
         backgroundContainer = Node.GetNode<SubViewportContainer>("Background");
 
         backgroundViewport = backgroundContainer.GetNode<SubViewport>("SubViewport");
+
+        AddChild(SettingsManager.Menu);
 
         Load("res://scenes/loading.tscn", true);
 

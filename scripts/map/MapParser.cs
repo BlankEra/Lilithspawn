@@ -7,22 +7,22 @@ using Godot;
 
 public partial class MapParser : Node
 {
-    public static Dictionary<string, bool> BulkImport(string[] files)
+    public static void BulkImport(string[] files)
     {
         double start = Time.GetTicksUsec();
         int good = 0;
         int corrupted = 0;
-        Dictionary<string, bool> results = [];
+        //Dictionary<string, bool> results = [];
 
         foreach (string file in files)
         {
-            results[file] = false;
+            //results[file] = false;
 
             try
             {
                 Decode(file, null, false);
                 good++;
-                results[file] = true;
+                //results[file] = true;
             }
             catch
             {
@@ -33,7 +33,7 @@ public partial class MapParser : Node
 
         Logger.Log($"BULK IMPORT: {(Time.GetTicksUsec() - start) / 1000}ms; TOTAL: {good + corrupted}; CORRUPT: {corrupted}");
 
-        return results;
+        //return results;
     }
 
     public static void Encode(Map map, bool logBenchmark = true)

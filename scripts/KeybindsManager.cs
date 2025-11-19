@@ -35,11 +35,11 @@ public partial class KeybindsManager : Node
                 settings.Fullscreen = value;
                 DisplayServer.WindowSetMode(value ? DisplayServer.WindowMode.ExclusiveFullscreen : DisplayServer.WindowMode.Windowed);
 
-                if (SceneManager.Scene.Name == "SceneMenu")
-                {
-                    SettingsManager.UpdateSettings();
-                    MainMenu.UpdateSpectrumSpacing();
-                }
+                // if (SceneManager.Scene.Name == "SceneMenu")
+                // {
+                //     SettingsManager.UpdateSettings();
+                //     MainMenu.UpdateSpectrumSpacing();
+                // }
             }
         }
     }

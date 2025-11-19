@@ -261,7 +261,7 @@ public partial class MainMenu : Control
 		};
 		buttons.GetNode<Button>("Settings").Pressed += () =>
 		{
-			SettingsManager.ShowSettings();
+			SettingsManager.ShowMenu();
 		};
 		buttons.GetNode<Button>("Extras").Pressed += () =>
 		{
@@ -466,7 +466,7 @@ public partial class MainMenu : Control
 		};
 		SettingsButton.Pressed += () =>
 		{
-			SettingsManager.ShowSettings();
+			SettingsManager.ShowMenu();
 		};
 		SearchEdit.TextChanged += (string text) =>
 		{
@@ -916,7 +916,7 @@ public partial class MainMenu : Control
 					SoundManager.LastRewind = now;
 					break;
 				default:
-					if (SettingsManager.FocusedLineEdit == null && !SearchAuthorEdit.HasFocus() && !SpeedEdit.HasFocus() && !StartFromEdit.HasFocus() && !eventKey.CtrlPressed && !eventKey.AltPressed && eventKey.Keycode != Key.Ctrl && eventKey.Keycode != Key.Shift && eventKey.Keycode != Key.Alt && eventKey.Keycode != Key.Escape && eventKey.Keycode != Key.Enter && eventKey.Keycode != Key.F11)
+					if (!SearchAuthorEdit.HasFocus() && !SpeedEdit.HasFocus() && !StartFromEdit.HasFocus() && !eventKey.CtrlPressed && !eventKey.AltPressed && eventKey.Keycode != Key.Ctrl && eventKey.Keycode != Key.Shift && eventKey.Keycode != Key.Alt && eventKey.Keycode != Key.Escape && eventKey.Keycode != Key.Enter && eventKey.Keycode != Key.F11)
 					{
 						SearchEdit.GrabFocus();
 					}
@@ -986,7 +986,7 @@ public partial class MainMenu : Control
 				switch (eventKey.Keycode)
 				{
 					case Key.O:
-						SettingsManager.ShowSettings(!SettingsManager.Shown);
+						SettingsManager.ShowMenu(!SettingsManager.Shown);
 						break;
 				}
 			}
@@ -996,7 +996,7 @@ public partial class MainMenu : Control
 				case Key.Escape:
 					if (SettingsManager.Shown)
 					{
-						SettingsManager.HideSettings();
+						SettingsManager.HideMenu();
 					}
 					else
 					{
@@ -1023,7 +1023,7 @@ public partial class MainMenu : Control
 		}
 	}
 
-	public static Dictionary<string, bool> Import(string[] files)
+	public static void Import(string[] files)
 	{
 		List<string> maps = [];
 
@@ -1035,11 +1035,12 @@ public partial class MainMenu : Control
 			}
 		}
 
-		Dictionary<string, bool> results = MapParser.BulkImport([.. maps]);
+		//Dictionary<string, bool> results = MapParser.BulkImport([.. maps]);
+		MapParser.BulkImport([.. maps]);
 
 		if (maps.Count == 0)
 		{
-			return results;
+			//return results;
 		}
 
 		SoundManager.UpdateJukeboxQueue();
@@ -1051,7 +1052,7 @@ public partial class MainMenu : Control
 			Select(maps[0].GetFile().GetBaseName(), true);
 		}
 
-		return results;
+		//return results;
 	}
 
 	public static void Search()
@@ -1238,10 +1239,10 @@ public partial class MainMenu : Control
 				break;
 		}
 
-		if (SettingsManager.FocusedLineEdit != null)
-		{
-			SettingsManager.FocusedLineEdit.ReleaseFocus();
-		}
+		// if (SettingsManager.FocusedLineEdit != null)
+		// {
+		// 	SettingsManager.FocusedLineEdit.ReleaseFocus();
+		// }
 
 		Tween outTween = Control.CreateTween();
 
@@ -1279,7 +1280,7 @@ public partial class MainMenu : Control
 	{
 		var settings = SettingsManager.Instance.Settings;
 
-		SettingsManager.Holder.GetNode("Categories").GetNode("Audio").GetNode("Container").GetNode("VolumeMaster").GetNode<HSlider>("HSlider").Value = settings.VolumeMaster;
+		// SettingsManager.Holder.GetNode("Categories").GetNode("Audio").GetNode("Container").GetNode("VolumeMaster").GetNode<HSlider>("HSlider").Value = settings.VolumeMaster;
 	}
 
 	public static void UpdateMapList()

@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://dkxy83ajqf2kq"]
+[gd_scene load_steps=15 format=3 uid="uid://dkxy83ajqf2kq"]
 
 [ext_resource type="Theme" uid="uid://dhuhu3mmaew1a" path="res://theme/theme.tres" id="1_8p7x0"]
+[ext_resource type="Script" uid="uid://8g3xqdpoywjn" path="res://scripts/ui/Settings.gd" id="1_epys8"]
 [ext_resource type="FontFile" uid="uid://bopde8iqsld1o" path="res://fonts/Ubuntu-Regular.ttf" id="2_cmtjb"]
 [ext_resource type="Theme" uid="uid://birpbaoexunde" path="res://theme/settings_categories_theme.tres" id="3_esq7m"]
 [ext_resource type="Texture2D" uid="uid://men3chmi3esy" path="res://textures/add.png" id="4_fgxmn"]
@@ -41,6 +42,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0.501961)
+script = ExtResource("1_epys8")
 
 [node name="Deselect" type="Button" parent="."]
 self_modulate = Color(1, 1, 1, 0)
@@ -50,7 +52,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 action_mode = 0
 button_mask = 3
 

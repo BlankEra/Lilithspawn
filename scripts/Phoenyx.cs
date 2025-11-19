@@ -15,6 +15,8 @@ public partial class Phoenyx : Node
 
     public override void _Ready()
     {
+        GetTree().AutoAcceptQuit = false;
+        
         Setup();
     }
 
@@ -154,7 +156,7 @@ public partial class Phoenyx : Node
             Stats.Save();
         }
 
-        SettingsManager.UpdateSettings();
+        // SettingsManager.UpdateSettings();
         Stats.GamesOpened++;
 
         List<string> import = [];

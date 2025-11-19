@@ -22,8 +22,13 @@ config/icon="uid://bwygmhmegsm4f"
 
 [autoload]
 
+Constants="*res://scripts/Constants.cs"
 Keybinds="*res://scripts/KeybindsManager.cs"
+SceneManager="*res://scripts/SceneManager.cs"
+SettingsManager="*res://scripts/SettingsManager.cs"
 SkinManager="*res://scripts/skinning/SkinManager.cs"
+SoundManager="*res://scripts/SoundManager.cs"
+MapParser="*res://scripts/map/MapParser.cs"
 ToastNotification="*res://scripts/ToastNotification.cs"
 SoundManager="*res://scripts/SoundManager.cs"
 SettingsManager="*res://scripts/SettingsManager.cs"
