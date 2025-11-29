@@ -20,7 +20,7 @@
 [ext_resource type="Shader" uid="uid://bp2sv5ynsubi2" path="res://scripts/shaders/alpha_gradient.gdshader" id="14_3xchs"]
 [ext_resource type="Texture2D" uid="uid://c3x2cp3tx4vqt" path="res://skin/misses.png" id="14_bqf11"]
 [ext_resource type="Shader" uid="uid://bx4888tau78tk" path="res://scripts/shaders/combo_progress.gdshader" id="14_y51pe"]
-[ext_resource type="Texture2D" uid="uid://lfj8i1bi6kfs" path="res://textures/pause.png" id="23_7silw"]
+[ext_resource type="Texture2D" uid="uid://lfj8i1bi6kfs" path="res://textures/ui/pause.png" id="23_7silw"]
 [ext_resource type="FontFile" uid="uid://dotb3skhwouha" path="res://fonts/Roboto-Bold.ttf" id="23_wf21h"]
 [ext_resource type="FontFile" uid="uid://rs2mb33nd3b1" path="res://fonts/Roboto-Italic.ttf" id="24_j6p10"]
 [ext_resource type="Theme" uid="uid://c8tb6mtqpycc8" path="res://theme/midgame_menu_buttons.tres" id="25_748ov"]

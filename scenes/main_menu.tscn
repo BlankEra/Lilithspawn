@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://do18270a428ma"]
+[gd_scene load_steps=72 format=3 uid="uid://do18270a428ma"]
 
 [ext_resource type="Shader" uid="uid://c7ldko1kfg2ho" path="res://scripts/shaders/noise_waves.gdshader" id="1_3wgol"]
 [ext_resource type="Script" uid="uid://ci5tsr20d66sa" path="res://scripts/ui/menu/MainMenu.gd" id="1_vr8o3"]
@@ -17,16 +17,22 @@
 [ext_resource type="Texture2D" uid="uid://d1c7yqqmohmv1" path="res://skin/mod_ghost.png" id="13_4puye"]
 [ext_resource type="Script" uid="uid://bn5a8vwc46x4v" path="res://scripts/ui/menu/MapList.gd" id="13_engjn"]
 [ext_resource type="Texture2D" uid="uid://bevth7guc4yc4" path="res://skin/mod_spin.png" id="14_q13xq"]
+[ext_resource type="Texture2D" uid="uid://b8wjaogc8fvq4" path="res://skin/scrollbar_background_middle.png" id="15_4puye"]
 [ext_resource type="Texture2D" uid="uid://3bg5xrocd55i" path="res://skin/mod_flashlight.png" id="15_u43bj"]
 [ext_resource type="Texture2D" uid="uid://ba8nnsyx5yiw8" path="res://skin/mod_chaos.png" id="16_jvjdd"]
+[ext_resource type="Texture2D" uid="uid://cr5wlhch2a3nc" path="res://skin/scrollbar_background_top.png" id="16_q13xq"]
+[ext_resource type="Texture2D" uid="uid://bhcxdv0lm6nog" path="res://skin/scrollbar_background_bottom.png" id="17_u43bj"]
 [ext_resource type="Texture2D" uid="uid://bugx1qn5t88e3" path="res://skin/mod_hardrock.png" id="17_yxnar"]
 [ext_resource type="Script" uid="uid://clbnlvtlq4ng" path="res://scripts/ui/menu/SoundSpaceButton.gd" id="18_3wgol"]
 [ext_resource type="Texture2D" uid="uid://baivqqkfll133" path="res://textures/RhythiaSquircle.png" id="18_eku7s"]
+[ext_resource type="Texture2D" uid="uid://ddx87gpqy8hfo" path="res://skin/scrollbar_middle.png" id="18_jvjdd"]
 [ext_resource type="FontFile" uid="uid://4bnnn01f4dqr" path="res://fonts/Ubuntu-Medium.ttf" id="19_c6nra"]
-[ext_resource type="Texture2D" uid="uid://ct67kupv6bmny" path="res://textures/discord.png" id="20_qw82i"]
-[ext_resource type="Texture2D" uid="uid://c0wbm1qc5npty" path="res://textures/discord_pressed.png" id="21_1468l"]
+[ext_resource type="Texture2D" uid="uid://6qtsltuf8u8e" path="res://skin/scrollbar_top.png" id="19_yxnar"]
+[ext_resource type="Texture2D" uid="uid://8jqgxhe6o58v" path="res://skin/scrollbar_bottom.png" id="20_eku7s"]
+[ext_resource type="Texture2D" uid="uid://ct67kupv6bmny" path="res://textures/ui/discord.png" id="20_qw82i"]
+[ext_resource type="Texture2D" uid="uid://c0wbm1qc5npty" path="res://textures/ui/discord_pressed.png" id="21_1468l"]
 [ext_resource type="Script" uid="uid://cwp2kmm6r074h" path="res://scripts/ui/menu/DiscordButton.gd" id="22_1acrt"]
-[ext_resource type="Texture2D" uid="uid://d3buklvnhgqcy" path="res://textures/discord_hovered.png" id="22_01xyg"]
+[ext_resource type="Texture2D" uid="uid://d3buklvnhgqcy" path="res://textures/ui/discord_hovered.png" id="22_01xyg"]
 [ext_resource type="Texture2D" uid="uid://8du82a5dxjdk" path="res://skin/jukebox_play.png" id="23_764ux"]
 [ext_resource type="Texture2D" uid="uid://bpsvcunhigs6c" path="res://skin/jukebox_skip.png" id="24_wadof"]
 [ext_resource type="Texture2D" uid="uid://3e1tjlr4m0wt" path="res://skin/cursor.png" id="25_b4jiv"]
@@ -560,7 +566,8 @@ theme_override_styles/focus = ExtResource("8_dj67d")
 placeholder_text = "Search"
 caret_blink = true
 
-[node name="MapList" type="ScrollContainer" parent="Menus/Play"]
+[node name="MapList" type="Panel" parent="Menus/Play"]
+clip_contents = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -572,16 +579,92 @@ offset_bottom = -72.0
 grow_horizontal = 0
 mouse_filter = 2
 theme = ExtResource("6_engjn")
-horizontal_scroll_mode = 0
-vertical_scroll_mode = 2
 script = ExtResource("13_engjn")
 
-[node name="Container" type="VBoxContainer" parent="Menus/Play/MapList"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.0
-theme = ExtResource("6_engjn")
+[node name="ScrollBar" type="Panel" parent="Menus/Play/MapList"]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -12.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Background" type="Panel" parent="Menus/Play/MapList/ScrollBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Middle" type="TextureRect" parent="Menus/Play/MapList/ScrollBar/Background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 12.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_4puye")
+
+[node name="Top" type="TextureRect" parent="Menus/Play/MapList/ScrollBar/Background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_bottom = 12.0
+grow_horizontal = 2
+texture = ExtResource("16_q13xq")
+
+[node name="Bottom" type="TextureRect" parent="Menus/Play/MapList/ScrollBar/Background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("17_u43bj")
+
+[node name="Main" type="Panel" parent="Menus/Play/MapList/ScrollBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Middle" type="TextureRect" parent="Menus/Play/MapList/ScrollBar/Main"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 12.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("18_jvjdd")
+
+[node name="Top" type="TextureRect" parent="Menus/Play/MapList/ScrollBar/Main"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_bottom = 12.0
+grow_horizontal = 2
+texture = ExtResource("19_yxnar")
+
+[node name="Bottom" type="TextureRect" parent="Menus/Play/MapList/ScrollBar/Main"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("20_eku7s")
 
 [node name="Leaderboard" type="Panel" parent="Menus/Play"]
 layout_mode = 1

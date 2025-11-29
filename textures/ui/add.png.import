@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3buklvnhgqcy"
-path="res://.godot/imported/discord_hovered.png-e8ec92e8d48032eeef2d0bd98676f85d.ctex"
+uid="uid://men3chmi3esy"
+path="res://.godot/imported/add.png-6bfa80664752a454bd286707ccf27521.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/discord_hovered.png"
-dest_files=["res://.godot/imported/discord_hovered.png-e8ec92e8d48032eeef2d0bd98676f85d.ctex"]
+source_file="res://textures/ui/add.png"
+dest_files=["res://.godot/imported/add.png-6bfa80664752a454bd286707ccf27521.ctex"]
 
 [params]
 

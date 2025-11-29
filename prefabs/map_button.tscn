@@ -4,16 +4,16 @@
 [ext_resource type="Texture2D" uid="uid://cacq7g5ijo7sy" path="res://skin/favorite.png" id="2_c1lr1"]
 [ext_resource type="Shader" uid="uid://cqqs8uux7hqyb" path="res://scripts/shaders/ui_blur.gdshader" id="2_q8uhd"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bchh2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xjrji"]
 shader = ExtResource("2_q8uhd")
 shader_parameter/brightness = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g0txm"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ud221"]
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 3
 corner_radius_bottom_left = 3
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jhkog"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b5pxb"]
 bg_color = Color(0.0235294, 0.0196078, 0.0352941, 0.768627)
 draw_center = false
 border_width_left = 2
@@ -25,7 +25,7 @@ border_blend = true
 corner_radius_top_left = 3
 corner_radius_bottom_left = 3
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6lsb"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_boybo"]
 bg_color = Color(0.0235294, 0.0196078, 0.0352941, 0.768627)
 draw_center = false
 border_width_left = 2
@@ -37,34 +37,30 @@ border_blend = true
 corner_radius_top_left = 3
 corner_radius_bottom_left = 3
 
-[sub_resource type="LabelSettings" id="LabelSettings_fpw8h"]
+[sub_resource type="LabelSettings" id="LabelSettings_gpm1h"]
 
-[node name="MapTemplate" type="Panel"]
+[node name="MapButton" type="Panel"]
 clip_children = 2
 clip_contents = true
 custom_minimum_size = Vector2(0, 80)
-offset_right = 546.0
-offset_bottom = 80.0
-theme = ExtResource("1_rhnis")
-
-[node name="Holder" type="Panel" parent="."]
-layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 60.0
+offset_right = -12.0
+offset_bottom = 80.0
+grow_horizontal = 0
+theme = ExtResource("1_rhnis")
 
-[node name="Blur" type="Panel" parent="Holder"]
-material = SubResource("ShaderMaterial_bchh2")
+[node name="Blur" type="Panel" parent="."]
+material = SubResource("ShaderMaterial_xjrji")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_g0txm")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ud221")
 
-[node name="Hover" type="ColorRect" parent="Holder"]
+[node name="Hover" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -74,16 +70,16 @@ grow_vertical = 2
 mouse_filter = 1
 color = Color(1, 1, 1, 0)
 
-[node name="Normal" type="Panel" parent="Holder"]
+[node name="Normal" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_jhkog")
+theme_override_styles/panel = SubResource("StyleBoxFlat_b5pxb")
 
-[node name="Selected" type="Panel" parent="Holder"]
+[node name="Selected" type="Panel" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -91,19 +87,21 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_b6lsb")
+theme_override_styles/panel = SubResource("StyleBoxFlat_boybo")
 
-[node name="Cover" type="TextureRect" parent="Holder"]
+[node name="Cover" type="TextureRect" parent="."]
 self_modulate = Color(1, 1, 1, 0.25098)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -30.0
+offset_right = -30.0
 expand_mode = 2
 stretch_mode = 6
 
-[node name="Title" type="Label" parent="Holder"]
+[node name="Title" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -114,12 +112,12 @@ offset_right = -40.0
 grow_vertical = 0
 theme = ExtResource("1_rhnis")
 text = "hello hi"
-label_settings = SubResource("LabelSettings_fpw8h")
+label_settings = SubResource("LabelSettings_gpm1h")
 vertical_alignment = 1
 clip_text = true
 text_overrun_behavior = 3
 
-[node name="Extra" type="RichTextLabel" parent="Holder"]
+[node name="Extra" type="RichTextLabel" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.5
@@ -139,7 +137,7 @@ shortcut_keys_enabled = false
 deselect_on_focus_loss_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Button" type="Button" parent="Holder"]
+[node name="Button" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -152,15 +150,15 @@ action_mode = 0
 button_mask = 3
 flat = true
 
-[node name="Favorited" type="TextureRect" parent="Holder"]
+[node name="Favorited" type="TextureRect" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -32.0
+offset_left = -92.0
 offset_top = 8.0
-offset_right = -8.0
+offset_right = -68.0
 offset_bottom = 32.0
 grow_horizontal = 0
 pivot_offset = Vector2(12, 12)

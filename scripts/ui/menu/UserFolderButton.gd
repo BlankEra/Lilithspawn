@@ -1,6 +1,6 @@
 extends Button
 
-#var Constants = load("res://scripts/Constants.cs")
+#var constants = Constants
 
 func _pressed() -> void:
 	print("get user folder path from backend")

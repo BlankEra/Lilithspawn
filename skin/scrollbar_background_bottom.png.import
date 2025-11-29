@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ct67kupv6bmny"
-path="res://.godot/imported/discord.png-badf18c49cc833e52e47198731ce8ef9.ctex"
+uid="uid://bhcxdv0lm6nog"
+path="res://.godot/imported/scrollbar_background_bottom.png-8910d4fa4fda970d713811eb393045aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/discord.png"
-dest_files=["res://.godot/imported/discord.png-badf18c49cc833e52e47198731ce8ef9.ctex"]
+source_file="res://skin/scrollbar_background_bottom.png"
+dest_files=["res://.godot/imported/scrollbar_background_bottom.png-8910d4fa4fda970d713811eb393045aa.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lfj8i1bi6kfs"
-path="res://.godot/imported/pause.png-9bb899085276626fff5295cecf3b6547.ctex"
+uid="uid://cr5wlhch2a3nc"
+path="res://.godot/imported/scrollbar_background_top.png-2ad0a95199f813af67ec53406447f504.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/pause.png"
-dest_files=["res://.godot/imported/pause.png-9bb899085276626fff5295cecf3b6547.ctex"]
+source_file="res://skin/scrollbar_background_top.png"
+dest_files=["res://.godot/imported/scrollbar_background_top.png-2ad0a95199f813af67ec53406447f504.ctex"]
 
 [params]
 

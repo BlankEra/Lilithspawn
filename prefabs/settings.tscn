@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://8g3xqdpoywjn" path="res://scripts/ui/Settings.gd" id="1_epys8"]
 [ext_resource type="FontFile" uid="uid://bopde8iqsld1o" path="res://fonts/Ubuntu-Regular.ttf" id="2_cmtjb"]
 [ext_resource type="Theme" uid="uid://birpbaoexunde" path="res://theme/settings_categories_theme.tres" id="3_esq7m"]
-[ext_resource type="Texture2D" uid="uid://men3chmi3esy" path="res://textures/add.png" id="4_fgxmn"]
+[ext_resource type="Texture2D" uid="uid://men3chmi3esy" path="res://textures/ui/add.png" id="4_fgxmn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8skyv"]
 bg_color = Color(0.0360807, 0.0300716, 0.0527505, 1)
