@@ -1,15 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://vgvjvbvu0qsc"]
+[gd_scene load_steps=8 format=3 uid="uid://vgvjvbvu0qsc"]
 
 [ext_resource type="Theme" uid="uid://dhuhu3mmaew1a" path="res://theme/theme.tres" id="1_rhnis"]
 [ext_resource type="Texture2D" uid="uid://cacq7g5ijo7sy" path="res://skin/favorite.png" id="2_c1lr1"]
-[ext_resource type="Shader" uid="uid://cqqs8uux7hqyb" path="res://scripts/shaders/ui_blur.gdshader" id="2_q8uhd"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xjrji"]
-shader = ExtResource("2_q8uhd")
-shader_parameter/brightness = 0.5
+[ext_resource type="Script" uid="uid://b47sml6mwm4p0" path="res://scripts/ui/menu/MapButton.gd" id="2_ud221"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ud221"]
-bg_color = Color(1, 1, 1, 1)
+bg_color = Color(0, 0, 0, 0.5019608)
 corner_radius_top_left = 3
 corner_radius_bottom_left = 3
 
@@ -48,10 +44,12 @@ anchor_right = 1.0
 offset_right = -12.0
 offset_bottom = 80.0
 grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 1
 theme = ExtResource("1_rhnis")
+script = ExtResource("2_ud221")
 
-[node name="Blur" type="Panel" parent="."]
-material = SubResource("ShaderMaterial_xjrji")
+[node name="Background" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
