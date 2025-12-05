@@ -4,9 +4,9 @@ using System;
 [GlobalClass]
 public partial class SkinProfile : GodotObject
 {
-    public Color[] Colors { get; set; } = [new(0x00ffedff), new(0xff8ff9ff)];
+    public Color[] Colors { get; set; } = [new(0x00ffedff), new(0xca0046ff)];
 
-    public string RawColors { get; set; } = "00ffed,ff8ff9";
+    public string RawColors { get; set; } = "00ffed,ca0046";
 
     public ImageTexture CursorImage { get; set; } = new();
 
@@ -58,7 +58,7 @@ public partial class SkinProfile : GodotObject
 
     public string MenuSpaceName = "waves";
 
-    public string GameSpaceName = "grid";
+    public string GameSpaceName = "void";
 
     public Node3D MenuSpace { get; set; }
 

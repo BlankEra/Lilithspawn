@@ -798,7 +798,7 @@ public partial class MainMenu : Control
 		if (SoundManager.Song.Stream != null)
 		{
 			JukeboxProgress.AnchorRight = (float)Math.Clamp(SoundManager.Song.GetPlaybackPosition() / SoundManager.Song.Stream.GetLength(), 0, 1);
-			SoundManager.Song.VolumeDb = Mathf.Lerp(SoundManager.Song.VolumeDb, Phoenyx.Quitting ? -80 : -80 + 70 * (float)Math.Pow(settings.VolumeMusic / 100, 0.1) * (float)Math.Pow(settings.VolumeMaster / 100, 0.1), (float)Math.Clamp(delta * 2, 0, 1));
+			SoundManager.Song.VolumeDb = Mathf.Lerp(SoundManager.Song.VolumeDb, Rhythia.Quitting ? -80 : -80 + 70 * (float)Math.Pow(settings.VolumeMusic / 100, 0.1) * (float)Math.Pow(settings.VolumeMaster / 100, 0.1), (float)Math.Clamp(delta * 2, 0, 1));
 		}
 
 		float prevHz = 0;
@@ -846,7 +846,7 @@ public partial class MainMenu : Control
 		Main.Position = Main.Position.Lerp((Size / 2 - MousePosition) * (4 / Size.Y), Math.Min(1, (float)delta * 16));
 		Extras.Position = Main.Position;
 
-		if (Phoenyx.Quitting)
+		if (Rhythia.Quitting)
 		{
 			MainBackgroundMaterial.SetShaderParameter("opaqueness", Mathf.Lerp((float)MainBackgroundMaterial.GetShaderParameter("opaqueness"), 0, delta * 8));
 		}

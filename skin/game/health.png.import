@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4u5y3e8yamuk"
-path.s3tc="res://.godot/imported/empty.png-4550676ddda09419c6eb3446d3130830.s3tc.ctex"
+uid="uid://4x2vfpyjkri6"
+path.s3tc="res://.godot/imported/health.png-bb2125f693f0d75ff24740c41331e3ba.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/empty.png"
-dest_files=["res://.godot/imported/empty.png-4550676ddda09419c6eb3446d3130830.s3tc.ctex"]
+source_file="res://skin/game/health.png"
+dest_files=["res://.godot/imported/health.png-bb2125f693f0d75ff24740c41331e3ba.s3tc.ctex"]
 
 [params]
 

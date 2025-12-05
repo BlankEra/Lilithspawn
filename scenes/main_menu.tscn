@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://do18270a428ma"]
+[gd_scene load_steps=79 format=3 uid="uid://do18270a428ma"]
 
 [ext_resource type="Shader" uid="uid://c7ldko1kfg2ho" path="res://scripts/shaders/noise_waves.gdshader" id="1_3wgol"]
 [ext_resource type="Script" uid="uid://ci5tsr20d66sa" path="res://scripts/ui/menu/MainMenu.gd" id="1_vr8o3"]
@@ -12,33 +12,35 @@
 [ext_resource type="Script" uid="uid://cin7x4exuo7ce" path="res://scripts/ui/menu/ImportButton.gd" id="9_1a85y"]
 [ext_resource type="Script" uid="uid://b5ectac2a6rv5" path="res://scripts/ui/menu/QuitButton.gd" id="10_engjn"]
 [ext_resource type="Script" uid="uid://y2nprjegqk20" path="res://scripts/ui/menu/UserFolderButton.gd" id="10_hl5e0"]
-[ext_resource type="Script" uid="uid://bsek1gp3lmfff" path="res://scripts/ui/menu/RandomPickButton.gd" id="12_6h3lr"]
-[ext_resource type="Texture2D" uid="uid://co5ul5mlsanna" path="res://skin/mod_nofail.png" id="12_tcusk"]
-[ext_resource type="Texture2D" uid="uid://d1c7yqqmohmv1" path="res://skin/mod_ghost.png" id="13_4puye"]
+[ext_resource type="Texture2D" uid="uid://cbbafomdyoenp" path="res://skin/ui/play/background_tile.png" id="10_jvjdd"]
+[ext_resource type="Shader" uid="uid://dgoi2tf33xnmj" path="res://skin/ui/play/background_tile.gdshader" id="10_yxnar"]
+[ext_resource type="Texture2D" uid="uid://co5ul5mlsanna" path="res://skin/modifiers/nofail.png" id="12_tcusk"]
+[ext_resource type="Texture2D" uid="uid://d1c7yqqmohmv1" path="res://skin/modifiers/ghost.png" id="13_4puye"]
 [ext_resource type="Script" uid="uid://bn5a8vwc46x4v" path="res://scripts/ui/menu/MapList.gd" id="13_engjn"]
-[ext_resource type="Texture2D" uid="uid://bevth7guc4yc4" path="res://skin/mod_spin.png" id="14_q13xq"]
-[ext_resource type="Texture2D" uid="uid://b8wjaogc8fvq4" path="res://skin/scrollbar_background_middle.png" id="15_4puye"]
-[ext_resource type="Texture2D" uid="uid://3bg5xrocd55i" path="res://skin/mod_flashlight.png" id="15_u43bj"]
-[ext_resource type="Texture2D" uid="uid://ba8nnsyx5yiw8" path="res://skin/mod_chaos.png" id="16_jvjdd"]
-[ext_resource type="Texture2D" uid="uid://cr5wlhch2a3nc" path="res://skin/scrollbar_background_top.png" id="16_q13xq"]
-[ext_resource type="Texture2D" uid="uid://bhcxdv0lm6nog" path="res://skin/scrollbar_background_bottom.png" id="17_u43bj"]
-[ext_resource type="Texture2D" uid="uid://bugx1qn5t88e3" path="res://skin/mod_hardrock.png" id="17_yxnar"]
+[ext_resource type="Texture2D" uid="uid://bevth7guc4yc4" path="res://skin/modifiers/spin.png" id="14_q13xq"]
+[ext_resource type="Texture2D" uid="uid://b8wjaogc8fvq4" path="res://skin/ui/play/scrollbar_background_middle.png" id="15_4puye"]
+[ext_resource type="Texture2D" uid="uid://3bg5xrocd55i" path="res://skin/modifiers/flashlight.png" id="15_u43bj"]
+[ext_resource type="Texture2D" uid="uid://ba8nnsyx5yiw8" path="res://skin/modifiers/chaos.png" id="16_jvjdd"]
+[ext_resource type="Texture2D" uid="uid://cr5wlhch2a3nc" path="res://skin/ui/play/scrollbar_background_top.png" id="16_q13xq"]
+[ext_resource type="Texture2D" uid="uid://bhcxdv0lm6nog" path="res://skin/ui/play/scrollbar_background_bottom.png" id="17_u43bj"]
+[ext_resource type="Texture2D" uid="uid://bugx1qn5t88e3" path="res://skin/modifiers/hardrock.png" id="17_yxnar"]
 [ext_resource type="Script" uid="uid://clbnlvtlq4ng" path="res://scripts/ui/menu/SoundSpaceButton.gd" id="18_3wgol"]
 [ext_resource type="Texture2D" uid="uid://baivqqkfll133" path="res://textures/RhythiaSquircle.png" id="18_eku7s"]
-[ext_resource type="Texture2D" uid="uid://ddx87gpqy8hfo" path="res://skin/scrollbar_middle.png" id="18_jvjdd"]
+[ext_resource type="Texture2D" uid="uid://ddx87gpqy8hfo" path="res://skin/ui/play/scrollbar_middle.png" id="18_jvjdd"]
 [ext_resource type="FontFile" uid="uid://4bnnn01f4dqr" path="res://fonts/Ubuntu-Medium.ttf" id="19_c6nra"]
-[ext_resource type="Texture2D" uid="uid://6qtsltuf8u8e" path="res://skin/scrollbar_top.png" id="19_yxnar"]
-[ext_resource type="Texture2D" uid="uid://8jqgxhe6o58v" path="res://skin/scrollbar_bottom.png" id="20_eku7s"]
+[ext_resource type="Texture2D" uid="uid://6qtsltuf8u8e" path="res://skin/ui/play/scrollbar_top.png" id="19_yxnar"]
+[ext_resource type="Texture2D" uid="uid://8jqgxhe6o58v" path="res://skin/ui/play/scrollbar_bottom.png" id="20_eku7s"]
 [ext_resource type="Texture2D" uid="uid://ct67kupv6bmny" path="res://textures/ui/discord.png" id="20_qw82i"]
 [ext_resource type="Texture2D" uid="uid://c0wbm1qc5npty" path="res://textures/ui/discord_pressed.png" id="21_1468l"]
-[ext_resource type="Texture2D" uid="uid://bku8toppyall7" path="res://skin/maplist_mask.png" id="21_q13xq"]
+[ext_resource type="Texture2D" uid="uid://bku8toppyall7" path="res://skin/ui/play/maplist_mask.png" id="21_q13xq"]
 [ext_resource type="Script" uid="uid://cwp2kmm6r074h" path="res://scripts/ui/menu/DiscordButton.gd" id="22_1acrt"]
 [ext_resource type="Texture2D" uid="uid://d3buklvnhgqcy" path="res://textures/ui/discord_hovered.png" id="22_01xyg"]
-[ext_resource type="Texture2D" uid="uid://bw35mprqnilk7" path="res://skin/maplist_selection_cursor.png" id="22_u43bj"]
-[ext_resource type="Texture2D" uid="uid://8du82a5dxjdk" path="res://skin/jukebox_play.png" id="23_764ux"]
-[ext_resource type="Texture2D" uid="uid://bpsvcunhigs6c" path="res://skin/jukebox_skip.png" id="24_wadof"]
-[ext_resource type="Texture2D" uid="uid://3e1tjlr4m0wt" path="res://skin/cursor.png" id="25_b4jiv"]
+[ext_resource type="Texture2D" uid="uid://bw35mprqnilk7" path="res://skin/ui/play/maplist_selection_cursor.png" id="22_u43bj"]
+[ext_resource type="Texture2D" uid="uid://8du82a5dxjdk" path="res://skin/ui/jukebox_play.png" id="23_764ux"]
+[ext_resource type="Texture2D" uid="uid://bpsvcunhigs6c" path="res://skin/ui/jukebox_skip.png" id="24_wadof"]
+[ext_resource type="Texture2D" uid="uid://3e1tjlr4m0wt" path="res://skin/game/cursor.png" id="25_b4jiv"]
 [ext_resource type="Script" uid="uid://c8gmkq7ur6lrr" path="res://scripts/ui/Cursor.gd" id="26_1acrt"]
+[ext_resource type="Script" uid="uid://d36x1ln46itd1" path="res://scripts/ui/menu/RandomButton.cs" id="27_u43bj"]
 
 [sub_resource type="SystemFont" id="SystemFont_lsskb"]
 font_names = PackedStringArray("Ubuntu")
@@ -115,6 +117,9 @@ shader_parameter/brightness = 1.0
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 3
 corner_radius_bottom_left = 3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eku7s"]
+shader = ExtResource("10_yxnar")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_omwck"]
 
@@ -397,56 +402,6 @@ offset_bottom = -8.0
 theme = ExtResource("6_engjn")
 theme_override_fonts/normal_font = ExtResource("7_6h3lr")
 bbcode_enabled = true
-text = "fixed hit sound polyphony (1 -> 16)
-[font_size=300]:3c[font_size=30]
-
-
-
-[i]Phoenyx 1.0 Release[/i]
-[font_size=24]Changelog
-
-[font_size=16][i]FEATURES & MAIN CHANGES[/i][ul]
- Proper main menu
- Extras (& statistics) menu
- Search by map author
- Spaces (background environments)[ul]
- Void
- Grid
-[/ul]
- Replays (supports viewing multiple at once)
- Local leaderboards
- Fully customizable combo progress widget (will become editable when skin editor is implemented)
- Pause menu
- Settings profiles
- Start from
- New settings[ul]
- Video background render scale
- Absolute input
- Record replays
- Toggle hit score popup
- Toggle miss popup
-[/ul]
- Ghost modifier
- Made score dropoff more lenient (20ms for perfect hit -> 25ms, lowest multiplier 0.65x -> 0.8x)
- This panel :)
-[/ul]
-
-[i]QoL CHANGES[/i][ul]
- Jukebox will now account for keyboards with media keys
- Map difficulty names' colour now represents the difficulty
- The delay when starting a map now accounts for your approach time
- Smooth song transitions from the game scene, to results, then menus
- Automatically import every non-phxm file in map folder on launch
- Improved game scene HUD
- Many more that I did not keep track of
-[/ul]
-
-[i]BUG FIXES[/i][ul]
- Settings values now round properly
- Skipping a break in a map with a video background no longer desyncs the video
- Playing a map you just imported will actually work
- Consistent map order
- Many, many more that I did not keep track of"
 shortcut_keys_enabled = false
 
 [node name="Buttons" type="VBoxContainer" parent="Menus/Main"]
@@ -490,6 +445,8 @@ alignment = 0
 script = ExtResource("10_engjn")
 
 [node name="Play" type="Panel" parent="Menus"]
+visible = false
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -499,7 +456,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_6pifw")
 
-[node name="Blur" type="Panel" parent="Menus/Play"]
+[node name="Background" type="Panel" parent="Menus/Play"]
 material = SubResource("ShaderMaterial_q13xq")
 layout_mode = 1
 anchors_preset = 15
@@ -509,6 +466,19 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_u43bj")
+
+[node name="Tile" type="TextureRect" parent="Menus/Play/Background"]
+material = SubResource("ShaderMaterial_eku7s")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("10_jvjdd")
+expand_mode = 1
+stretch_mode = 1
 
 [node name="MapList" type="Panel" parent="Menus/Play"]
 layout_mode = 1
@@ -523,6 +493,8 @@ grow_horizontal = 0
 mouse_filter = 1
 theme = ExtResource("6_engjn")
 script = ExtResource("13_engjn")
+buttonSize = 100.0
+buttonHoverOffset = 25.0
 
 [node name="ScrollBar" type="Panel" parent="Menus/Play/MapList"]
 z_index = 1
@@ -613,9 +585,10 @@ texture = ExtResource("20_eku7s")
 clip_children = 1
 clip_contents = true
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -12.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("21_q13xq")
@@ -623,7 +596,7 @@ expand_mode = 1
 
 [node name="SelectionCursor" type="TextureRect" parent="Menus/Play/MapList"]
 modulate = Color(1, 1, 1, 0)
-self_modulate = Color(1, 0.27058825, 0.30980393, 1)
+self_modulate = Color(0.7921569, 0, 0.27450982, 1)
 layout_mode = 1
 anchors_preset = -1
 offset_left = -40.0
@@ -985,7 +958,7 @@ focus_mode = 0
 theme = ExtResource("6_engjn")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Random"
-script = ExtResource("12_6h3lr")
+script = ExtResource("27_u43bj")
 
 [node name="SearchAuthor" type="LineEdit" parent="Menus/Play/SubTopBar/HBoxContainer"]
 custom_minimum_size = Vector2(120, 32)
@@ -1689,7 +1662,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="2" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -1706,7 +1679,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="3" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -1723,7 +1696,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="4" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -1740,7 +1713,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="5" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -1757,7 +1730,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="6" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -1774,7 +1747,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="7" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -1791,7 +1764,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="8" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -1808,7 +1781,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="9" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -1825,7 +1798,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="10" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -1842,7 +1815,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="11" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -1859,7 +1832,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="12" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -1876,7 +1849,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="13" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -1893,7 +1866,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="14" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -1910,7 +1883,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="15" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -1927,7 +1900,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="16" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -1944,7 +1917,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="17" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -1961,7 +1934,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="18" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -1978,7 +1951,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="19" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -1995,7 +1968,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="20" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -2012,7 +1985,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="21" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -2029,7 +2002,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="22" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -2046,7 +2019,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="23" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -2063,7 +2036,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="24" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -2080,7 +2053,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="25" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -2097,7 +2070,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="26" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -2114,7 +2087,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="27" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -2131,7 +2104,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="28" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -2148,7 +2121,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="29" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -2165,7 +2138,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="30" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -2182,7 +2155,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="31" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -2199,7 +2172,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="32" type="Panel" parent="Jukebox/Spectrum"]
 custom_minimum_size = Vector2(6, 0)
@@ -2216,7 +2189,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.9425801, 0.2992559, 0.34318772, 1)
+color = Color(0.7921569, 0, 0.27450982, 1)
 
 [node name="Title" type="Label" parent="Jukebox"]
 modulate = Color(0.762404, 0.762404, 0.762404, 1)

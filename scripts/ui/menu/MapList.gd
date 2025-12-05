@@ -1,7 +1,8 @@
 extends Panel
 
-@export var buttonSize := 80.0
-@export var buttonHoverOffset := 20.0
+@export var buttonSize := 90.0
+@export var buttonHoverSize := 10.0
+@export var buttonSelectedSize := 20.0
 @export var spacing := 12.0
 @export var scrollStep := 1500.0
 @export var scrollFriction := 20.0
@@ -13,10 +14,12 @@ extends Panel
 
 var maps: Array[String] = [] # get this from db in the future
 
-var mapButtonTemplate = preload("res://prefabs/map_button.tscn")
+const mapButtonTemplate = preload("res://prefabs/map_button.tscn")
+
 var mapButtons: Dictionary[String, Panel] = {}
 var mapButtonCache: Array[Panel] = []
 var hoveredButton: Panel
+var selectedMap := ""	# change to map type in the future
 
 var scrollLength := 0.0
 var scrollMomentum := 0.0
@@ -28,7 +31,7 @@ var displaySelectionCursor := false
 func _ready() -> void:
 	mouse_exited.connect(ToggleSelectionCursor.bind(false))
 	
-	for i in range(20):
+	for i in 20:
 		maps.append("map %s" % i)
 
 func _process(delta: float) -> void:
@@ -38,7 +41,7 @@ func _process(delta: float) -> void:
 	if (targetScroll <= 0 and scrollMomentum < 0) or (targetScroll >= scrollLength and scrollMomentum > 0):
 		scrollElasticOffset = scrollMomentum * scrollElasticity
 	
-	scrollLength = max(0, mapCount * (buttonSize + spacing) - spacing - size.y) + buttonHoverOffset
+	scrollLength = max(0, mapCount * (buttonSize + spacing) - spacing - size.y) + buttonHoverSize + buttonSelectedSize
 	scrollMomentum = lerp(scrollMomentum, 0.0, min(1, scrollFriction * delta))
 	
 	if mouseScroll:
@@ -56,7 +59,7 @@ func _process(delta: float) -> void:
 	var upOffset := 0.0
 	var downOffset := 0.0
 	
-	for i in range(mapCount):
+	for i in mapCount:
 		var map := maps[i]	# use map ID here
 		var offset := i * (buttonSize + spacing)
 		var top := offset - scroll
@@ -66,10 +69,13 @@ func _process(delta: float) -> void:
 		
 		# cache/ignore if out of map list
 		if !display:
-			if button != null:
+			if button:
 				mapButtons.erase(map)
 				mapButtonCache.append(button)
 				mask.remove_child(button)
+				
+				button.Deselect()
+				button.UpdateOutline(0.0, 0.0)
 				
 				if button == hoveredButton:
 					hoveredButton = null
@@ -77,22 +83,21 @@ func _process(delta: float) -> void:
 			continue
 		
 		# we know everything must be rendered from here
-		if button == null:
+		if not button:
 			button = mapButtonCache.pop_front()
 			
-			if button == null:
+			if not button:
 				button = mapButtonTemplate.instantiate()
-				button.sizeHeight = buttonSize
-				button.hoverSizeOffset = buttonHoverOffset
-				button.mouse_entered.connect(func() -> void:
-					hoveredButton = button
-					ToggleSelectionCursor(true)
-				)
+				SetupButton(button)
 			
 			button.index = i
 			mapButtons[map] = button
 			mask.add_child(button)
 			button.UpdateInfo(map)
+			
+			if map == selectedMap:
+				button.Select()
+				button.UpdateOutline(1.0, 0.0)
 		
 		var sizeOffset: float = button.size.y - button.sizeHeight
 		
@@ -100,7 +105,15 @@ func _process(delta: float) -> void:
 		drawnButtons.append(button)
 		buttonSizeOffsets.append(sizeOffset)
 	
-	for i in range(drawnButtons.size()):
+	var selectionCursorPosition := Vector2(
+		hoveredButton.position.x - 60 if hoveredButton and displaySelectionCursor else -80.0,
+		clamp(hoveredButton.position.y + hoveredButton.size.y / 2 - selectionCursor.size.y / 2 if hoveredButton else selectionCursor.position.y, 0.0, size.y)
+	)
+	
+	selectionCursor.position = lerp(selectionCursor.position, selectionCursorPosition, min(1, 8 * delta))
+	selectionCursor.rotation = -selectionCursor.position.y / 60
+	
+	for i in drawnButtons.size():
 		var button := drawnButtons[i]
 		var sizeOffset := buttonSizeOffsets[i]
 		
@@ -111,27 +124,20 @@ func _process(delta: float) -> void:
 		var top := indexOffset - scroll - sizeOffset / 2
 		
 		downOffset -= sizeOffset
-		top += (upOffset - downOffset) / 2 + buttonHoverOffset / 2
+		top += (upOffset - downOffset) / 2 + (buttonHoverSize + buttonSelectedSize) / 2
 		upOffset += sizeOffset
 		
 		# normalized offset from list center
 		var centerOffset: float = abs((top + button.size.y / 2) - size.y / 2) / (size.y / 2 + buttonSize / 2)
-		centerOffset = cos(PI * centerOffset / 2)
 		
+		button.centerOffset = cos(PI * centerOffset / 2)
 		button.z_index = 1 if isFirst or isLast else 0
 		button.position = Vector2(button.position.x, top)
-		button.anchor_left = 0.05 - centerOffset / 20
-	
-	var selectionCursorPosition := Vector2(
-		hoveredButton.position.x - 60 if hoveredButton != null else -80.0,
-		hoveredButton.position.y + hoveredButton.size.y / 2 - selectionCursor.size.y / 2 if hoveredButton != null else selectionCursor.position.y
-	)
-	
-	selectionCursor.position = lerp(selectionCursor.position, selectionCursorPosition, min(1, 12 * delta))
-	selectionCursor.rotation = -selectionCursor.position.y / 60
+		button.outline_shader.set_shader_parameter("cursor_position", get_viewport().get_mouse_position())
+		button.outline_shader.set_shader_parameter("selection_position", selectionCursor.global_position if displaySelectionCursor else Vector2.ZERO)
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and !event.ctrl_pressed:
 		match event.button_index:
 			MOUSE_BUTTON_RIGHT:
 				mouseScroll = event.pressed
@@ -139,6 +145,31 @@ func _input(event: InputEvent) -> void:
 				scrollMomentum += scrollStep
 			MOUSE_BUTTON_WHEEL_UP:
 				scrollMomentum -= scrollStep
+
+func SetupButton(button: Panel) -> void:
+	button.sizeHeight = buttonSize
+	button.hoverSizeOffset = buttonHoverSize
+	button.selectedSizeOffset = buttonSelectedSize
+	
+	button.mouse_entered.connect(func() -> void:
+		hoveredButton = button
+		ToggleSelectionCursor(true)
+		
+		if button.map != selectedMap:
+			button.UpdateOutline(0.5)
+	)
+	button.mouse_exited.connect(func() -> void:
+		if button.map != selectedMap:
+			button.UpdateOutline(0.0)
+	)
+	button.get_node("Button").pressed.connect(func() -> void:
+		if selectedMap and selectedMap != button.map and mapButtons.get(selectedMap):
+			mapButtons[selectedMap].Deselect()
+			mapButtons[selectedMap].UpdateOutline(0.0)
+		
+		selectedMap = button.map
+		button.UpdateOutline(1.0)
+	)
 
 func ToggleSelectionCursor(display: bool) -> void:
 	if display == displaySelectionCursor:

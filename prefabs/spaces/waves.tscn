@@ -1,15 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://t8stmueifd3q"]
+[gd_scene load_steps=11 format=3 uid="uid://t8stmueifd3q"]
 
 [ext_resource type="Script" uid="uid://bqd3px7xcwow5" path="res://scripts/spaces/waves/Waves.gd" id="1_m5heb"]
 [ext_resource type="Shader" uid="uid://c0caw7os4jvr4" path="res://scripts/shaders/sky_noise_waves.gdshader" id="2_ewipa"]
 [ext_resource type="Script" uid="uid://8rok6tmd2gnu" path="res://scripts/spaces/waves/WorldEnvironment.gd" id="3_56okg"]
+[ext_resource type="Texture2D" uid="uid://c4u5y3e8yamuk" path="res://textures/empty.png" id="3_m5heb"]
 [ext_resource type="Shader" uid="uid://1vvyfqyj0n87" path="res://scripts/shaders/water_ripple.gdshader" id="4_jaxqn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s7g12"]
 shader = ExtResource("2_ewipa")
+shader_parameter/sine_color_swap = false
 shader_parameter/opacity = 1.0
 shader_parameter/coverage = 1.0
 shader_parameter/background_color = Color(0, 0, 0, 1)
+shader_parameter/image = ExtResource("3_m5heb")
 
 [sub_resource type="Sky" id="Sky_cqp65"]
 sky_material = SubResource("ShaderMaterial_s7g12")

@@ -5,7 +5,7 @@ extends Control
 @onready var lastMenu := currentMenu
 
 func _ready() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	#Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	
 	for button: Button in $"Menus/Main/Buttons".get_children():
 		var menu := menus.find_child(button.name, false)

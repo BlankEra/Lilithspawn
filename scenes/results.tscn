@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://dhuhu3mmaew1a" path="res://theme/theme.tres" id="2_dgnpu"]
 [ext_resource type="FontFile" uid="uid://4bnnn01f4dqr" path="res://fonts/Ubuntu-Medium.ttf" id="2_f4qdi"]
 [ext_resource type="Shader" uid="uid://bp2sv5ynsubi2" path="res://scripts/shaders/alpha_gradient.gdshader" id="2_oatel"]
-[ext_resource type="Texture2D" uid="uid://3e1tjlr4m0wt" path="res://skin/cursor.png" id="2_ow183"]
+[ext_resource type="Texture2D" uid="uid://3e1tjlr4m0wt" path="res://skin/game/cursor.png" id="2_ow183"]
 [ext_resource type="FontFile" uid="uid://bopde8iqsld1o" path="res://fonts/Ubuntu-Regular.ttf" id="3_rsbg1"]
 [ext_resource type="Script" uid="uid://ci36kf1g7wv5j" path="res://scripts/ui/results/Graph.cs" id="4_b55ol"]
 [ext_resource type="FontFile" uid="uid://dvb6fvy008bhv" path="res://fonts/Roboto-Medium.ttf" id="4_yxv8s"]

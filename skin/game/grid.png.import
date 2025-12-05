@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4u5y3e8yamuk"
-path.s3tc="res://.godot/imported/empty.png-4550676ddda09419c6eb3446d3130830.s3tc.ctex"
+uid="uid://b3g4aw54n6bow"
+path.s3tc="res://.godot/imported/grid.png-7c95691f5a65b4bd2f6a5b0fbe7b4ed7.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/empty.png"
-dest_files=["res://.godot/imported/empty.png-4550676ddda09419c6eb3446d3130830.s3tc.ctex"]
+source_file="res://skin/game/grid.png"
+dest_files=["res://.godot/imported/grid.png-7c95691f5a65b4bd2f6a5b0fbe7b4ed7.s3tc.ctex"]
 
 [params]
 
