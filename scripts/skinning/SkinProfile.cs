@@ -54,6 +54,8 @@ public partial class SkinProfile : GodotObject
 
     public ImageTexture MapListScrollBarBackgroundBottomImage { get; set; } = new();
 
+    public ImageTexture MapInfoCoverBackgroundImage { get; set; } = new();
+
     public ImageTexture ModNofailImage { get; set; } = new();
 
     public ImageTexture ModSpinImage { get; set; } = new();

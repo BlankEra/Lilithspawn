@@ -1,0 +1,336 @@
+[gd_scene load_steps=19 format=3 uid="uid://cma3kiioc1djt"]
+
+[ext_resource type="Script" uid="uid://bhox71y4fbivo" path="res://scripts/ui/menu/MapInfoContainer.cs" id="1_50xtp"]
+[ext_resource type="Texture2D" uid="uid://blttbj4jmqhsq" path="res://skin/ui/play/mapinfo_cover_background.png" id="2_4d08m"]
+[ext_resource type="Shader" uid="uid://rngh60dyh10b" path="res://scripts/shaders/outline.gdshader" id="2_nrche"]
+[ext_resource type="Theme" uid="uid://dhuhu3mmaew1a" path="res://theme/theme.tres" id="4_4d08m"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_svokg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_50xtp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1q06g"]
+bg_color = Color(0, 0, 0, 0.627451)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="LabelSettings" id="LabelSettings_j6nyj"]
+font_size = 18
+font_color = Color(0.5647059, 0.5647059, 0.5882353, 1)
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4d08m"]
+shader = ExtResource("2_nrche")
+shader_parameter/outline_color = Color(0.05, 0.05, 0.05, 1)
+shader_parameter/outline_opacity = 1.0
+shader_parameter/light_color = Color(0.79, 0, 0.27, 1)
+shader_parameter/cursor_light_color = Color(0.15, 0.15, 0.15, 1)
+shader_parameter/fill = 0.0
+shader_parameter/glow_radius = 350.0
+shader_parameter/glow_exponent = 2.0
+shader_parameter/light_position = Vector2(-10000, 0)
+shader_parameter/cursor_position = Vector2(0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w0o2h"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4d08m"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w0o2h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j6nyj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1q06g"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j6nyj"]
+bg_color = Color(1, 1, 1, 0.0470588)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_svokg"]
+bg_color = Color(1, 1, 1, 0.0313726)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4d08m"]
+bg_color = Color(1, 1, 1, 0.03137255)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_w0o2h"]
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="MapInfoContainer" type="Panel"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -504.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_svokg")
+script = ExtResource("1_50xtp")
+
+[node name="Info" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.4
+offset_bottom = -8.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_50xtp")
+
+[node name="Background" type="Panel" parent="Info"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1q06g")
+
+[node name="CoverContainer" type="AspectRatioContainer" parent="Info"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+alignment_horizontal = 0
+
+[node name="Background" type="TextureRect" parent="Info/CoverContainer"]
+show_behind_parent = true
+layout_mode = 2
+texture = ExtResource("2_4d08m")
+expand_mode = 2
+
+[node name="Cover" type="TextureRect" parent="Info/CoverContainer/Background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 2
+
+[node name="Extra" type="Label" parent="Info"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4
+anchor_top = 0.6
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+theme = ExtResource("4_4d08m")
+text = "{0}
+{1} notes"
+label_settings = SubResource("LabelSettings_j6nyj")
+horizontal_alignment = 2
+vertical_alignment = 2
+autowrap_mode = 3
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="MainLabel" type="RichTextLabel" parent="Info"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4
+anchor_right = 1.0
+anchor_bottom = 0.6
+offset_top = 8.0
+offset_right = -8.0
+mouse_filter = 1
+theme = ExtResource("4_4d08m")
+theme_override_constants/paragraph_separation = 4
+bbcode_enabled = true
+text = "[outline_size=2][font_size=24]{0}
+[color={1}]{2}
+[font_size=16][color=909096]by {3}"
+
+[node name="Outline" type="Panel" parent="Info"]
+material = SubResource("ShaderMaterial_4d08m")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_w0o2h")
+
+[node name="Actions" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.4
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -108.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxEmpty_50xtp")
+
+[node name="Background" type="Panel" parent="Actions"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1q06g")
+
+[node name="Outline" type="Panel" parent="Actions"]
+material = SubResource("ShaderMaterial_4d08m")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_w0o2h")
+
+[node name="Dim" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="LeaderboardHide" type="Button" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4d08m")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_w0o2h")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_j6nyj")
+button_mask = 3
+
+[node name="Leaderboard" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -100.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxEmpty_1q06g")
+
+[node name="Background" type="Panel" parent="Leaderboard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1q06g")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Leaderboard"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = false
+theme = ExtResource("4_4d08m")
+scroll_vertical_custom_step = 10.0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Leaderboard/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="Expand" type="Button" parent="Leaderboard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4d08m")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_j6nyj")
+theme_override_styles/hover = SubResource("StyleBoxFlat_svokg")
+
+[node name="Hover" type="Panel" parent="Leaderboard/Expand"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4d08m")
+
+[node name="Label" type="Label" parent="Leaderboard/Expand/Hover"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_4d08m")
+text = "EXPAND"
+label_settings = SubResource("LabelSettings_w0o2h")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Outline" type="Panel" parent="Leaderboard"]
+material = SubResource("ShaderMaterial_4d08m")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_w0o2h")

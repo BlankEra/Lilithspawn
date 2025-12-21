@@ -28,6 +28,9 @@ public partial class MapList : Panel
     public bool MouseScroll = false;
     public bool DisplaySelectionCursor = false;
 
+    [Signal]
+    public delegate void OnMapSelectedEventHandler(Map map);
+
     private TextureRect mask;
     private TextureRect selectionCursor;
     private Panel scrollBar;
@@ -67,7 +70,6 @@ public partial class MapList : Panel
         updateSkin();
 
         // temporary until db is implemented
-        // also a memory leak every time you reload the menu
         foreach (string path in Directory.GetFiles($"{Constants.USER_FOLDER}/maps"))
 		{
             maps.Add(MapParser.Decode(path, null, false));
@@ -190,11 +192,11 @@ public partial class MapList : Panel
             button.ZIndex = button.ListIndex == 0 || button.ListIndex == maps.Count - 1 ? 1 : 0;
             button.Position = new(button.Position.X, top);
             button.OutlineShader.SetShaderParameter("cursor_position", GetViewport().GetMousePosition());
-            button.OutlineShader.SetShaderParameter("selection_position", DisplaySelectionCursor ? selectionCursor.GlobalPosition : Vector2.Zero);
+            button.OutlineShader.SetShaderParameter("light_position", DisplaySelectionCursor ? selectionCursor.GlobalPosition : Vector2.Left * 10000);
         }
     }
 
-    public override void _Input(InputEvent @event)
+    public override void _UnhandledInput(InputEvent @event)
     {
         if (@event is InputEventMouseButton mouseButton && !mouseButton.CtrlPressed)
 		{
@@ -238,6 +240,7 @@ public partial class MapList : Panel
             }
 
             selectedMapID = button.Map.ID;
+            EmitSignal(SignalName.OnMapSelected, button.Map);
 
             button.UpdateOutline(1.0f);
         };
@@ -248,7 +251,7 @@ public partial class MapList : Panel
 	private void toggleSelectionCursor(bool display)
 	{
         if (DisplaySelectionCursor == display) { return; }
-
+        
         DisplaySelectionCursor = display;
 
 		if (display && hoveredButton != null)

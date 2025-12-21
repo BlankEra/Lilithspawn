@@ -1,90 +1,145 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 public partial class SettingsMenu : ColorRect
 {
     public bool Shown = false;
 
     private Dictionary<string, Panel> settingPanels = [];
-    private Button deselect;
+    private Button hideButton;
     private Panel holder;
     private VBoxContainer sidebar;
     private Panel categories;
+
+    private ColorRect sidebarCategoryTemplate;
+    private ScrollContainer categoryTemplate;
+
     private ScrollContainer selectedCategory;
 
     public override void _Ready()
     {
-        deselect = GetNode<Button>("Deselect");
+        hideButton = GetNode<Button>("Hide");
         holder = GetNode<Panel>("Holder");
         sidebar = holder.GetNode("Sidebar").GetNode<VBoxContainer>("Container");
         categories = holder.GetNode<Panel>("Categories");
-        selectedCategory = categories.GetNode<ScrollContainer>("Gameplay");
+
+        sidebarCategoryTemplate = sidebar.GetNode<ColorRect>("SidebarCategoryTemplate");
+        categoryTemplate = categories.GetNode<ScrollContainer>("CategoryTemplate");
+
+        Modulate = Color.Color8(255, 255, 255, 0);
 
         SettingsManager.Instance.OnShown += ShowMenu;
-        // SettingsManager.Instance.Settings.FieldUpdated += (string field, Variant value) => {
-        //     Panel panel = settingPanels[field];
 
-        //     HSlider slider = (HSlider)panel?.FindChild("HSlider", false);
-        //     LineEdit lineEdit = (LineEdit)panel?.FindChild("LineEdit", false);
-        //     CheckButton toggle = (CheckButton)panel?.FindChild("CheckButton", false);
+        double start = Time.GetTicksUsec();
 
-        //     if (slider != null)
-		// 	{
-		// 		updateSlider(slider, lineEdit, (double)value);
-		// 	}
-		// 	else if (toggle != null)
-		// 	{
-		// 		updateToggle(toggle, (bool)value);
-		// 	}
-        // };
+        foreach (KeyValuePair<SettingsSection, List<ISettingsItem>> section in SettingsManager.Instance.Settings.ToOrderedSectionList())
+        {
+            if (section.Key == SettingsSection.None) { continue; };
+
+            string sectionName = section.Key.ToString();
+
+            ScrollContainer category = categoryTemplate.Duplicate() as ScrollContainer;
+            category.Name = sectionName;
+
+            categories.AddChild(category);
+
+            ColorRect sidebarCategory = sidebarCategoryTemplate.Duplicate() as ColorRect;
+            Button sidebarButton = sidebarCategory.GetNode<Button>("Button");
+
+            sidebarCategory.Name = sectionName;
+            sidebarCategory.Visible = true;
+            sidebarButton.Text = sectionName.ToUpper();
+            sidebarButton.Pressed += () => { SelectCategory(category); };
+
+            sidebar.AddChild(sidebarCategory);
+
+            if (selectedCategory == null)
+            {
+                SelectCategory(category);
+            }
+
+            VBoxContainer container = category.GetNode<VBoxContainer>("Container");
+            Panel settingTemplate = container.GetNode<Panel>("SettingTemplate");
+            CheckButton checkButtonTemplate = settingTemplate.GetNode<CheckButton>("CheckButton");
+            HSlider sliderTemplate = settingTemplate.GetNode<HSlider>("Slider");
+            LineEdit sliderLineEditTemplate = settingTemplate.GetNode<LineEdit>("SliderLineEdit");
+            LineEdit lineEditTemplate = settingTemplate.GetNode<LineEdit>("LineEdit");
+            OptionButton optionButtonTemplate = settingTemplate.GetNode<OptionButton>("OptionButton");
+            Button buttonTemplate = settingTemplate.GetNode<Button>("Button");
+
+            foreach (ISettingsItem setting in section.Value)
+            {
+                Panel panel = settingTemplate.Duplicate() as Panel;
+                panel.Name = setting.Id;
+                
+                foreach (Node child in panel.GetChildren())
+                {
+                    if (child.Name == "Title") { continue; };
+
+                    child.QueueFree();
+                }
+
+                Label title = panel.GetNode<Label>("Title");
+                title.Text = setting.Title;
+
+                if (setting.Type == typeof(bool))
+                {
+                    CheckButton checkButton = checkButtonTemplate.Duplicate() as CheckButton;
+
+                    setupToggle(setting, checkButton);
+                    panel.AddChild(checkButton);
+                }
+                else if (setting.Slider != null)
+                {
+                    HSlider slider = sliderTemplate.Duplicate() as HSlider;
+                    LineEdit lineEdit = sliderLineEditTemplate.Duplicate() as LineEdit;
+
+                    setupSlider(setting, slider, lineEdit);
+                    panel.AddChild(slider);
+                    panel.AddChild(lineEdit);
+                }
+                else if (setting.Type == typeof(string) && setting.List == null)
+                {
+                    LineEdit lineEdit = lineEditTemplate.Duplicate() as LineEdit;
+
+                    setupInput(setting, lineEdit);
+                    panel.AddChild(lineEdit);
+                }
+                else if (setting.List != null)
+                {
+                    OptionButton optionButton = optionButtonTemplate.Duplicate() as OptionButton;
+
+                    setupList(setting, optionButton);
+                    panel.AddChild(optionButton);
+                }
+                else if (setting.Type == typeof(Variant))
+                {
+                    Button button = buttonTemplate.Duplicate() as Button;
+
+                    setupButton(setting, button);
+                    panel.AddChild(button);
+                }
+
+                container.AddChild(panel);
+                settingPanels[setting.Id] = panel;
+            }
+
+            settingTemplate.QueueFree();
+        }
+
+        Logger.Log($"SETTINGS MENU: {(Time.GetTicksUsec() - start) / 1000}ms");
 
         ShowMenu(false);
 
-        deselect.Pressed += () => { ShowMenu(false); };
-		
-		foreach (ColorRect buttonHolder in sidebar.GetChildren())
-		{
-            ScrollContainer category = (ScrollContainer)categories.FindChild(buttonHolder.Name, false);
-
-			if (category != null)
-			{
-                buttonHolder.GetNode<Button>("Button").Pressed += () => { SelectCategory(category); };
-            }
-        }
-
-		foreach (ScrollContainer category in categories.GetChildren())
-		{
-			foreach (Panel panel in category.GetNode("Container").GetChildren())
-			{
-                string field = panel.Name;
-
-                settingPanels[field] = panel;
-
-                // Variant value = SettingsManager.Instance.Settings.Get(field);
-
-                // HSlider slider = (HSlider)panel.FindChild("HSlider", false);
-				// LineEdit lineEdit = (LineEdit)panel.FindChild("LineEdit", false);
-				// CheckButton toggle = (CheckButton)panel.FindChild("CheckButton", false);
-
-				// if (slider != null)
-				// {
-                //     setupSlider(field, slider, lineEdit);
-                //     updateSlider(slider, lineEdit, (double)value);
-                // }
-				// else if (toggle != null)
-				// {
-                //     setupToggle(field, toggle);
-                //     updateToggle(toggle, (bool)value);
-                // }
-            }
-		}
+        hideButton.Pressed += () => { ShowMenu(false); };
     }
 
 	public void ShowMenu(bool show)
 	{
         Shown = show;
-        deselect.MouseFilter = show ? MouseFilterEnum.Stop : MouseFilterEnum.Ignore;
+        hideButton.MouseFilter = show ? MouseFilterEnum.Stop : MouseFilterEnum.Ignore;
 
         MoveToFront();
 
@@ -104,8 +159,11 @@ public partial class SettingsMenu : ColorRect
 
 	public void SelectCategory(ScrollContainer category)
 	{
-        sidebar.GetNode<ColorRect>(new(selectedCategory.Name)).Color = Color.Color8(255, 255, 255, 0);
-        selectedCategory.Visible = false;
+        if (selectedCategory != null)
+        {
+            sidebar.GetNode<ColorRect>(new(selectedCategory.Name)).Color = Color.Color8(255, 255, 255, 0);
+            selectedCategory.Visible = false;
+        }
 
         selectedCategory = category;
 
@@ -113,32 +171,90 @@ public partial class SettingsMenu : ColorRect
 		sidebar.GetNode<ColorRect>(new(selectedCategory.Name)).Color = Color.Color8(255, 255, 255, 8);
     }
 
-	private void setupSlider(string field, HSlider slider, LineEdit lineEdit)
-	{
-		void applyLineEdit() {
-            double value = (lineEdit.Text == "" ? lineEdit.PlaceholderText : lineEdit.Text).ToFloat();
-            SettingsManager.ApplySetting(field, value);
-        }
+    // IMPLEMENT SETTINGSITEM UPDATE SIGNAL IN THESE //
 
-        lineEdit.FocusExited += applyLineEdit;
-        lineEdit.TextSubmitted += (_) => { applyLineEdit(); };
-        slider.ValueChanged += (double value) => { SettingsManager.ApplySetting(field, value); };
-    }
-
-	private void updateSlider(HSlider slider, LineEdit lineEdit, double value)
+    private void setupToggle(ISettingsItem setting, CheckButton button)
 	{
-        lineEdit.Text = value.ToString();
-        lineEdit.ReleaseFocus();
-        slider.SetValueNoSignal(value);
-    }
+        button.Toggled += value => { setting.SetVariant(value); };
 
-	private void setupToggle(string field, CheckButton button)
-	{
-        button.Toggled += (bool value) => { SettingsManager.ApplySetting(field, value); };
+        updateToggle(button, (bool)setting.GetVariant());
     }
 
 	private void updateToggle(CheckButton button, bool value)
 	{
         button.ButtonPressed = value;
+    }
+
+	private void setupSlider(ISettingsItem setting, HSlider slider, LineEdit lineEdit)
+	{
+		void applyLineEdit()
+        {
+            double value = (lineEdit.Text == "" ? lineEdit.PlaceholderText : lineEdit.Text).ToFloat();
+            setting.SetVariant(value);
+        }
+
+        lineEdit.FocusExited += applyLineEdit;
+        lineEdit.TextSubmitted += (_) => { applyLineEdit(); };
+        slider.ValueChanged += value => { setting.SetVariant(value); };
+
+        updateSlider(slider, lineEdit, (double)setting.GetVariant());
+    }
+
+	private void updateSlider(HSlider slider, LineEdit lineEdit, double value)
+	{
+        lineEdit.Text = value.ToString();
+        
+        if (lineEdit.IsInsideTree())
+        {
+            lineEdit.ReleaseFocus();
+        }
+
+        slider.SetValueNoSignal(value);
+    }
+
+    private void setupInput(ISettingsItem setting, LineEdit lineEdit)
+    {
+        void applyLineEdit()
+        {
+            string value = (lineEdit.Text == "" ? lineEdit.PlaceholderText : lineEdit.Text);
+            setting.SetVariant(value);
+        }
+
+        lineEdit.FocusExited += applyLineEdit;
+        lineEdit.TextSubmitted += (_) => { applyLineEdit(); };
+
+        updateInput(lineEdit, (string)setting.GetVariant());
+    }
+
+    private void updateInput(LineEdit lineEdit, string input)
+    {
+        lineEdit.Text = input;
+
+        if (lineEdit.IsInsideTree())
+        {
+            lineEdit.ReleaseFocus();
+        }
+    }
+
+    private void setupList(ISettingsItem setting, OptionButton optionButton)
+    {
+        foreach (Variant item in setting.List.Values)
+        {
+            optionButton.AddItem((string)item);
+        }
+
+        optionButton.ItemSelected += (long id) => { setting.SetVariant(id); };
+
+        updateList(optionButton, (int)setting.GetVariant());
+    }
+
+    private void updateList(OptionButton optionButton, int value)
+    {
+        optionButton.Selected = value;
+    }
+
+    private void setupButton(ISettingsItem setting, Button button)
+    {
+        
     }
 }

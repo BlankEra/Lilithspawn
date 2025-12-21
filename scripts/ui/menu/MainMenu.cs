@@ -15,8 +15,9 @@ public partial class MainMenu : Control
         lastMenu = CurrentMenu;
 
         Input.MouseMode = Input.MouseModeEnum.Hidden;
+        DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Adaptive);
 
-		foreach (Button button in CurrentMenu.GetNode("Buttons").GetChildren())
+        foreach (Button button in CurrentMenu.GetNode("Buttons").GetChildren())
 		{
             Panel menu = (Panel)MenuHolder.FindChild(button.Name, false);
 			
@@ -27,7 +28,7 @@ public partial class MainMenu : Control
         }
     }
 
-    public override void _Input(InputEvent @event)
+    public override void _UnhandledInput(InputEvent @event)
     {
         if (@event is InputEventMouseButton mouseButton && mouseButton.Pressed)
 		{

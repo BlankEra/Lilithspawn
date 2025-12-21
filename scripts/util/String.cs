@@ -7,12 +7,12 @@ public class String
 {
 	public static string FormatTime(double seconds, bool padMinutes = false)
 	{
-		int minutes = (int)Mathf.Floor(seconds / 60);
+		int minutes = (int)Mathf.Floor(seconds / (seconds > 0 ? 60 : -60));
 
 		seconds -= minutes * 60;
 		seconds = Math.Floor(seconds);
 
-		return $"{(seconds < 0 ? "-" : "")}{(padMinutes ? minutes.ToString().PadZeros(2) : minutes)}:{seconds.ToString().PadZeros(2)}";
+		return $"{(seconds < 0 ? "-" : "")}{(padMinutes ? minutes.ToString().PadZeros(2) : minutes)}:{Math.Abs(seconds).ToString().PadZeros(2)}";
 	}
 
 	public static string FormatUnixTimePretty(double now, double time)

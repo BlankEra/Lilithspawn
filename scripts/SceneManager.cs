@@ -1,8 +1,8 @@
+using System.Collections.Generic;
 using Godot;
 
 public partial class SceneManager : Node
 {
-
     private static SubViewportContainer backgroundContainer;
 
     private static SubViewport backgroundViewport;
@@ -12,6 +12,8 @@ public partial class SceneManager : Node
     private static string activeScenePath;
 
     private static bool skipNextTransition = false;
+
+    private static Dictionary<string, Node> loaded = [];
 
     public static Node Node { get; private set; }
 
@@ -83,8 +85,15 @@ public partial class SceneManager : Node
 
     private static void swapScene(string path)
     {
-        var node = ResourceLoader.Load<PackedScene>(path).Instantiate();
-        
+        bool sceneCached = loaded.TryGetValue(path, out Node scene);
+        Node newScene = sceneCached ? scene : ResourceLoader.Load<PackedScene>(path).Instantiate();
+
+        //                  temp solution until these scenes are non-static
+        if (!sceneCached && newScene.Name != "SceneGame" && newScene.Name != "SceneResults")
+        {
+            loaded[path] = newScene;
+        }
+
         if (Scene != null && Scene.GetParent() != null)
         {
             Node.RemoveChild(Scene);
@@ -94,7 +103,7 @@ public partial class SceneManager : Node
                 backgroundViewport.RemoveChild(space);
             }
             
-            switch (node.Name)
+            switch (newScene.Name)
             {
                 case "SceneMenu":
                     space = SkinManager.Instance.Skin.MenuSpace;
@@ -104,14 +113,14 @@ public partial class SceneManager : Node
                     break;
             }
 
-            // temp solution until the game scene is non-static
-            backgroundViewport.TransparentBg = node.Name != "SceneMenu";
+            // another temp static solution
+            backgroundViewport.TransparentBg = newScene.Name != "SceneMenu";
             
             backgroundViewport.AddChild(space);
         }
 
         activeScenePath = path;
-        Scene = node;
-        Node.AddChild(node);
+        Scene = newScene;
+        Node.AddChild(newScene);
     }
 }

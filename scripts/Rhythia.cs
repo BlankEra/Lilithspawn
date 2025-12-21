@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using Godot;
 using Godot.NativeInterop;
@@ -12,10 +13,13 @@ public partial class Rhythia : Node
 
     private DatabaseService databaseService = DatabaseService.Instance;
 
+    public static Rhythia Instance;
     public static bool Quitting { get; private set; } = false;
 
     public override void _Ready()
     {
+        Instance = this;
+
         GetTree().AutoAcceptQuit = false;
 
         // Set up user folder
@@ -194,21 +198,8 @@ public partial class Rhythia : Node
 
         Discord.Client.Dispose();
         DatabaseService.Instance.Dispose();
-
-        if (SceneManager.Scene.Name == "SceneMenu")
-        {
-            Tween tween = SceneManager.Scene.CreateTween();
-            tween.TweenProperty(SceneManager.Scene, "modulate", Color.Color8(1, 1, 1, 0), 0.5).SetTrans(Tween.TransitionType.Quad);
-            tween.TweenCallback(Callable.From(() =>
-            {
-                SceneManager.Scene.GetTree().Quit();
-            }));
-            tween.Play();
-        }
-        else
-        {
-            SceneManager.Scene.GetTree().Quit();
-        }
+        
+        Instance.GetTree().Quit();
     }
 
     public override void _Notification(int what)

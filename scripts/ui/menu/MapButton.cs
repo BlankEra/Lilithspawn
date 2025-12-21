@@ -126,9 +126,15 @@ public partial class MapButton : Panel
 	public void UpdateInfo(Map map)
 	{
         Map = map;
-        Name = Map.ID;
-        title.Text = Map.PrettyTitle;
-        extra.Text = $"[outline_size=2][outline_color=000000][color=808080]{Util.String.FormatTime(Map.Length / 1000)} — [color={Constants.DIFFICULTY_COLORS[Map.Difficulty].ToHtml()}]{Map.DifficultyName} [color=808080]by [color=b0b0b0]{Map.PrettyMappers}";
+        Name = map.ID;
+        
+        title.Text = map.PrettyTitle;
+        extra.Text = string.Format("[outline_size=2][outline_color=000000][color=808080]{0} — [color={1}]{2} [color=808080]by [color=b0b0b0]{3}",
+            Util.String.FormatTime(map.Length / 1000),
+            Constants.DIFFICULTY_COLORS[map.Difficulty].ToHtml(),
+            map.DifficultyName,
+            map.PrettyMappers
+        );
     }
 
 	public void UpdateOutline(float targetFill, float fill = -1)

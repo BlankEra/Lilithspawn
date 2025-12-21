@@ -72,9 +72,9 @@ public partial class SkinManager : Node
 		skin.JukeboxPlayImage = loadTexture("ui/jukebox_play.png");
 		skin.JukeboxPauseImage = loadTexture("ui/jukebox_pause.png");
 		skin.JukeboxSkipImage = loadTexture("ui/jukebox_skip.png");
+        skin.BackgroundTileImage = loadTexture("ui/background_tile.png");
 
 		skin.FavoriteImage = loadTexture("ui/play/favorite.png");
-        skin.BackgroundTileImage = loadTexture("ui/play/background_tile.png");
 		skin.MapListMaskImage = loadTexture("ui/play/maplist_mask.png");
 		skin.MapListSelectionCursorImage = loadTexture("ui/play/maplist_selection_cursor.png");
         skin.MapListScrollBarTopImage = loadTexture("ui/play/scrollbar_top.png");
@@ -83,6 +83,8 @@ public partial class SkinManager : Node
 		skin.MapListScrollBarBackgroundTopImage = loadTexture("ui/play/scrollbar_background_top.png");
 		skin.MapListScrollBarBackgroundMiddleImage = loadTexture("ui/play/scrollbar_background_middle.png");
 		skin.MapListScrollBarBackgroundBottomImage = loadTexture("ui/play/scrollbar_background_bottom.png");
+
+        skin.MapInfoCoverBackgroundImage = loadTexture("ui/play/mapinfo_cover_background.png");
 
         skin.ModNofailImage = loadTexture("modifiers/nofail.png");
 		skin.ModSpinImage = loadTexture("modifiers/spin.png");
@@ -110,7 +112,7 @@ public partial class SkinManager : Node
 
 		// Shaders
 
-		skin.BackgroundTileShader = loadShader("ui/play/background_tile.gdshader");
+		skin.BackgroundTileShader = loadShader("ui/background_tile.gdshader");
         skin.MapButtonCoverShader = loadShader("ui/play/map_button_cover.gdshader");
 
         //

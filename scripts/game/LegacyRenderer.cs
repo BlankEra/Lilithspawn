@@ -25,8 +25,9 @@ public partial class LegacyRenderer : MultiMeshInstance3D
         float fadeIn = (float)(LegacyRunner.CurrentAttempt.IsReplay ? LegacyRunner.CurrentAttempt.Replays[0].FadeIn : settings.FadeIn.Value);
         bool fadeOut = LegacyRunner.CurrentAttempt.IsReplay ? LegacyRunner.CurrentAttempt.Replays[0].FadeOut : settings.FadeOut.Value;
         bool pushback = LegacyRunner.CurrentAttempt.IsReplay ? LegacyRunner.CurrentAttempt.Replays[0].Pushback : settings.Pushback.Value;
-        float noteSize = (float)(LegacyRunner.CurrentAttempt.IsReplay ? LegacyRunner.CurrentAttempt.Replays[0].NoteSize : settings.NoteSize.Value);
-        Transform3D transform = new(new Vector3(noteSize / 2, 0, 0), new Vector3(0, noteSize / 2, 0), new Vector3(0, 0, noteSize / 2), Vector3.Zero);
+        float hitWindowDepth = pushback ? (float)Constants.HIT_WINDOW * ar / 1000 : 0;
+        float noteSize = (float)(LegacyRunner.CurrentAttempt.IsReplay ? LegacyRunner.CurrentAttempt.Replays[0].NoteSize : settings.NoteSize.Value) / 4;
+        Transform3D transform = new(Vector3.Right * noteSize, Vector3.Up * noteSize, Vector3.Back * noteSize, Vector3.Zero);
 
         for (int i = 0; i < LegacyRunner.ToProcess; i++)
         {
@@ -40,7 +41,8 @@ public partial class LegacyRenderer : MultiMeshInstance3D
             }
             else if (fadeOut)
             {
-                alpha -= (ad - depth) / (ad + (float)Constants.HIT_WINDOW * ar / 1000);
+                // alpha -= (ad - depth) / (ad + (float)Constants.HIT_WINDOW * ar / 1000);
+                alpha *= Math.Min(1, (depth + hitWindowDepth) / (ad + hitWindowDepth));
             }
 
             if (!pushback && note.Millisecond - LegacyRunner.CurrentAttempt.Progress <= 0)

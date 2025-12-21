@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using Godot;
 
@@ -9,7 +10,6 @@ public partial class LegacyRunner : Node3D
 	private static SettingsProfile settings;
 
 	private static Node3D node3D;
-	private static readonly PackedScene player_score = GD.Load<PackedScene>("res://prefabs/player_score.tscn");
 	private static readonly PackedScene hit_feedback = GD.Load<PackedScene>("res://prefabs/hit_popup.tscn");
 	private static readonly PackedScene miss_feedback = GD.Load<PackedScene>("res://prefabs/miss_icon.tscn");
 	private static readonly PackedScene modifier_icon = GD.Load<PackedScene>("res://prefabs/modifier.tscn");
@@ -530,7 +530,7 @@ public partial class LegacyRunner : Node3D
 			
 			if (CurrentAttempt.DeathTime == -1)
 			{
-				CurrentAttempt.DeathTime = CurrentAttempt.Progress;
+				CurrentAttempt.DeathTime = Math.Max(0, CurrentAttempt.Progress);
 			}
 
 			Stop();
@@ -1132,7 +1132,9 @@ public partial class LegacyRunner : Node3D
 	
 	public static void Play(Map map, double speed = 1, double startFrom = 0, Dictionary<string, bool> mods = null, string[] players = null, Replay[] replays = null)
 	{
-		CurrentAttempt = new(map, speed, startFrom, mods ?? [], players, replays);
+        map = MapParser.Decode(map.FilePath, null, false, false);
+
+        CurrentAttempt = new(map, speed, startFrom, mods ?? [], players, replays);
 		Playing = true;
 		stopQueued = false;
 		Started = Time.GetTicksUsec();
@@ -1229,7 +1231,7 @@ public partial class LegacyRunner : Node3D
 				
 				Leaderboard leaderboard = new(CurrentAttempt.Map.ID, $"{Constants.USER_FOLDER}/pbs/{CurrentAttempt.Map.ID}");
 				
-				leaderboard.Add(new(CurrentAttempt.ID, "You", CurrentAttempt.Qualifies, CurrentAttempt.Score, CurrentAttempt.Accuracy, Time.GetUnixTimeFromSystem(), CurrentAttempt.DeathTime, CurrentAttempt.Map.Length, CurrentAttempt.Speed, CurrentAttempt.Mods));
+				leaderboard.Add(new(CurrentAttempt.ID, "You", CurrentAttempt.Qualifies, CurrentAttempt.Score, CurrentAttempt.Accuracy, Time.GetUnixTimeFromSystem(), CurrentAttempt.Map.Length, CurrentAttempt.Map.Length, CurrentAttempt.Speed, CurrentAttempt.Mods));
 				leaderboard.Save();
 				
 				if (CurrentAttempt.Qualifies)

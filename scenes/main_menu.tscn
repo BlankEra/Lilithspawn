@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=3 uid="uid://do18270a428ma"]
+[gd_scene load_steps=76 format=3 uid="uid://do18270a428ma"]
 
 [ext_resource type="Shader" uid="uid://c7ldko1kfg2ho" path="res://scripts/shaders/noise_waves.gdshader" id="1_3wgol"]
 [ext_resource type="Script" uid="uid://j2paynyu362u" path="res://scripts/ui/menu/MainMenu.cs" id="1_yxnar"]
@@ -13,16 +13,10 @@
 [ext_resource type="Script" uid="uid://cqprxe41p0qov" path="res://scripts/ui/menu/Background.cs" id="10_eku7s"]
 [ext_resource type="Texture2D" uid="uid://cbbafomdyoenp" path="res://skin/ui/background_tile.png" id="10_jvjdd"]
 [ext_resource type="Shader" uid="uid://dgoi2tf33xnmj" path="res://skin/ui/background_tile.gdshader" id="10_yxnar"]
-[ext_resource type="Texture2D" uid="uid://co5ul5mlsanna" path="res://skin/modifiers/nofail.png" id="12_tcusk"]
 [ext_resource type="Script" uid="uid://dsq135xacv1vh" path="res://scripts/ui/menu/MapList.cs" id="12_yxnar"]
-[ext_resource type="Texture2D" uid="uid://d1c7yqqmohmv1" path="res://skin/modifiers/ghost.png" id="13_4puye"]
-[ext_resource type="Texture2D" uid="uid://bevth7guc4yc4" path="res://skin/modifiers/spin.png" id="14_q13xq"]
 [ext_resource type="Texture2D" uid="uid://b8wjaogc8fvq4" path="res://skin/ui/play/scrollbar_background_middle.png" id="15_4puye"]
-[ext_resource type="Texture2D" uid="uid://3bg5xrocd55i" path="res://skin/modifiers/flashlight.png" id="15_u43bj"]
-[ext_resource type="Texture2D" uid="uid://ba8nnsyx5yiw8" path="res://skin/modifiers/chaos.png" id="16_jvjdd"]
 [ext_resource type="Texture2D" uid="uid://cr5wlhch2a3nc" path="res://skin/ui/play/scrollbar_background_top.png" id="16_q13xq"]
 [ext_resource type="Texture2D" uid="uid://bhcxdv0lm6nog" path="res://skin/ui/play/scrollbar_background_bottom.png" id="17_u43bj"]
-[ext_resource type="Texture2D" uid="uid://bugx1qn5t88e3" path="res://skin/modifiers/hardrock.png" id="17_yxnar"]
 [ext_resource type="Texture2D" uid="uid://baivqqkfll133" path="res://textures/RhythiaSquircle.png" id="18_eku7s"]
 [ext_resource type="Texture2D" uid="uid://ddx87gpqy8hfo" path="res://skin/ui/play/scrollbar_middle.png" id="18_jvjdd"]
 [ext_resource type="FontFile" uid="uid://4bnnn01f4dqr" path="res://fonts/Ubuntu-Medium.ttf" id="19_c6nra"]
@@ -32,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://c0wbm1qc5npty" path="res://textures/ui/discord_pressed.png" id="21_1468l"]
 [ext_resource type="Texture2D" uid="uid://bku8toppyall7" path="res://skin/ui/play/maplist_mask.png" id="21_q13xq"]
 [ext_resource type="Texture2D" uid="uid://d3buklvnhgqcy" path="res://textures/ui/discord_hovered.png" id="22_01xyg"]
+[ext_resource type="Script" uid="uid://bdxxohkj7wy22" path="res://scripts/ui/menu/MapInfo.cs" id="22_qw82i"]
 [ext_resource type="Texture2D" uid="uid://bw35mprqnilk7" path="res://skin/ui/play/maplist_selection_cursor.png" id="22_u43bj"]
 [ext_resource type="Texture2D" uid="uid://8du82a5dxjdk" path="res://skin/ui/jukebox_play.png" id="23_764ux"]
 [ext_resource type="Texture2D" uid="uid://bpsvcunhigs6c" path="res://skin/ui/jukebox_skip.png" id="24_wadof"]
@@ -39,6 +34,7 @@
 [ext_resource type="Script" uid="uid://c31515lg0ihgs" path="res://scripts/ui/menu/UserFolderButton.cs" id="27_eku7s"]
 [ext_resource type="Script" uid="uid://d36x1ln46itd1" path="res://scripts/ui/menu/RandomPickButton.cs" id="27_u43bj"]
 [ext_resource type="Script" uid="uid://nob6vs2h1mwj" path="res://scripts/ui/menu/ImportButton.cs" id="28_eku7s"]
+[ext_resource type="Shader" uid="uid://rngh60dyh10b" path="res://scripts/shaders/outline.gdshader" id="30_q13xq"]
 [ext_resource type="Script" uid="uid://b47jydbbjdh3i" path="res://scripts/ui/menu/SoundSpaceButton.cs" id="33_yxnar"]
 [ext_resource type="Script" uid="uid://bqidqko521o1v" path="res://scripts/ui/menu/DiscordButton.cs" id="37_c6nra"]
 [ext_resource type="Script" uid="uid://carutkgoqpr4e" path="res://scripts/ui/Cursor.cs" id="41_yxnar"]
@@ -122,32 +118,20 @@ corner_radius_bottom_left = 3
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eku7s"]
 shader = ExtResource("10_yxnar")
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_omwck"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_l7ueg"]
-shader = ExtResource("4_1a85y")
-shader_parameter/brightness = 0.5
-
-[sub_resource type="LabelSettings" id="LabelSettings_73f6f"]
-font = ExtResource("7_6h3lr")
-font_color = Color(1, 1, 1, 0.25098)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v77in"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_ptq8h"]
-font = ExtResource("7_6h3lr")
-
-[sub_resource type="LabelSettings" id="LabelSettings_cltbi"]
-font = ExtResource("7_6h3lr")
-font_size = 14
-font_color = Color(1, 1, 1, 0.501961)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c6nra"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_18lcc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ooiyf"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ruka0"]
-bg_color = Color(1, 1, 1, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u43bj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jvjdd"]
+bg_color = Color(0, 0, 0, 0.627451)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="LabelSettings" id="LabelSettings_5g0q6"]
 font = ExtResource("5_hl5e0")
@@ -160,6 +144,36 @@ font = ExtResource("19_c6nra")
 
 [sub_resource type="LabelSettings" id="LabelSettings_5pcip"]
 font = ExtResource("7_6h3lr")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yxnar"]
+shader = ExtResource("30_q13xq")
+shader_parameter/outline_color = Color(0.05, 0.05, 0.05, 1)
+shader_parameter/outline_opacity = 1.0
+shader_parameter/light_color = Color(0.79, 0, 0.27, 1)
+shader_parameter/cursor_light_color = Color(0.15, 0.15, 0.15, 1)
+shader_parameter/fill = 0.0
+shader_parameter/glow_radius = 350.0
+shader_parameter/glow_exponent = 2.0
+shader_parameter/light_position = Vector2(-10000, 0)
+shader_parameter/cursor_position = Vector2(0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eku7s"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qw82i"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l7ueg"]
+shader = ExtResource("4_1a85y")
+shader_parameter/brightness = 0.5
 
 [sub_resource type="LabelSettings" id="LabelSettings_1o5ig"]
 
@@ -485,12 +499,12 @@ stretch_mode = 1
 [node name="MapList" type="Panel" parent="Menus/Play"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
+anchor_left = 0.55
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 128.0
 offset_right = -8.0
-offset_bottom = -72.0
+offset_bottom = -80.0
 grow_horizontal = 0
 mouse_filter = 1
 theme = ExtResource("6_engjn")
@@ -608,299 +622,25 @@ mouse_filter = 2
 texture = ExtResource("22_u43bj")
 expand_mode = 1
 
-[node name="Leaderboard" type="Panel" parent="Menus/Play"]
+[node name="MapInfo" type="AspectRatioContainer" parent="Menus/Play"]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.4
-anchor_right = 0.25
+anchor_left = 0.05
+anchor_right = 0.45
 anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 8.0
-offset_bottom = -72.0
-theme_override_styles/panel = SubResource("StyleBoxEmpty_omwck")
-
-[node name="Background" type="ColorRect" parent="Menus/Play/Leaderboard"]
-material = SubResource("ShaderMaterial_l7ueg")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="NoScores" type="Label" parent="Menus/Play/Leaderboard"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "no scores yet :("
-label_settings = SubResource("LabelSettings_73f6f")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Menus/Play/Leaderboard"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("6_engjn")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Menus/Play/Leaderboard/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/separation = 0
-
-[node name="Modifiers" type="Panel" parent="Menus/Play"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.25
-anchor_bottom = 0.4
-offset_left = 8.0
+offset_left = 8.000004
 offset_top = 128.0
-theme_override_styles/panel = SubResource("StyleBoxEmpty_omwck")
-
-[node name="Background" type="ColorRect" parent="Menus/Play/Modifiers"]
-material = SubResource("ShaderMaterial_l7ueg")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+offset_bottom = -80.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("22_qw82i")
 
-[node name="Speed" type="Panel" parent="Menus/Play/Modifiers"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.2
-offset_left = 8.0
-offset_right = -8.0
-theme_override_styles/panel = SubResource("StyleBoxEmpty_v77in")
-
-[node name="Label" type="Label" parent="Menus/Play/Modifiers/Speed"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.2
-anchor_bottom = 1.0
-text = "Speed"
-label_settings = SubResource("LabelSettings_ptq8h")
-vertical_alignment = 1
-clip_text = true
-text_overrun_behavior = 3
-
-[node name="HSlider" type="HSlider" parent="Menus/Play/Modifiers/Speed"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.2
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -67.0
-theme = ExtResource("6_engjn")
-min_value = 50.0
-max_value = 200.0
-step = 5.0
-value = 100.0
-rounded = true
-allow_greater = true
-allow_lesser = true
-scrollable = false
-
-[node name="LineEdit" type="LineEdit" parent="Menus/Play/Modifiers/Speed"]
-clip_contents = true
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-grow_horizontal = 0
-mouse_default_cursor_shape = 0
-theme_override_font_sizes/font_size = 16
-text = "100"
-placeholder_text = "100"
-max_length = 5
-context_menu_enabled = false
-flat = true
-caret_blink = true
-
-[node name="LabelDecrease" type="Label" parent="Menus/Play/Modifiers"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.2
-anchor_right = 1.0
-anchor_bottom = 0.2
-offset_left = 8.0
-offset_right = -8.0
-offset_bottom = 17.0
-text = "Difficulty Decrease"
-label_settings = SubResource("LabelSettings_cltbi")
-horizontal_alignment = 1
-
-[node name="Decrease" type="HBoxContainer" parent="Menus/Play/Modifiers"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.2
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 8.0
-offset_top = 22.0
-offset_right = -8.0
-offset_bottom = -5.0
-theme_override_constants/separation = 4
-
-[node name="NoFail" type="TextureButton" parent="Menus/Play/Modifiers/Decrease"]
-self_modulate = Color(1, 1, 1, 0.501961)
-texture_filter = 4
-texture_repeat = 1
-custom_minimum_size = Vector2(4, 0)
+[node name="Holder" type="Panel" parent="Menus/Play/MapInfo"]
 layout_mode = 2
-size_flags_horizontal = 3
-texture_normal = ExtResource("12_tcusk")
-ignore_texture_size = true
-stretch_mode = 5
-
-[node name="LabelIncrease" type="Label" parent="Menus/Play/Modifiers"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 8.0
-offset_right = -8.0
-offset_bottom = 17.0
-text = "Difficulty Increase"
-label_settings = SubResource("LabelSettings_cltbi")
-horizontal_alignment = 1
-
-[node name="Increase" type="HBoxContainer" parent="Menus/Play/Modifiers"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.8
-offset_left = 8.0
-offset_top = 22.0
-offset_right = -8.0
-offset_bottom = -5.0
-theme_override_constants/separation = 4
-
-[node name="Ghost" type="TextureButton" parent="Menus/Play/Modifiers/Increase"]
-self_modulate = Color(1, 1, 1, 0.501961)
-texture_filter = 4
-texture_repeat = 1
-custom_minimum_size = Vector2(24, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-texture_normal = ExtResource("13_4puye")
-ignore_texture_size = true
-stretch_mode = 5
-
-[node name="Spin" type="TextureButton" parent="Menus/Play/Modifiers/Increase"]
-self_modulate = Color(1, 1, 1, 0.501961)
-texture_filter = 4
-texture_repeat = 1
-custom_minimum_size = Vector2(24, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-texture_normal = ExtResource("14_q13xq")
-ignore_texture_size = true
-stretch_mode = 5
-
-[node name="Flashlight" type="TextureButton" parent="Menus/Play/Modifiers/Increase"]
-visible = false
-self_modulate = Color(1, 1, 1, 0.501961)
-texture_filter = 4
-texture_repeat = 1
-custom_minimum_size = Vector2(24, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-texture_normal = ExtResource("15_u43bj")
-ignore_texture_size = true
-stretch_mode = 5
-
-[node name="Chaos" type="TextureButton" parent="Menus/Play/Modifiers/Increase"]
-visible = false
-self_modulate = Color(1, 1, 1, 0.501961)
-texture_filter = 4
-texture_repeat = 1
-custom_minimum_size = Vector2(24, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-texture_normal = ExtResource("16_jvjdd")
-ignore_texture_size = true
-stretch_mode = 5
-
-[node name="HardRock" type="TextureButton" parent="Menus/Play/Modifiers/Increase"]
-visible = false
-self_modulate = Color(1, 1, 1, 0.501961)
-texture_filter = 4
-texture_repeat = 1
-custom_minimum_size = Vector2(24, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-texture_normal = ExtResource("17_yxnar")
-ignore_texture_size = true
-stretch_mode = 5
-
-[node name="StartFrom" type="Panel" parent="Menus/Play/Modifiers"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.8
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_right = -8.0
-theme_override_styles/panel = SubResource("StyleBoxEmpty_v77in")
-
-[node name="Label" type="Label" parent="Menus/Play/Modifiers/StartFrom"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.2
-anchor_bottom = 1.0
-text = "Start From"
-label_settings = SubResource("LabelSettings_ptq8h")
-vertical_alignment = 1
-clip_text = true
-text_overrun_behavior = 3
-
-[node name="HSlider" type="HSlider" parent="Menus/Play/Modifiers/StartFrom"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.2
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -67.0
-theme = ExtResource("6_engjn")
-max_value = 1.0
-step = 0.0
-allow_greater = true
-allow_lesser = true
-scrollable = false
-
-[node name="LineEdit" type="LineEdit" parent="Menus/Play/Modifiers/StartFrom"]
-clip_contents = true
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-grow_horizontal = 0
-mouse_default_cursor_shape = 0
-theme_override_font_sizes/font_size = 16
-text = "0:00"
-placeholder_text = "0:00"
-max_length = 5
-context_menu_enabled = false
-flat = true
-caret_blink = true
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxEmpty_c6nra")
 
 [node name="SubTopBar" type="Panel" parent="Menus/Play"]
 layout_mode = 1
@@ -910,6 +650,7 @@ offset_left = 8.0
 offset_top = 64.0
 offset_right = -8.0
 offset_bottom = 128.0
+mouse_filter = 2
 theme = ExtResource("6_engjn")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_18lcc")
 
@@ -992,6 +733,31 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ooiyf")
 
+[node name="Background" type="Panel" parent="Menus/Extras"]
+material = SubResource("ShaderMaterial_q13xq")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_u43bj")
+script = ExtResource("10_eku7s")
+
+[node name="Tile" type="TextureRect" parent="Menus/Extras/Background"]
+material = SubResource("ShaderMaterial_eku7s")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("10_jvjdd")
+expand_mode = 1
+stretch_mode = 1
+
 [node name="Logo" type="TextureRect" parent="Menus/Extras"]
 layout_mode = 1
 anchors_preset = -1
@@ -1038,7 +804,6 @@ text = "[center][color=ffffff40]Inspired by Sound Space"
 scroll_active = false
 
 [node name="Stats" type="Panel" parent="Menus/Extras"]
-material = SubResource("ShaderMaterial_dr6yk")
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
@@ -1047,7 +812,16 @@ anchor_bottom = 1.0
 offset_top = 220.0
 offset_bottom = -80.0
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ruka0")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_u43bj")
+
+[node name="Background" type="Panel" parent="Menus/Extras/Stats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jvjdd")
 
 [node name="Header" type="Label" parent="Menus/Extras/Stats"]
 layout_mode = 1
@@ -1514,8 +1288,18 @@ offset_top = 6.0
 label_settings = SubResource("LabelSettings_5pcip")
 autowrap_mode = 3
 
+[node name="Outline" type="Panel" parent="Menus/Extras/Stats"]
+material = SubResource("ShaderMaterial_yxnar")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_eku7s")
+
 [node name="Credits" type="Panel" parent="Menus/Extras"]
-material = SubResource("ShaderMaterial_dr6yk")
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.55
@@ -1525,7 +1309,16 @@ offset_top = 220.0
 offset_bottom = -80.0
 grow_horizontal = 0
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ruka0")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_qw82i")
+
+[node name="Background" type="Panel" parent="Menus/Extras/Credits"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jvjdd")
 
 [node name="Header" type="Label" parent="Menus/Extras/Credits"]
 layout_mode = 1
@@ -1555,6 +1348,17 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
+[node name="Outline" type="Panel" parent="Menus/Extras/Credits"]
+material = SubResource("ShaderMaterial_yxnar")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_eku7s")
+
 [node name="TopBar" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = -1
@@ -1563,6 +1367,7 @@ offset_left = 8.0
 offset_top = 8.0
 offset_right = -8.0
 offset_bottom = 64.0
+mouse_filter = 2
 theme = ExtResource("6_engjn")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_18lcc")
 
@@ -1624,6 +1429,7 @@ offset_left = 8.0
 offset_top = -64.0
 offset_right = -8.0
 offset_bottom = -8.0
+mouse_filter = 2
 theme = ExtResource("6_engjn")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_18lcc")
 
@@ -2309,6 +2115,7 @@ offset_right = -10.0
 offset_bottom = -72.0
 grow_horizontal = 0
 grow_vertical = 0
+mouse_filter = 2
 alignment = 2
 
 [node name="ContextMenu" type="Panel" parent="."]
@@ -2437,7 +2244,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Cursor" type="TextureRect" parent="."]
-z_index = 1
+z_index = 2
 layout_mode = 0
 offset_right = 32.0
 offset_bottom = 32.0

@@ -64,7 +64,7 @@ public partial class KeybindsManager : Node
 
                 Panel volumePopup = SceneManager.Scene.GetNode<Panel>("Volume");
                 Label label = volumePopup.GetNode<Label>("Label");
-                label.Text = settings.VolumeMaster.ToString();
+                label.Text = settings.VolumeMaster.Value.ToString();
                 Tween tween = volumePopup.CreateTween();
                 tween.TweenProperty(volumePopup, "modulate", Color.FromHtml("ffffffff"), 0.25).SetTrans(Tween.TransitionType.Quad);
                 tween.Parallel().TweenProperty(volumePopup.GetNode<ColorRect>("Main"), "anchor_right", settings.VolumeMaster.Value / 100, 0.15).SetTrans(Tween.TransitionType.Quad);

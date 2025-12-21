@@ -426,7 +426,7 @@ public partial class SettingsProfile
             }
         };
 
-        CursorTrail = new(true)
+        CursorTrail = new(false)
         {
             Id = "CursorTrail",
             Title = "Cursor Trail",

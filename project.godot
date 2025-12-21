@@ -39,6 +39,7 @@ file_logging/enable_file_logging=true
 [display]
 
 window/subwindows/embed_subwindows=false
+window/per_pixel_transparency/allowed=true
 
 [dotnet]
 
@@ -60,5 +61,5 @@ common/physics_ticks_per_second=120
 
 textures/lossless_compression/force_png=true
 anti_aliasing/quality/msaa_2d=1
-environment/defaults/default_clear_color=Color(0, 0, 0, 1)
+environment/defaults/default_clear_color=Color(0.0885599, 0.08855992, 0.08855987, 1)
 anti_aliasing/quality/screen_space_aa=1

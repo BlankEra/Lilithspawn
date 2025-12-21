@@ -52,7 +52,7 @@ public partial class Map : RefCounted
         Mappers = mappers ?? ["N/A"];
         PrettyMappers = "";
         Difficulty = difficulty;
-        DifficultyName = difficultyName ?? Constants.DIFFICULTIES[Difficulty];
+        DifficultyName = difficultyName.StripEscapes() ?? Constants.DIFFICULTIES[Difficulty];
         AudioBuffer = audioBuffer;
         CoverBuffer = coverBuffer;
         VideoBuffer = videoBuffer;
@@ -67,7 +67,7 @@ public partial class Map : RefCounted
             PrettyMappers += $"{mapper}, ";
         }
 
-        PrettyMappers = PrettyMappers.Substr(0, PrettyMappers.Length - 2).Replace("\n", "");
+        PrettyMappers = PrettyMappers.Substr(0, PrettyMappers.Length - 2).StripEscapes();
     }
 
     public string EncodeMeta()
