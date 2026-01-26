@@ -1,9 +1,9 @@
 [gd_resource type="Theme" load_steps=29 format=3 uid="uid://dhuhu3mmaew1a"]
 
-[ext_resource type="Texture2D" uid="uid://cieygsw1v4ulk" path="res://skin/ui/buttons/grabber_normal.png" id="1_2hrgd"]
+[ext_resource type="Texture2D" uid="uid://cieygsw1v4ulk" path="res://user/skins/default/ui/buttons/grabber_normal.png" id="1_2hrgd"]
 [ext_resource type="Texture2D" uid="uid://c4u5y3e8yamuk" path="res://textures/empty.png" id="2_a8t2u"]
-[ext_resource type="Texture2D" uid="uid://dmaro0gvrgoh7" path="res://skin/ui/buttons/grabber_pressed.png" id="3_k0q7g"]
-[ext_resource type="Texture2D" uid="uid://btkgx3m0tkmul" path="res://skin/ui/buttons/grabber_tick.png" id="4_j33s6"]
+[ext_resource type="Texture2D" uid="uid://dmaro0gvrgoh7" path="res://user/skins/default/ui/buttons/grabber_pressed.png" id="3_k0q7g"]
+[ext_resource type="Texture2D" uid="uid://btkgx3m0tkmul" path="res://user/skins/default/ui/buttons/grabber_tick.png" id="4_j33s6"]
 [ext_resource type="FontFile" uid="uid://dvb6fvy008bhv" path="res://fonts/Roboto-Medium.ttf" id="5_vsup1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rucdj"]

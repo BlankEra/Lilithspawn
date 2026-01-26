@@ -1,0 +1,105 @@
+using Godot;
+using System;
+
+/// <summary>
+/// Jukebox UI controls. The jukebox songs are handled in <see cref="SoundManager"/>
+/// </summary>
+public partial class JukeboxPanel : Panel, ISkinnable
+{
+    public static JukeboxPanel Instance;
+
+    private Label title;
+    private TextureButton pauseButton;
+    private TextureButton skipButton;
+    private TextureButton rewindButton;
+    private Button gotoButton;
+    private AudioSpectrum spectrum;
+    private ShaderMaterial spectrumMaterial;
+
+    public override void _Ready()
+	{
+        Instance = this;
+
+        title = GetNode<Label>("Title");
+        pauseButton = GetNode<TextureButton>("Pause");
+        skipButton = GetNode<TextureButton>("Skip");
+        rewindButton = GetNode<TextureButton>("Rewind");
+        gotoButton = GetNode<Button>("GoTo");
+        spectrum = GetNode<AudioSpectrum>("Spectrum");
+        spectrumMaterial = spectrum.Material as ShaderMaterial;
+
+        pauseButton.Pressed += pause;
+        skipButton.Pressed += skip;
+        rewindButton.Pressed += rewind;
+        gotoButton.Pressed += goToMap;
+
+        foreach (TextureButton button in new TextureButton[] {pauseButton, skipButton, rewindButton})
+        {
+            button.MouseEntered += () => { button.SelfModulate = Color.Color8(255, 255, 255); };
+            button.MouseExited += () => { button.SelfModulate = Color.Color8(255, 255, 255, 190); };
+        }
+
+        gotoButton.MouseEntered += () => { title.SelfModulate = Color.Color8(255, 255, 255); };
+        gotoButton.MouseExited += () => { title.SelfModulate = Color.Color8(255, 255, 255, 190); };
+        
+        if (SettingsManager.Instance.Settings.AutoplayJukebox)
+        {
+            pauseButton.TextureNormal = SkinManager.Instance.Skin.JukeboxPauseImage;
+        }
+
+        UpdateMap(SoundManager.Map);
+        UpdateSkin();
+
+        SoundManager.Instance.JukeboxPlayed += UpdateMap;
+        SkinManager.Instance.Loaded += UpdateSkin;
+    }
+
+    public override void _Process(double delta)
+    {
+        float progress = 0;
+
+        if (SoundManager.Song.Stream != null)
+        {
+            progress = SoundManager.Song.GetPlaybackPosition() / (float)SoundManager.Song.Stream.GetLength();
+        }
+        
+        spectrumMaterial.SetShaderParameter("progress", progress);
+        spectrumMaterial.SetShaderParameter("margin", 1 - spectrum.Size.X / GetViewport().GetVisibleRect().Size.X);
+    }
+
+	public void UpdateMap(Map map)
+	{
+        title.Text = map.PrettyTitle;
+    }
+
+    public void UpdateSkin(SkinProfile skin = null)
+    {
+        skin ??= SkinManager.Instance.Skin;
+
+        pauseButton.TextureNormal = SoundManager.Song.StreamPaused ? skin.JukeboxPlayImage : skin.JukeboxPauseImage;
+        skipButton.TextureNormal = skin.JukeboxSkipImage;
+        rewindButton.TextureNormal = skin.JukeboxSkipImage;
+    }
+
+    private void pause()
+    {
+        var skin = SkinManager.Instance.Skin;
+        SoundManager.Song.StreamPaused = !SoundManager.Song.StreamPaused;
+        pauseButton.TextureNormal = SoundManager.Song.StreamPaused ? skin.JukeboxPlayImage : skin.JukeboxPauseImage;
+    }
+
+    private void skip()
+    {
+
+    }
+
+    private void rewind()
+    {
+
+    }
+
+    private void goToMap()
+    {
+
+    }
+}

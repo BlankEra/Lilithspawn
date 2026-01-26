@@ -14,7 +14,7 @@ public partial class KeybindsManager : Node
         {
             popupShown = false;
 
-            Panel volumePopup = SceneManager.Scene.GetNode<Panel>("Volume");
+            Panel volumePopup = SceneManager.VolumePanel;
             Label label = volumePopup.GetNode<Label>("Label");
             Tween tween = volumePopup.CreateTween();
             tween.TweenProperty(volumePopup, "modulate", Color.FromHtml("ffffff00"), 0.25).SetTrans(Tween.TransitionType.Quad);
@@ -34,12 +34,6 @@ public partial class KeybindsManager : Node
                 bool value = DisplayServer.WindowGetMode() == DisplayServer.WindowMode.Windowed;
 
                 settings.Fullscreen.Value = value;
-
-                // if (SceneManager.Scene.Name == "SceneMenu")
-                // {
-                //     SettingsManager.UpdateSettings();
-                //     MainMenu.UpdateSpectrumSpacing();
-                // }
             }
         }
     }
@@ -62,7 +56,7 @@ public partial class KeybindsManager : Node
                         break;
                 }
 
-                Panel volumePopup = SceneManager.Scene.GetNode<Panel>("Volume");
+                Panel volumePopup = SceneManager.VolumePanel;
                 Label label = volumePopup.GetNode<Label>("Label");
                 label.Text = settings.VolumeMaster.Value.ToString();
                 Tween tween = volumePopup.CreateTween();

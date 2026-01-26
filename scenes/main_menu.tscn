@@ -1,4 +1,4 @@
-[gd_scene load_steps=95 format=3 uid="uid://do18270a428ma"]
+[gd_scene load_steps=99 format=3 uid="uid://do18270a428ma"]
 
 [ext_resource type="Shader" uid="uid://c7ldko1kfg2ho" path="res://scripts/shaders/noise_waves.gdshader" id="1_3wgol"]
 [ext_resource type="Script" uid="uid://j2paynyu362u" path="res://scripts/scenes/MainMenu.cs" id="1_yxnar"]
@@ -10,40 +10,23 @@
 [ext_resource type="Script" uid="uid://bnead3awk7yr4" path="res://scripts/ui/menu/SettingsMenuButton.cs" id="8_yxnar"]
 [ext_resource type="Script" uid="uid://byighsqkmf2c4" path="res://scripts/ui/menu/QuitButton.cs" id="9_yxnar"]
 [ext_resource type="Script" uid="uid://cqprxe41p0qov" path="res://scripts/ui/menu/Background.cs" id="10_eku7s"]
-[ext_resource type="Texture2D" uid="uid://cbbafomdyoenp" path="res://skin/ui/background_tile.png" id="10_jvjdd"]
-[ext_resource type="Shader" uid="uid://dgoi2tf33xnmj" path="res://skin/ui/background_tile.gdshader" id="10_yxnar"]
-[ext_resource type="Script" uid="uid://dsq135xacv1vh" path="res://scripts/ui/menu/MapList.cs" id="12_yxnar"]
-[ext_resource type="Texture2D" uid="uid://b8wjaogc8fvq4" path="res://skin/ui/play/scrollbar_background_middle.png" id="15_4puye"]
-[ext_resource type="Texture2D" uid="uid://cr5wlhch2a3nc" path="res://skin/ui/play/scrollbar_background_top.png" id="16_q13xq"]
-[ext_resource type="Texture2D" uid="uid://bhcxdv0lm6nog" path="res://skin/ui/play/scrollbar_background_bottom.png" id="17_u43bj"]
+[ext_resource type="Script" uid="uid://dsq135xacv1vh" path="res://scripts/ui/menu/play/MapList.cs" id="12_yxnar"]
+[ext_resource type="Texture2D" uid="uid://cltk7bcbr5o51" path="res://user/skins/default/ui/buttons/layout_list.png" id="16_6h3lr"]
+[ext_resource type="Script" uid="uid://bc0ftljto8dtx" path="res://scripts/ui/menu/LayoutButton.cs" id="17_dj67d"]
 [ext_resource type="Texture2D" uid="uid://baivqqkfll133" path="res://textures/RhythiaSquircle.png" id="18_eku7s"]
-[ext_resource type="Texture2D" uid="uid://ddx87gpqy8hfo" path="res://skin/ui/play/scrollbar_middle.png" id="18_jvjdd"]
 [ext_resource type="FontFile" uid="uid://4bnnn01f4dqr" path="res://fonts/Ubuntu-Medium.ttf" id="19_c6nra"]
-[ext_resource type="Texture2D" uid="uid://6qtsltuf8u8e" path="res://skin/ui/play/scrollbar_top.png" id="19_yxnar"]
-[ext_resource type="Texture2D" uid="uid://8jqgxhe6o58v" path="res://skin/ui/play/scrollbar_bottom.png" id="20_eku7s"]
 [ext_resource type="Texture2D" uid="uid://ct67kupv6bmny" path="res://textures/ui/discord.png" id="20_qw82i"]
 [ext_resource type="Texture2D" uid="uid://c0wbm1qc5npty" path="res://textures/ui/discord_pressed.png" id="21_1468l"]
-[ext_resource type="Texture2D" uid="uid://bku8toppyall7" path="res://skin/ui/play/maplist_mask.png" id="21_q13xq"]
 [ext_resource type="Texture2D" uid="uid://d3buklvnhgqcy" path="res://textures/ui/discord_hovered.png" id="22_01xyg"]
-[ext_resource type="Script" uid="uid://bdxxohkj7wy22" path="res://scripts/ui/menu/MapInfo.cs" id="22_qw82i"]
-[ext_resource type="Texture2D" uid="uid://bw35mprqnilk7" path="res://skin/ui/play/maplist_selection_cursor.png" id="22_u43bj"]
-[ext_resource type="Texture2D" uid="uid://dqg2qk62dxcc6" path="res://skin/ui/buttons/settings.png" id="23_01xyg"]
-[ext_resource type="Texture2D" uid="uid://8du82a5dxjdk" path="res://skin/ui/jukebox_play.png" id="23_764ux"]
-[ext_resource type="Texture2D" uid="uid://1fj6g1xt5b0" path="res://skin/ui/buttons/open_folder.png" id="24_01xyg"]
-[ext_resource type="Texture2D" uid="uid://bpsvcunhigs6c" path="res://skin/ui/jukebox_skip.png" id="24_wadof"]
-[ext_resource type="Texture2D" uid="uid://3e1tjlr4m0wt" path="res://skin/game/cursor.png" id="25_b4jiv"]
-[ext_resource type="Texture2D" uid="uid://bvjkhxgqjmg7y" path="res://skin/ui/buttons/import.png" id="26_wadof"]
+[ext_resource type="Script" uid="uid://bdxxohkj7wy22" path="res://scripts/ui/menu/play/MapInfo.cs" id="22_qw82i"]
 [ext_resource type="Script" uid="uid://c31515lg0ihgs" path="res://scripts/ui/menu/UserFolderButton.cs" id="27_eku7s"]
-[ext_resource type="Script" uid="uid://d36x1ln46itd1" path="res://scripts/ui/menu/RandomPickButton.cs" id="27_u43bj"]
-[ext_resource type="Texture2D" uid="uid://b44v7e2jfwmkn" path="res://skin/ui/buttons/random.png" id="28_b4jiv"]
+[ext_resource type="Shader" uid="uid://cxckrd6xtplnx" path="res://scripts/shaders/jukebox_progress.gdshader" id="27_engjn"]
+[ext_resource type="Script" uid="uid://dx2wecnf76cyo" path="res://scripts/ui/AudioSpectrum.cs" id="27_hl5e0"]
+[ext_resource type="Script" uid="uid://d36x1ln46itd1" path="res://scripts/ui/menu/play/RandomPickButton.cs" id="27_u43bj"]
 [ext_resource type="Script" uid="uid://nob6vs2h1mwj" path="res://scripts/ui/menu/ImportButton.cs" id="28_eku7s"]
-[ext_resource type="Texture2D" uid="uid://bfy3x7rqnts4i" path="res://skin/ui/buttons/filter.png" id="30_68b7m"]
 [ext_resource type="Shader" uid="uid://rngh60dyh10b" path="res://scripts/shaders/outline.gdshader" id="30_q13xq"]
-[ext_resource type="Texture2D" uid="uid://bl6ten82nkjmd" path="res://skin/ui/buttons/sort.png" id="31_vanrq"]
-[ext_resource type="Texture2D" uid="uid://c6k1k4817che2" path="res://skin/ui/buttons/author.png" id="33_wadof"]
 [ext_resource type="Script" uid="uid://b47jydbbjdh3i" path="res://scripts/ui/menu/SoundSpaceButton.cs" id="33_yxnar"]
-[ext_resource type="Texture2D" uid="uid://bg3gjft0mamud" path="res://skin/ui/buttons/search.png" id="34_b4jiv"]
-[ext_resource type="Script" uid="uid://chb17y8gabhta" path="res://scripts/ui/menu/Jukebox.cs" id="35_jvjdd"]
+[ext_resource type="Script" uid="uid://chb17y8gabhta" path="res://scripts/ui/menu/JukeboxPanel.cs" id="35_jvjdd"]
 [ext_resource type="Script" uid="uid://bqidqko521o1v" path="res://scripts/ui/menu/DiscordButton.cs" id="37_c6nra"]
 [ext_resource type="Script" uid="uid://783e032bf2o3" path="res://scripts/ui/menu/extras/StatsPanel.cs" id="37_wadof"]
 [ext_resource type="Script" uid="uid://bss5l0q8yh47u" path="res://scripts/ui/menu/extras/CreditsPanel.cs" id="39_b4jiv"]
@@ -165,12 +148,64 @@ bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 3
 corner_radius_bottom_left = 3
 
+[sub_resource type="Shader" id="Shader_1a85y"]
+code = "shader_type canvas_item;
+
+void vertex() {
+	UV.x -= TIME;
+}"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eku7s"]
-shader = ExtResource("10_yxnar")
+shader = SubResource("Shader_1a85y")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hl5e0"]
+load_path = "res://.godot/imported/background_tile.png-4c6063608cf4e867f53ff9bb9cf422f3.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_engjn"]
+load_path = "res://.godot/imported/scrollbar_background_middle.png-ae71c68532c3d261336087a1a6e68984.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6h3lr"]
+load_path = "res://.godot/imported/scrollbar_background_top.png-fe90b755d884f8b10118e496f4ea3e11.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dj67d"]
+load_path = "res://.godot/imported/scrollbar_background_bottom.png-5e612a703982b9b7b07452558e28ea4b.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6vcge"]
+load_path = "res://.godot/imported/scrollbar_middle.png-0b20bc3bc7a38d981358f0dbdfeda0eb.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ip0br"]
+load_path = "res://.godot/imported/scrollbar_top.png-b91a7b4b1497685c5e1030c817d105b6.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xyero"]
+load_path = "res://.godot/imported/scrollbar_bottom.png-177fa435ed3ba350d78f542a7332bc8a.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tcusk"]
+load_path = "res://.godot/imported/maplist_mask.png-6dca6298d6a9bec1742523306a9adbed.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4puye"]
+load_path = "res://.godot/imported/maplist_selection_cursor.png-3b6fc2cb560634c2a2c8bd1c31fc74fa.ctex"
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c6nra"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_18lcc"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eku7s"]
+load_path = "res://.godot/imported/settings.png-9a5f37194de093397fac943e2914ef25.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_c6nra"]
+load_path = "res://.godot/imported/open_folder.png-a1bb1f6ca750e1caf48fa7b2053a1942.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qw82i"]
+load_path = "res://.godot/imported/import.png-dbdccf474ead57e5ba2691df47528f9d.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1468l"]
+load_path = "res://.godot/imported/random.png-55e062f9a2cfc2485d0d169684b57c17.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_q13xq"]
+load_path = "res://.godot/imported/filter.png-d7287682fb5dd364e0cc2cbdce5c915e.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_u43bj"]
+load_path = "res://.godot/imported/sort.png-ca2595616fa169518b92abac3cfeb104.ctex"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_68b7m"]
 bg_color = Color(0, 0, 0, 1)
@@ -200,6 +235,12 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jvjdd"]
+load_path = "res://.godot/imported/author.png-25d68439975019af2922801f15cdc77b.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yxnar"]
+load_path = "res://.godot/imported/search.png-df77888866ac62c7675b3f1d5839396f.ctex"
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ooiyf"]
 
@@ -273,36 +314,37 @@ corner_radius_bottom_left = 16
 shader = ExtResource("4_1a85y")
 shader_parameter/brightness = 0.5
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_engjn"]
+shader = ExtResource("27_engjn")
+shader_parameter/color_fill = Color(0.7882353, 0, 0.27058825, 1)
+shader_parameter/color_background = Color(1, 0.7921569, 0.8039216, 0.74509805)
+shader_parameter/progress = 0.0
+shader_parameter/margin = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_engjn"]
+bg_color = Color(1, 1, 1, 1)
+draw_center = false
+
 [sub_resource type="LabelSettings" id="LabelSettings_wksxa"]
 font = ExtResource("7_6h3lr")
 font_size = 17
 outline_size = 6
 outline_color = Color(0, 0, 0, 0.501961)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_01xyg"]
+load_path = "res://.godot/imported/jukebox_play.png-ddde97260ca214e1410927861f99769a.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_764ux"]
+load_path = "res://.godot/imported/jukebox_skip.png-6f2eb91ff6f4c2444a146ddf0a969cd1.ctex"
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t0m3h"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0ne5a"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_6ohrb"]
-font_size = 18
-outline_size = 5
-outline_color = Color(0, 0, 0, 0.501961)
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wadof"]
+load_path = "res://.godot/imported/cursor.png-ffcf7f952fe5701c626da4c93ae0df7c.s3tc.ctex"
 
 [node name="SceneMenu" type="Node"]
 script = ExtResource("1_yxnar")
 UseMenuSpace = true
-
-[node name="ImportDialog" type="FileDialog" parent="."]
-title = "Open File(s)"
-initial_position = 2
-size = Vector2i(454, 175)
-theme = SubResource("Theme_nlclj")
-ok_button_text = "Open"
-file_mode = 1
-access = 2
-filters = PackedStringArray("*.sspm", "*.phxm", "*.txt")
-use_native_dialog = true
-script = ExtResource("2_yxnar")
 
 [node name="VideoDialog" type="FileDialog" parent="."]
 auto_translate_mode = 1
@@ -587,14 +629,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("10_jvjdd")
+texture = SubResource("CompressedTexture2D_hl5e0")
 expand_mode = 1
 stretch_mode = 1
 
 [node name="MapList" type="Panel" parent="Menus/Play"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.55
+anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 128.0
@@ -604,6 +646,7 @@ grow_horizontal = 0
 mouse_filter = 1
 theme = ExtResource("6_engjn")
 script = ExtResource("12_yxnar")
+SquareButtonHoveredSize = 10.0
 
 [node name="ScrollBar" type="Panel" parent="Menus/Play/MapList"]
 z_index = 1
@@ -633,7 +676,7 @@ offset_top = 12.0
 offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("15_4puye")
+texture = SubResource("CompressedTexture2D_engjn")
 
 [node name="Top" type="TextureRect" parent="Menus/Play/MapList/ScrollBar/Background"]
 layout_mode = 1
@@ -641,7 +684,7 @@ anchors_preset = -1
 anchor_right = 1.0
 offset_bottom = 12.0
 grow_horizontal = 2
-texture = ExtResource("16_q13xq")
+texture = SubResource("CompressedTexture2D_6h3lr")
 
 [node name="Bottom" type="TextureRect" parent="Menus/Play/MapList/ScrollBar/Background"]
 layout_mode = 1
@@ -651,9 +694,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
-texture = ExtResource("17_u43bj")
+texture = SubResource("CompressedTexture2D_dj67d")
 
 [node name="Main" type="Panel" parent="Menus/Play/MapList/ScrollBar"]
+clip_contents = true
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -670,7 +714,7 @@ offset_top = 12.0
 offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("18_jvjdd")
+texture = SubResource("CompressedTexture2D_6vcge")
 
 [node name="Top" type="TextureRect" parent="Menus/Play/MapList/ScrollBar/Main"]
 layout_mode = 1
@@ -678,7 +722,7 @@ anchors_preset = -1
 anchor_right = 1.0
 offset_bottom = 12.0
 grow_horizontal = 2
-texture = ExtResource("19_yxnar")
+texture = SubResource("CompressedTexture2D_ip0br")
 
 [node name="Bottom" type="TextureRect" parent="Menus/Play/MapList/ScrollBar/Main"]
 layout_mode = 1
@@ -688,7 +732,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
-texture = ExtResource("20_eku7s")
+texture = SubResource("CompressedTexture2D_xyero")
 
 [node name="Mask" type="TextureRect" parent="Menus/Play/MapList"]
 clip_children = 1
@@ -700,7 +744,7 @@ anchor_bottom = 1.0
 offset_right = -12.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("21_q13xq")
+texture = SubResource("CompressedTexture2D_tcusk")
 expand_mode = 1
 
 [node name="SelectionCursor" type="TextureRect" parent="Menus/Play/MapList"]
@@ -714,7 +758,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(20, 20)
 mouse_filter = 2
-texture = ExtResource("22_u43bj")
+texture = SubResource("CompressedTexture2D_4puye")
 expand_mode = 1
 
 [node name="MapInfo" type="AspectRatioContainer" parent="Menus/Play"]
@@ -760,68 +804,104 @@ grow_vertical = 2
 alignment = 2
 
 [node name="Settings" type="Button" parent="Menus/Play/SubTopBar/HBoxContainer"]
-custom_minimum_size = Vector2(0, 32)
+custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 tooltip_text = "CTRL + O"
 focus_mode = 0
 theme = ExtResource("6_engjn")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Settings"
-icon = ExtResource("23_01xyg")
+icon = SubResource("CompressedTexture2D_eku7s")
 script = ExtResource("8_yxnar")
 
 [node name="UserFolder" type="Button" parent="Menus/Play/SubTopBar/HBoxContainer"]
-custom_minimum_size = Vector2(0, 32)
+custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 focus_mode = 0
 theme = ExtResource("6_engjn")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "User Folder"
-icon = ExtResource("24_01xyg")
+icon = SubResource("CompressedTexture2D_c6nra")
 script = ExtResource("27_eku7s")
 
 [node name="Import" type="Button" parent="Menus/Play/SubTopBar/HBoxContainer"]
-custom_minimum_size = Vector2(0, 32)
+custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 focus_mode = 0
 theme = ExtResource("6_engjn")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Import"
-icon = ExtResource("26_wadof")
+icon = SubResource("CompressedTexture2D_qw82i")
 script = ExtResource("28_eku7s")
 
+[node name="ImportDialog" type="FileDialog" parent="Menus/Play/SubTopBar/HBoxContainer/Import"]
+title = "Open File(s)"
+initial_position = 2
+size = Vector2i(454, 175)
+theme = SubResource("Theme_nlclj")
+ok_button_text = "Open"
+file_mode = 1
+access = 2
+filters = PackedStringArray("*.sspm", "*.phxm", "*.txt")
+use_native_dialog = true
+script = ExtResource("2_yxnar")
+
 [node name="Random" type="Button" parent="Menus/Play/SubTopBar/HBoxContainer"]
-custom_minimum_size = Vector2(0, 32)
+custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 focus_mode = 0
 theme = ExtResource("6_engjn")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Random"
-icon = ExtResource("28_b4jiv")
+icon = SubResource("CompressedTexture2D_1468l")
 script = ExtResource("27_u43bj")
 
+[node name="Separator" type="Control" parent="Menus/Play/SubTopBar/HBoxContainer"]
+custom_minimum_size = Vector2(20, 36)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Menus/Play/SubTopBar/HBoxContainer/Separator"]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = 4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.1254902)
+
+[node name="Layout" type="Button" parent="Menus/Play/SubTopBar/HBoxContainer"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("6_engjn")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+icon = ExtResource("16_6h3lr")
+script = ExtResource("17_dj67d")
+
 [node name="Filters" type="Button" parent="Menus/Play/SubTopBar/HBoxContainer"]
-custom_minimum_size = Vector2(0, 32)
+custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 focus_mode = 0
 theme = ExtResource("6_engjn")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 disabled = true
-text = "Filters"
-icon = ExtResource("30_68b7m")
+icon = SubResource("CompressedTexture2D_q13xq")
 
 [node name="Sort" type="Button" parent="Menus/Play/SubTopBar/HBoxContainer"]
-custom_minimum_size = Vector2(0, 32)
+custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 focus_mode = 0
 theme = ExtResource("6_engjn")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 disabled = true
-text = "Sort"
-icon = ExtResource("31_vanrq")
+icon = SubResource("CompressedTexture2D_u43bj")
 
 [node name="SearchAuthor" type="Panel" parent="Menus/Play/SubTopBar/HBoxContainer"]
-custom_minimum_size = Vector2(150, 32)
+custom_minimum_size = Vector2(150, 36)
 layout_mode = 2
 mouse_filter = 2
 theme = ExtResource("6_engjn")
@@ -857,12 +937,12 @@ offset_top = -10.0
 offset_bottom = 10.0
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("33_wadof")
+texture = SubResource("CompressedTexture2D_jvjdd")
 expand_mode = 2
 stretch_mode = 4
 
 [node name="Search" type="Panel" parent="Menus/Play/SubTopBar/HBoxContainer"]
-custom_minimum_size = Vector2(220, 32)
+custom_minimum_size = Vector2(220, 36)
 layout_mode = 2
 mouse_filter = 2
 theme = ExtResource("6_engjn")
@@ -898,11 +978,13 @@ offset_top = -10.0
 offset_bottom = 10.0
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("34_b4jiv")
+texture = SubResource("CompressedTexture2D_yxnar")
 expand_mode = 2
 stretch_mode = 4
 
 [node name="Extras" type="Panel" parent="Menus"]
+visible = false
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -933,7 +1015,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("10_jvjdd")
+texture = SubResource("CompressedTexture2D_hl5e0")
 expand_mode = 1
 stretch_mode = 1
 
@@ -1494,18 +1576,18 @@ anchor_left = 0.5
 anchor_right = 0.75
 anchor_bottom = 1.0
 offset_left = 150.0
-offset_top = 124.0
-offset_right = 262.0
-offset_bottom = -124.0
+offset_top = 200.0
+offset_bottom = -200.0
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_qw82i")
 script = ExtResource("39_b4jiv")
 
 [node name="Background" type="Panel" parent="Menus/Extras/Credits"]
-layout_mode = 0
-offset_right = 400.0
-offset_bottom = 400.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jvjdd")
@@ -1567,9 +1649,10 @@ horizontal_alignment = 1
 
 [node name="Outline" type="Panel" parent="Menus/Extras/Credits"]
 material = SubResource("ShaderMaterial_yxnar")
-layout_mode = 0
-offset_right = 400.0
-offset_bottom = 400.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -1635,7 +1718,8 @@ texture_pressed = ExtResource("21_1468l")
 texture_hover = ExtResource("22_01xyg")
 script = ExtResource("37_c6nra")
 
-[node name="Jukebox" type="Panel" parent="."]
+[node name="JukeboxPanel" type="Panel" parent="."]
+clip_contents = true
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -1644,12 +1728,14 @@ offset_left = 8.0
 offset_top = -64.0
 offset_right = -8.0
 offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
 mouse_filter = 2
 theme = ExtResource("6_engjn")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_18lcc")
 script = ExtResource("35_jvjdd")
 
-[node name="Background" type="Panel" parent="Jukebox"]
+[node name="Background" type="Panel" parent="JukeboxPanel"]
 material = SubResource("ShaderMaterial_h3j6r")
 layout_mode = 1
 anchors_preset = 15
@@ -1659,578 +1745,44 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_wadof")
 
-[node name="Spectrum" type="HBoxContainer" parent="Jukebox"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/separation = 16
-alignment = 1
-
-[node name="1" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/1"]
-custom_minimum_size = Vector2(6, 0)
+[node name="Spectrum" type="Panel" parent="JukeboxPanel"]
+material = SubResource("ShaderMaterial_engjn")
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_engjn")
+script = ExtResource("27_hl5e0")
+MinFreq = 0
+MaxFreq = 6000
+Align = 1.0
 
-[node name="2" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/2"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="3" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/3"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="4" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/4"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="5" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/5"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="6" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/6"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="7" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/7"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="8" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/8"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="9" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/9"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="10" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/10"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="11" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/11"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="12" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/12"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="13" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/13"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="14" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/14"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="15" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/15"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="16" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/16"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="17" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/17"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="18" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/18"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="19" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/19"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="20" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/20"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="21" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/21"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="22" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/22"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="23" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/23"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="24" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/24"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="25" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/25"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="26" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/26"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="27" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/27"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="28" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/28"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="29" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/29"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="30" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/30"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="31" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/31"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="32" type="Panel" parent="Jukebox/Spectrum"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Main" type="ColorRect" parent="Jukebox/Spectrum/32"]
-custom_minimum_size = Vector2(6, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7921569, 0, 0.27450982, 1)
-
-[node name="Title" type="Label" parent="Jukebox"]
-modulate = Color(0.762404, 0.762404, 0.762404, 1)
+[node name="Title" type="Label" parent="JukeboxPanel"]
+self_modulate = Color(1, 1, 1, 0.74509805)
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_top = -10.0
+offset_left = 8.0
 offset_right = -60.0
-offset_bottom = 11.0
+grow_horizontal = 0
+grow_vertical = 2
 theme = ExtResource("6_engjn")
 label_settings = SubResource("LabelSettings_wksxa")
 horizontal_alignment = 2
 vertical_alignment = 1
 text_overrun_behavior = 3
 
-[node name="Button" type="Button" parent="Jukebox"]
+[node name="GoTo" type="Button" parent="JukeboxPanel"]
+self_modulate = Color(1, 1, 1, 0.74509805)
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.5
@@ -2243,8 +1795,8 @@ focus_mode = 0
 flat = true
 text_overrun_behavior = 3
 
-[node name="Pause" type="TextureButton" parent="Jukebox"]
-self_modulate = Color(0.760784, 0.760784, 0.760784, 1)
+[node name="Pause" type="TextureButton" parent="JukeboxPanel"]
+self_modulate = Color(1, 1, 1, 0.74509805)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -2255,12 +1807,12 @@ offset_top = 13.0
 offset_right = 15.0
 offset_bottom = -13.0
 focus_mode = 1
-texture_normal = ExtResource("23_764ux")
+texture_normal = SubResource("CompressedTexture2D_01xyg")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Skip" type="TextureButton" parent="Jukebox"]
-self_modulate = Color(0.760784, 0.760784, 0.760784, 1)
+[node name="Skip" type="TextureButton" parent="JukeboxPanel"]
+self_modulate = Color(1, 1, 1, 0.74509805)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -2271,12 +1823,12 @@ offset_top = 13.0
 offset_right = 50.0
 offset_bottom = -13.0
 focus_mode = 1
-texture_normal = ExtResource("24_wadof")
+texture_normal = SubResource("CompressedTexture2D_764ux")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Rewind" type="TextureButton" parent="Jukebox"]
-self_modulate = Color(0.760784, 0.760784, 0.760784, 1)
+[node name="Rewind" type="TextureButton" parent="JukeboxPanel"]
+self_modulate = Color(1, 1, 1, 0.74509805)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -2287,37 +1839,10 @@ offset_top = 13.0
 offset_right = -20.0
 offset_bottom = -13.0
 focus_mode = 1
-texture_normal = ExtResource("24_wadof")
+texture_normal = SubResource("CompressedTexture2D_764ux")
 ignore_texture_size = true
 stretch_mode = 0
 flip_h = true
-
-[node name="Progress" type="Panel" parent="Jukebox"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 64.0
-offset_top = -2.0
-offset_right = -64.0
-mouse_filter = 2
-
-[node name="Background" type="ColorRect" parent="Jukebox/Progress"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
-
-[node name="Main" type="ColorRect" parent="Jukebox/Progress"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-color = Color(0.9411765, 0.29803923, 0.34509805, 1)
 
 [node name="NotificationHolder" type="VBoxContainer" parent="."]
 anchors_preset = 3
@@ -2407,62 +1932,12 @@ text = "Remove Video"
 flat = true
 alignment = 0
 
-[node name="Volume" type="Panel" parent="."]
-modulate = Color(1, 1, 1, 0)
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -128.0
-offset_top = -38.0
-offset_right = 128.0
-offset_bottom = -32.0
-grow_horizontal = 2
-grow_vertical = 0
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_0ne5a")
-
-[node name="Label" type="Label" parent="Volume"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 2.0
-offset_top = -14.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "100"
-label_settings = SubResource("LabelSettings_6ohrb")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Background" type="ColorRect" parent="Volume"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 2.0
-offset_bottom = 2.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 0.768627)
-
-[node name="Main" type="ColorRect" parent="Volume"]
-layout_mode = 1
-anchors_preset = -1
-anchor_bottom = 1.0
-grow_vertical = 2
-mouse_filter = 2
-
 [node name="Cursor" type="TextureRect" parent="."]
 z_index = 2
 offset_right = 32.0
 offset_bottom = 32.0
 mouse_filter = 2
-texture = ExtResource("25_b4jiv")
+texture = SubResource("CompressedTexture2D_wadof")
 expand_mode = 1
 script = ExtResource("41_yxnar")
 

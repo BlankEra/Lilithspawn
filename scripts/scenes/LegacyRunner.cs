@@ -134,7 +134,7 @@ public partial class LegacyRunner : BaseScene
 			Speed = speed;
 			StartFrom = startFrom;
 			Players = players ?? [];
-			Progress = -1000 - settings.ApproachTime.Value * 1000 + StartFrom;
+			Progress = Speed * -1000 - settings.ApproachTime.Value * 1000 + StartFrom;
             ComboMultiplierIncrement = Math.Max(2, (uint)Map.Notes.Length / 200);
 			Mods = [];
 			HitsInfo = IsReplay ? Replays[0].Notes : new float[Map.Notes.Length];
@@ -1001,7 +1001,7 @@ public partial class LegacyRunner : BaseScene
 		else
 		{
 			targetSkipLabelAlpha = 0;
-			progressLabel.Modulate = Color.Color8(255, 255, 255, 96);
+			progressLabel.Modulate = Color.Color8(255, 255, 255, 190);
 		}
 
 		progressLabel.Text = $"{Util.String.FormatTime(Math.Max(0, CurrentAttempt.Progress) / 1000)} / {Util.String.FormatTime(MapLength / 1000)}";
@@ -1108,7 +1108,7 @@ public partial class LegacyRunner : BaseScene
 					}
 					else
 					{
-						if (Lobby.PlayerCount > 1)
+						if (Lobby.Players.Count > 1)
 						{
 							break;
 						}
@@ -1253,7 +1253,7 @@ public partial class LegacyRunner : BaseScene
 				if (CurrentAttempt.Qualifies)
 				{
 					Stats.Passes++;
-					Stats.Total_Score += CurrentAttempt.Score;
+					Stats.TotalScore += CurrentAttempt.Score;
 					
 					if (CurrentAttempt.Accuracy == 100)
 					{

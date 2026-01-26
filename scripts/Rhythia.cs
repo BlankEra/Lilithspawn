@@ -9,7 +9,6 @@ using LiteDB;
 public partial class Rhythia : Node
 {
     private static bool loaded = false;
-    private static string[] userDirectories = ["cache", "maps", "profiles", "skins", "replays", "pbs"];
 
     private DatabaseService databaseService = DatabaseService.Instance;
 
@@ -27,51 +26,16 @@ public partial class Rhythia : Node
 
         // Set up user folder
 
-        if (!File.Exists($"{Constants.USER_FOLDER}/favorites.txt"))
+        void deepCopy(string resDir = "")
         {
-            File.WriteAllText($"{Constants.USER_FOLDER}/favorites.txt", "");
-        }
-
-        if (!File.Exists($"{Constants.USER_FOLDER}/current_profile.txt"))
-        {
-            File.WriteAllText($"{Constants.USER_FOLDER}/current_profile.txt", "default");
-        }
-
-        foreach (string folder in userDirectories)
-        {
-            if (!Directory.Exists($"{Constants.USER_FOLDER}/{folder}"))
-            {
-                Directory.CreateDirectory($"{Constants.USER_FOLDER}/{folder}");
-            }
-        }
-
-        foreach (string cacheFile in Directory.GetFiles($"{Constants.USER_FOLDER}/cache"))
-        {
-            File.Delete(cacheFile);
-        }
-
-        if (!Directory.Exists($"{Constants.USER_FOLDER}/cache/maps"))
-        {
-            Directory.CreateDirectory($"{Constants.USER_FOLDER}/cache/maps");
-        }
-
-        if (!Directory.Exists($"{Constants.USER_FOLDER}/skins/default"))
-        {
-            Directory.CreateDirectory($"{Constants.USER_FOLDER}/skins/default");
-        }
-
-        // Skin
-
-        void deepCopy(string resDir)
-        {
-            string userDir = $"{Constants.USER_FOLDER}/skins/default{resDir.TrimPrefix("skin")}";
+            string userDir = $"{Constants.USER_FOLDER}{resDir}";
 
             if (!Directory.Exists(userDir))
             {
                 Directory.CreateDirectory(userDir);
             }
 
-            foreach (string resFile in Godot.DirAccess.GetFilesAt($"res://{resDir}"))
+            foreach (string resFile in Godot.DirAccess.GetFilesAt($"res://user{resDir}"))
             {
                 string userFile = $"{userDir}/{resFile}";
                 string ext = resFile.GetExtension();
@@ -81,7 +45,7 @@ public partial class Rhythia : Node
                     continue;
                 }
 
-                Godot.FileAccess source = Godot.FileAccess.Open($"res://{resDir}/{resFile}", Godot.FileAccess.ModeFlags.Read);
+                Godot.FileAccess source = Godot.FileAccess.Open($"res://user{resDir}/{resFile}", Godot.FileAccess.ModeFlags.Read);
                 byte[] buffer = source.GetBuffer((long)source.GetLength());
                 source.Close();
 
@@ -90,13 +54,13 @@ public partial class Rhythia : Node
                 copy.Close();
             }
 
-            foreach (string dir in Godot.DirAccess.GetDirectoriesAt($"res://{resDir}"))
+            foreach (string dir in Godot.DirAccess.GetDirectoriesAt($"res://user{resDir}"))
             {
                 deepCopy($"{resDir}/{dir}");
             }
         }
 
-        deepCopy("skin");
+        deepCopy();
 
         // Settings
 
@@ -141,7 +105,7 @@ public partial class Rhythia : Node
             Stats.Passes = 0;
             Stats.FullCombos = 0;
             Stats.HighestScore = 0;
-            Stats.Total_Score = 0;
+            Stats.TotalScore = 0;
             Stats.RageQuits = 0;
             Stats.PassAccuracies = [];
             Stats.FavoriteMaps = [];
@@ -186,7 +150,7 @@ public partial class Rhythia : Node
                     maps.Add(file);
                 }
             }
-
+            
             MapParser.BulkImport([.. maps]);
             
             if (SceneManager.Scene is MainMenu)

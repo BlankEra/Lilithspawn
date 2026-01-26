@@ -1,14 +1,19 @@
-[gd_scene load_steps=34 format=3 uid="uid://cma3kiioc1djt"]
+[gd_scene load_steps=44 format=3 uid="uid://cma3kiioc1djt"]
 
-[ext_resource type="Script" uid="uid://bhox71y4fbivo" path="res://scripts/ui/menu/MapInfoContainer.cs" id="1_50xtp"]
-[ext_resource type="Texture2D" uid="uid://blttbj4jmqhsq" path="res://skin/ui/play/mapinfo_cover_background.png" id="2_4d08m"]
+[ext_resource type="Script" uid="uid://bhox71y4fbivo" path="res://scripts/ui/menu/play/MapInfoContainer.cs" id="1_50xtp"]
 [ext_resource type="Shader" uid="uid://rngh60dyh10b" path="res://scripts/shaders/outline.gdshader" id="2_nrche"]
 [ext_resource type="Theme" uid="uid://dhuhu3mmaew1a" path="res://themes/theme.tres" id="4_4d08m"]
-[ext_resource type="Texture2D" uid="uid://7px5v8ikildx" path="res://skin/ui/buttons/favorite.png" id="4_svokg"]
-[ext_resource type="Texture2D" uid="uid://degvlg4p0if70" path="res://skin/ui/buttons/add_video.png" id="5_8cypg"]
-[ext_resource type="Texture2D" uid="uid://cgxbwx4f28lt2" path="res://skin/ui/buttons/copy.png" id="6_dccrs"]
-[ext_resource type="Texture2D" uid="uid://xd005fiv7qgg" path="res://skin/ui/buttons/delete.png" id="7_i21mh"]
-[ext_resource type="Texture2D" uid="uid://4o5eelsayk4d" path="res://skin/ui/buttons/play.png" id="9_8cypg"]
+[ext_resource type="Script" uid="uid://c1235cyjfh4rl" path="res://scripts/ui/LinkPopupButton.cs" id="4_dccrs"]
+[ext_resource type="Script" uid="uid://dy45uerqy0yd7" path="res://scripts/ui/FlatPreview.cs" id="5_svokg"]
+[ext_resource type="Script" uid="uid://dfj260vsm4j" path="res://scripts/ui/menu/play/CameraModeButton.cs" id="6_8cypg"]
+[ext_resource type="PackedScene" uid="uid://dndbtgq2yrwen" path="res://prefabs/modifier_button.tscn" id="7_dccrs"]
+[ext_resource type="PackedScene" uid="uid://kwoco4d2gdqc" path="res://prefabs/speed_preset_button.tscn" id="8_i21mh"]
+[ext_resource type="Texture2D" uid="uid://nvy5xmi7bbw4" path="res://user/skins/default/modifiers/nofail.png" id="8_wk5qh"]
+[ext_resource type="Texture2D" uid="uid://bmkw04d0fyhv" path="res://user/skins/default/modifiers/ghost.png" id="9_abwk8"]
+[ext_resource type="Texture2D" uid="uid://40acunj8wr8e" path="res://user/skins/default/ui/buttons/speed_minus_minus.png" id="11_1jb84"]
+[ext_resource type="Texture2D" uid="uid://dte55kqyqtf12" path="res://user/skins/default/ui/buttons/speed_minus.png" id="12_cqtnb"]
+[ext_resource type="Texture2D" uid="uid://r6nsvqtknp20" path="res://user/skins/default/ui/buttons/speed_plus.png" id="13_3adhn"]
+[ext_resource type="Texture2D" uid="uid://csk7favaty7k2" path="res://user/skins/default/ui/buttons/speed_plus_plus.png" id="14_hri10"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_svokg"]
 
@@ -29,13 +34,20 @@ content_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dccrs"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_j6nyj"]
-font_size = 18
-font_color = Color(0.5647059, 0.5647059, 0.5882353, 1)
-outline_size = 1
-outline_color = Color(0, 0, 0, 1)
-shadow_size = 4
-shadow_color = Color(0, 0, 0, 1)
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1q06g"]
+load_path = "res://.godot/imported/mapinfo_cover_background.png-985802c74bcceb1cc2765c8b7fe56845.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4d08m"]
+load_path = "res://.godot/imported/favorite.png-3c2b9d98e445791481c7a02d92d01d6b.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_w0o2h"]
+load_path = "res://.godot/imported/add_video.png-e77439198006e5343b0856382fec8144.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_j6nyj"]
+load_path = "res://.godot/imported/copy.png-6cff9195e3bdb75d40a32a195f8f7add.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_svokg"]
+load_path = "res://.godot/imported/delete.png-1bcfd89983280f873231762c2fac894c.ctex"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4d08m"]
 shader = ExtResource("2_nrche")
@@ -138,6 +150,9 @@ corner_radius_bottom_left = 4
 expand_margin_left = 16.0
 expand_margin_right = 16.0
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8cypg"]
+load_path = "res://.godot/imported/play.png-47818f4142be2b60302553be25208289.ctex"
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4d08m"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w0o2h"]
@@ -202,6 +217,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = false
 theme = ExtResource("4_4d08m")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_i21mh")
 
@@ -227,7 +244,7 @@ alignment_horizontal = 0
 [node name="Background" type="TextureRect" parent="Info/ScrollContainer/Holder/CoverContainer"]
 show_behind_parent = true
 layout_mode = 2
-texture = ExtResource("2_4d08m")
+texture = SubResource("CompressedTexture2D_1q06g")
 expand_mode = 2
 
 [node name="Cover" type="TextureRect" parent="Info/ScrollContainer/Holder/CoverContainer/Background"]
@@ -243,7 +260,7 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 2
 
-[node name="AuthorLink" type="Button" parent="Info/ScrollContainer/Holder/CoverContainer/Background"]
+[node name="ArtistLink" type="Button" parent="Info/ScrollContainer/Holder/CoverContainer/Background"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -253,10 +270,13 @@ anchor_bottom = 1.0
 offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_constants/outline_size = 4
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.78431374)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 18
 text = "Available on {0}"
 flat = true
 alignment = 0
+script = ExtResource("4_dccrs")
 
 [node name="Subholder" type="Panel" parent="Info/ScrollContainer/Holder"]
 layout_mode = 1
@@ -266,26 +286,24 @@ anchor_bottom = 1.0
 offset_left = 240.0
 grow_horizontal = 0
 
-[node name="Extra" type="Label" parent="Info/ScrollContainer/Holder/Subholder"]
+[node name="Extra" type="RichTextLabel" parent="Info/ScrollContainer/Holder/Subholder"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.4
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -0.4000244
+offset_left = 8.0
 offset_top = 138.0
 offset_right = -8.399963
 offset_bottom = -50.0
 grow_horizontal = 0
 theme = ExtResource("4_4d08m")
-text = "{0}
-{1} notes"
-label_settings = SubResource("LabelSettings_j6nyj")
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "[color=ffffff88]{0}
+{1} notes
+[color=ffffff44]{2}"
 horizontal_alignment = 2
 vertical_alignment = 2
-autowrap_mode = 3
-clip_text = true
-text_overrun_behavior = 3
 
 [node name="MainLabel" type="RichTextLabel" parent="Info/ScrollContainer/Holder/Subholder"]
 layout_mode = 1
@@ -300,17 +318,16 @@ theme = ExtResource("4_4d08m")
 theme_override_constants/paragraph_separation = 4
 bbcode_enabled = true
 text = "[outline_size=2][font_size=24]{0}
-[color={1}]{2}
-[font_size=16][color=909096]by {3}"
+[color={1}]{2} [font_size=16][color=909096]by {3}"
 
 [node name="Buttons" type="HBoxContainer" parent="Info/ScrollContainer/Holder/Subholder"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 8.0
 offset_top = -46.0
 offset_right = -6.0
 offset_bottom = -6.0
@@ -325,7 +342,7 @@ focus_mode = 0
 theme = ExtResource("4_4d08m")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/icon_max_width = 24
-icon = ExtResource("4_svokg")
+icon = SubResource("CompressedTexture2D_4d08m")
 icon_alignment = 1
 
 [node name="Video" type="Button" parent="Info/ScrollContainer/Holder/Subholder/Buttons"]
@@ -335,7 +352,7 @@ focus_mode = 0
 theme = ExtResource("4_4d08m")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/icon_max_width = 24
-icon = ExtResource("5_8cypg")
+icon = SubResource("CompressedTexture2D_w0o2h")
 icon_alignment = 1
 
 [node name="Copy" type="Button" parent="Info/ScrollContainer/Holder/Subholder/Buttons"]
@@ -345,7 +362,7 @@ focus_mode = 0
 theme = ExtResource("4_4d08m")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/icon_max_width = 24
-icon = ExtResource("6_dccrs")
+icon = SubResource("CompressedTexture2D_j6nyj")
 icon_alignment = 1
 
 [node name="Delete" type="Button" parent="Info/ScrollContainer/Holder/Subholder/Buttons"]
@@ -355,7 +372,7 @@ focus_mode = 0
 theme = ExtResource("4_4d08m")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/icon_max_width = 24
-icon = ExtResource("7_i21mh")
+icon = SubResource("CompressedTexture2D_svokg")
 icon_alignment = 1
 
 [node name="Outline" type="Panel" parent="Info"]
@@ -399,6 +416,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = false
 theme = ExtResource("4_4d08m")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_6xsea")
 
@@ -444,13 +463,14 @@ theme = ExtResource("4_4d08m")
 
 [node name="Holder" type="Panel" parent="Actions/ScrollContainer/Holder/Preview/AspectRatioContainer"]
 layout_mode = 2
+script = ExtResource("5_svokg")
 
 [node name="1" type="ColorRect" parent="Actions/ScrollContainer/Holder/Preview/AspectRatioContainer/Holder"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.333
 anchor_bottom = 0.333
-color = Color(1, 1, 1, 0.18039216)
+color = Color(1, 1, 1, 0)
 
 [node name="2" type="ColorRect" parent="Actions/ScrollContainer/Holder/Preview/AspectRatioContainer/Holder"]
 layout_mode = 1
@@ -459,7 +479,7 @@ anchor_left = 0.333
 anchor_right = 0.667
 anchor_bottom = 0.333
 grow_horizontal = 2
-color = Color(1, 1, 1, 0.18039216)
+color = Color(1, 1, 1, 0)
 
 [node name="3" type="ColorRect" parent="Actions/ScrollContainer/Holder/Preview/AspectRatioContainer/Holder"]
 layout_mode = 1
@@ -468,7 +488,7 @@ anchor_left = 0.667
 anchor_right = 1.0
 anchor_bottom = 0.333
 grow_horizontal = 0
-color = Color(1, 1, 1, 0.18039216)
+color = Color(1, 1, 1, 0)
 
 [node name="4" type="ColorRect" parent="Actions/ScrollContainer/Holder/Preview/AspectRatioContainer/Holder"]
 layout_mode = 1
@@ -477,7 +497,7 @@ anchor_top = 0.333
 anchor_right = 0.333
 anchor_bottom = 0.667
 grow_vertical = 2
-color = Color(1, 1, 1, 0.18039216)
+color = Color(1, 1, 1, 0)
 
 [node name="5" type="ColorRect" parent="Actions/ScrollContainer/Holder/Preview/AspectRatioContainer/Holder"]
 layout_mode = 1
@@ -488,7 +508,7 @@ anchor_right = 0.667
 anchor_bottom = 0.667
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(1, 1, 1, 0.18039216)
+color = Color(1, 1, 1, 0)
 
 [node name="6" type="ColorRect" parent="Actions/ScrollContainer/Holder/Preview/AspectRatioContainer/Holder"]
 layout_mode = 1
@@ -499,7 +519,7 @@ anchor_right = 1.0
 anchor_bottom = 0.667
 grow_horizontal = 0
 grow_vertical = 2
-color = Color(1, 1, 1, 0.18039216)
+color = Color(1, 1, 1, 0)
 
 [node name="7" type="ColorRect" parent="Actions/ScrollContainer/Holder/Preview/AspectRatioContainer/Holder"]
 layout_mode = 1
@@ -508,7 +528,7 @@ anchor_top = 0.667
 anchor_right = 0.333
 anchor_bottom = 1.0
 grow_vertical = 0
-color = Color(1, 1, 1, 0.18039216)
+color = Color(1, 1, 1, 0)
 
 [node name="8" type="ColorRect" parent="Actions/ScrollContainer/Holder/Preview/AspectRatioContainer/Holder"]
 layout_mode = 1
@@ -519,7 +539,7 @@ anchor_right = 0.667
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
-color = Color(1, 1, 1, 0.18039216)
+color = Color(1, 1, 1, 0)
 
 [node name="9" type="ColorRect" parent="Actions/ScrollContainer/Holder/Preview/AspectRatioContainer/Holder"]
 layout_mode = 1
@@ -530,7 +550,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 0
-color = Color(1, 1, 1, 0.18039216)
+color = Color(1, 1, 1, 0)
 
 [node name="Modes" type="Panel" parent="Actions/ScrollContainer/Holder"]
 layout_mode = 1
@@ -580,6 +600,8 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 disabled = true
 text = "Lock"
 icon_alignment = 1
+script = ExtResource("6_8cypg")
+CameraMode = "Lock"
 
 [node name="Spin" type="Button" parent="Actions/ScrollContainer/Holder/Modes/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 32)
@@ -590,6 +612,8 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Spin
 "
 icon_alignment = 1
+script = ExtResource("6_8cypg")
+CameraMode = "Spin"
 
 [node name="Modifiers" type="Panel" parent="Actions/ScrollContainer/Holder"]
 layout_mode = 1
@@ -630,35 +654,23 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="Actions/ScrollContainer/Holder/Modifiers/ScrollContainer/HBoxContainer"]
-custom_minimum_size = Vector2(64, 64)
+[node name="NoFail" type="AspectRatioContainer" parent="Actions/ScrollContainer/Holder/Modifiers/ScrollContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 0
 
-[node name="ColorRect" type="ColorRect" parent="Actions/ScrollContainer/Holder/Modifiers/ScrollContainer/HBoxContainer/AspectRatioContainer"]
-custom_minimum_size = Vector2(64, 0)
+[node name="ModifierButton" parent="Actions/ScrollContainer/Holder/Modifiers/ScrollContainer/HBoxContainer/NoFail" instance=ExtResource("7_dccrs")]
 layout_mode = 2
-size_flags_horizontal = 4
-color = Color(0.12955844, 0.12955847, 0.12955844, 1)
+icon = ExtResource("8_wk5qh")
+Modifier = "NoFail"
 
-[node name="AspectRatioContainer2" type="AspectRatioContainer" parent="Actions/ScrollContainer/Holder/Modifiers/ScrollContainer/HBoxContainer"]
-custom_minimum_size = Vector2(64, 64)
+[node name="Ghost" type="AspectRatioContainer" parent="Actions/ScrollContainer/Holder/Modifiers/ScrollContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 0
 
-[node name="ColorRect" type="ColorRect" parent="Actions/ScrollContainer/Holder/Modifiers/ScrollContainer/HBoxContainer/AspectRatioContainer2"]
-custom_minimum_size = Vector2(64, 0)
+[node name="ModifierButton" parent="Actions/ScrollContainer/Holder/Modifiers/ScrollContainer/HBoxContainer/Ghost" instance=ExtResource("7_dccrs")]
 layout_mode = 2
-size_flags_horizontal = 4
-color = Color(0.12955844, 0.12955847, 0.12955844, 1)
-
-[node name="AspectRatioContainer3" type="AspectRatioContainer" parent="Actions/ScrollContainer/Holder/Modifiers/ScrollContainer/HBoxContainer"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-
-[node name="ColorRect" type="ColorRect" parent="Actions/ScrollContainer/Holder/Modifiers/ScrollContainer/HBoxContainer/AspectRatioContainer3"]
-custom_minimum_size = Vector2(64, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-color = Color(0.12955844, 0.12955847, 0.12955844, 1)
+icon = ExtResource("9_abwk8")
+Modifier = "Ghost"
 
 [node name="Speed" type="Panel" parent="Actions/ScrollContainer/Holder"]
 custom_minimum_size = Vector2(0, 32)
@@ -704,49 +716,41 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="Actions/ScrollContainer/Holder/Speed/Presets/HBoxContainer"]
-custom_minimum_size = Vector2(64, 0)
+[node name="80" type="AspectRatioContainer" parent="Actions/ScrollContainer/Holder/Speed/Presets/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="ColorRect" type="ColorRect" parent="Actions/ScrollContainer/Holder/Speed/Presets/HBoxContainer/AspectRatioContainer"]
-custom_minimum_size = Vector2(64, 0)
+[node name="SpeedPresetButton" parent="Actions/ScrollContainer/Holder/Speed/Presets/HBoxContainer/80" instance=ExtResource("8_i21mh")]
 layout_mode = 2
-size_flags_horizontal = 5
-color = Color(0.12955844, 0.12955847, 0.12955844, 1)
+icon = ExtResource("11_1jb84")
+Speed = 80.0
 
-[node name="AspectRatioContainer2" type="AspectRatioContainer" parent="Actions/ScrollContainer/Holder/Speed/Presets/HBoxContainer"]
-custom_minimum_size = Vector2(64, 0)
+[node name="90" type="AspectRatioContainer" parent="Actions/ScrollContainer/Holder/Speed/Presets/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="ColorRect" type="ColorRect" parent="Actions/ScrollContainer/Holder/Speed/Presets/HBoxContainer/AspectRatioContainer2"]
-custom_minimum_size = Vector2(64, 0)
+[node name="SpeedPresetButton" parent="Actions/ScrollContainer/Holder/Speed/Presets/HBoxContainer/90" instance=ExtResource("8_i21mh")]
 layout_mode = 2
-size_flags_horizontal = 5
-color = Color(0.12955844, 0.12955847, 0.12955844, 1)
+icon = ExtResource("12_cqtnb")
+Speed = 90.0
 
-[node name="AspectRatioContainer3" type="AspectRatioContainer" parent="Actions/ScrollContainer/Holder/Speed/Presets/HBoxContainer"]
-custom_minimum_size = Vector2(64, 0)
+[node name="110" type="AspectRatioContainer" parent="Actions/ScrollContainer/Holder/Speed/Presets/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="ColorRect" type="ColorRect" parent="Actions/ScrollContainer/Holder/Speed/Presets/HBoxContainer/AspectRatioContainer3"]
-custom_minimum_size = Vector2(64, 0)
+[node name="SpeedPresetButton" parent="Actions/ScrollContainer/Holder/Speed/Presets/HBoxContainer/110" instance=ExtResource("8_i21mh")]
 layout_mode = 2
-size_flags_horizontal = 5
-color = Color(0.12955844, 0.12955847, 0.12955844, 1)
+icon = ExtResource("13_3adhn")
+Speed = 110.0
 
-[node name="AspectRatioContainer4" type="AspectRatioContainer" parent="Actions/ScrollContainer/Holder/Speed/Presets/HBoxContainer"]
-custom_minimum_size = Vector2(64, 0)
+[node name="120" type="AspectRatioContainer" parent="Actions/ScrollContainer/Holder/Speed/Presets/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="ColorRect" type="ColorRect" parent="Actions/ScrollContainer/Holder/Speed/Presets/HBoxContainer/AspectRatioContainer4"]
-custom_minimum_size = Vector2(64, 0)
+[node name="SpeedPresetButton" parent="Actions/ScrollContainer/Holder/Speed/Presets/HBoxContainer/120" instance=ExtResource("8_i21mh")]
 layout_mode = 2
-size_flags_horizontal = 5
-color = Color(0.12955844, 0.12955847, 0.12955844, 1)
+icon = ExtResource("14_hri10")
+Speed = 120.0
 
 [node name="LineEdit" type="LineEdit" parent="Actions/ScrollContainer/Holder/Speed"]
 layout_mode = 1
@@ -756,8 +760,6 @@ anchor_top = 0.75
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -84.0
-offset_top = 16.0
-offset_bottom = -16.0
 grow_horizontal = 0
 grow_vertical = 2
 theme = ExtResource("4_4d08m")
@@ -826,8 +828,6 @@ anchor_top = 0.75
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -84.0
-offset_top = 16.0
-offset_bottom = -16.0
 grow_horizontal = 0
 grow_vertical = 2
 theme = ExtResource("4_4d08m")
@@ -864,7 +864,7 @@ anchor_left = 0.1
 anchor_right = 0.9
 anchor_bottom = 0.75
 offset_top = 48.0
-offset_bottom = -16.0
+offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 0
@@ -878,7 +878,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_6xsea")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_8wv8f")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_wk5qh")
 text = "START"
-icon = ExtResource("9_8cypg")
+icon = SubResource("CompressedTexture2D_8cypg")
 icon_alignment = 2
 
 [node name="Separator1" type="ColorRect" parent="Actions/ScrollContainer/Holder"]

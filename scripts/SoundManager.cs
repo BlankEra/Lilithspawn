@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Godot;
 using Menu;
 
@@ -43,13 +44,15 @@ public partial class SoundManager : Node, ISkinnable
         
         UpdateSkin(SkinManager.Instance.Skin);
 
-        Song.Finished += () =>
-        {
+        Song.Finished += () => {
             switch (SceneManager.Scene.Name)
             {
                 case "SceneMenu":
-                    JukeboxIndex++;
-                    PlayJukebox(JukeboxIndex);
+                    if (SettingsManager.Instance.Settings.AutoplayJukebox)
+                    {
+                        JukeboxIndex++;
+                        PlayJukebox(JukeboxIndex);
+                    }
                     break;
                 case "SceneResults":
                     PlayJukebox(JukeboxIndex);  // play skinnable results song here in the future
@@ -60,9 +63,15 @@ public partial class SoundManager : Node, ISkinnable
         };
 
         SettingsManager.Instance.Loaded += UpdateVolume;
+        Lobby.Instance.SpeedChanged += (speed) => { SoundManager.Song.PitchScale = (float)speed; };
 
         UpdateVolume();
         UpdateJukeboxQueue();
+
+        if (SettingsManager.Instance.Settings.AutoplayJukebox)
+        {
+            PlayJukebox();
+        }
     }
 
     public void UpdateSkin(SkinProfile skin)
@@ -120,7 +129,7 @@ public partial class SoundManager : Node, ISkinnable
 
     public static void UpdateJukeboxQueue()
     {
-        JukeboxQueue = Directory.GetFiles($"{Constants.USER_FOLDER}/maps");
+        JukeboxQueue = [.. Directory.GetFiles($"{Constants.USER_FOLDER}/maps").Shuffle()];
 
         for (int i = 0; i < JukeboxQueue.Length; i++)
         {

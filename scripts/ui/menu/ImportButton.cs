@@ -7,7 +7,7 @@ public partial class ImportButton : Button
 
     public override void _Ready()
     {
-        importDialog = GetParent().GetParent().GetParent().GetParent().GetParent().GetNode<FileDialog>("ImportDialog");
+        importDialog = GetNode<FileDialog>("ImportDialog");
     }
 
     public override void _Pressed()

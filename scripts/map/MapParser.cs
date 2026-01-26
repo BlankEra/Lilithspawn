@@ -50,7 +50,10 @@ public partial class MapParser : Node
 
         SoundManager.UpdateJukeboxQueue();
 
-        Instance.EmitSignal(SignalName.MapsImported, maps.ToArray());
+        if (maps.Count > 0)
+        {
+            Instance.EmitSignal(SignalName.MapsImported, maps.ToArray());
+        }
     }
 
     public static void Encode(Map map, bool logBenchmark = true)
@@ -58,11 +61,6 @@ public partial class MapParser : Node
         double start = Time.GetTicksUsec();
         string mapPath = $"{Constants.USER_FOLDER}/maps/{map.ID}.{Constants.DEFAULT_MAP_EXT}";
         string encodePath = $"{Constants.USER_FOLDER}/cache/{Constants.DEFAULT_MAP_EXT}encode";
-        
-        if (File.Exists(mapPath))
-        {
-            File.Delete(mapPath);
-        }
 
         if (!Directory.Exists(encodePath))
         {
@@ -140,6 +138,11 @@ public partial class MapParser : Node
             Godot.FileAccess video = Godot.FileAccess.Open($"{encodePath}/video.mp4", Godot.FileAccess.ModeFlags.Write);
             video.StoreBuffer(map.VideoBuffer);
             video.Close();
+        }
+
+        if (File.Exists(mapPath))
+        {
+            File.Delete(mapPath);
         }
         
         ZipFile.CreateFromDirectory(encodePath, mapPath, CompressionLevel.Fastest, false);
@@ -651,7 +654,28 @@ public partial class MapParser : Node
 
             file.Dispose();
 
-            map = new(path, notes, (string)metadata["ID"], (string)metadata["Artist"], (string)metadata["Title"], 0, (string[])metadata["Mappers"], (int)metadata["Difficulty"], (string)metadata["DifficultyName"], (int)metadata["Length"], audioBuffer, coverBuffer, videoBuffer);
+            // temp
+            metadata.TryGetValue("ArtistLink", out Variant artistLink);
+            metadata.TryGetValue("ArtistLink", out Variant artistPlatform);
+
+            map = new(
+                path,
+                notes,
+                (string)metadata["ID"],
+                (string)metadata["Artist"],
+                (string)metadata["Title"],
+                0,
+                (string[])metadata["Mappers"],
+                (int)metadata["Difficulty"],
+                (string)metadata["DifficultyName"],
+                (int)metadata["Length"],
+                audioBuffer,
+                coverBuffer,
+                videoBuffer,
+                false,
+                (string)artistLink ?? "",
+                (string)artistPlatform ?? ""
+            );
         }
         catch (Exception exception)
         {

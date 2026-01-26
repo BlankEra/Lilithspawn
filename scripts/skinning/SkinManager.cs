@@ -55,6 +55,8 @@ public partial class SkinManager : Node
 
 		skin.Colors = colors;
 
+		/////
+        
         // Textures
 
         skin.CursorImage = loadTexture("game/cursor.png");
@@ -77,12 +79,21 @@ public partial class SkinManager : Node
 		skin.SortButtonImage = loadTexture("ui/buttons/sort.png");
         skin.AuthorButtonImage = loadTexture("ui/buttons/author.png");
 		skin.SearchButtonImage = loadTexture("ui/buttons/search.png");
+        skin.LayoutListButtonImage = loadTexture("ui/buttons/layout_list.png");
+		skin.LayoutGridButtonImage = loadTexture("ui/buttons/layout_grid.png");
+
+        skin.SpeedPresetMinusButtonImage = loadTexture("ui/buttons/speed_minus.png");
+		skin.SpeedPresetMinusMinusButtonImage = loadTexture("ui/buttons/speed_minus_minus.png");
+		skin.SpeedPresetPlusButtonImage = loadTexture("ui/buttons/speed_plus.png");
+		skin.SpeedPresetPlusPlusButtonImage = loadTexture("ui/buttons/speed_plus_plus.png");
+
         skin.PlayButtonImage = loadTexture("ui/buttons/play.png");
 		skin.FavoriteButtonImage = loadTexture("ui/buttons/favorite.png");
 		skin.CopyButtonImage = loadTexture("ui/buttons/copy.png");
 		skin.DeleteButtonImage = loadTexture("ui/buttons/delete.png");
 		skin.AddVideoButtonImage = loadTexture("ui/buttons/add_video.png");
 		skin.RemoveVideoButtonImage = loadTexture("ui/buttons/remove_video.png");
+
         skin.GrabberNormalImage = loadTexture("ui/buttons/grabber_normal.png");
 		skin.GrabberPressedImage = loadTexture("ui/buttons/grabber_pressed.png");
 		skin.GrabberTickImage = loadTexture("ui/buttons/grabber_tick.png");
@@ -126,7 +137,7 @@ public partial class SkinManager : Node
         skin.GameSpaceName = "grid";
         skin.GameSpace = loadSpace($"res://prefabs/spaces/{skin.GameSpaceName}.tscn");
 
-        skin.MenuSpaceName = "squircles";
+        skin.MenuSpaceName = "waves";
 		skin.MenuSpace = loadSpace($"res://prefabs/spaces/{skin.MenuSpaceName}.tscn");
 
 		// Shaders
@@ -134,7 +145,7 @@ public partial class SkinManager : Node
 		skin.BackgroundTileShader = loadShader("ui/background_tile.gdshader");
         skin.MapButtonCoverShader = loadShader("ui/play/map_button_cover.gdshader");
 
-        //
+        /////
 
         ToastNotification.Notify($"Loaded skin [{settings.Skin.Value}]");
 		Logger.Log($"Loaded skin {settings.Skin.Value}");

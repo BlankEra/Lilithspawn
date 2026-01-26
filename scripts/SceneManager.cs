@@ -11,20 +11,27 @@ public partial class SceneManager : Node
 
     public static SceneManager Instance { get; private set; }
 
+    public static Window Root;
+
     public static Dictionary<string, BaseScene> Scenes = [];
 
     public static BaseScene Scene;
 
     public static BaseSpace Space;
 
-    public override void _Ready()
+    public static Panel VolumePanel;
+
+    public override void _EnterTree()
     {
         Instance = this;
-        
+        Root = GetTree().Root;
+        VolumePanel = GetNode<Panel>("Volume");
+    }
+
+    public override void _Ready()
+    {
         backgroundContainer = GetNode<SubViewportContainer>("Background");
         backgroundViewport = backgroundContainer.GetNode<SubViewport>("SubViewport");
-
-        AddChild(SettingsManager.Menu);
 
         Load("res://scenes/loading.tscn");
     }

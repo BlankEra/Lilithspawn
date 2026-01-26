@@ -1,9 +1,9 @@
 [gd_scene load_steps=17 format=3 uid="uid://ue0x3n0ryhe5"]
 
-[ext_resource type="Script" uid="uid://ct3jnd8m87bkc" path="res://scripts/ui/menu/ScorePanel.cs" id="1_rwxrw"]
+[ext_resource type="Script" uid="uid://ct3jnd8m87bkc" path="res://scripts/ui/menu/play/ScorePanel.cs" id="1_rwxrw"]
 [ext_resource type="FontFile" uid="uid://4bnnn01f4dqr" path="res://fonts/Ubuntu-Medium.ttf" id="2_ngxw4"]
 [ext_resource type="FontFile" uid="uid://bopde8iqsld1o" path="res://fonts/Ubuntu-Regular.ttf" id="3_314mk"]
-[ext_resource type="Texture2D" uid="uid://3e1tjlr4m0wt" path="res://skin/game/cursor.png" id="4_svuah"]
+[ext_resource type="Texture2D" uid="uid://3e1tjlr4m0wt" path="res://user/skins/default/game/cursor.png" id="4_svuah"]
 [ext_resource type="Theme" uid="uid://dhuhu3mmaew1a" path="res://themes/theme.tres" id="5_ngxw4"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bfkib"]

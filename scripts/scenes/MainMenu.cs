@@ -7,7 +7,7 @@ public partial class MainMenu : BaseScene
 	public Panel LastMenu;
     public Panel HomeMenu;
     public Panel PlayMenu;
-    public Jukebox Jukebox;
+    public JukeboxPanel Jukebox;
     public Cursor Cursor;
     public MapList MapList;
     public MapInfo MapInfo;
@@ -24,7 +24,7 @@ public partial class MainMenu : BaseScene
         PlayMenu = MenuHolder.GetNode<Panel>("Play");
         LastMenu = HomeMenu;
 
-        Jukebox = GetNode<Jukebox>("Jukebox");
+        Jukebox = GetNode<JukeboxPanel>("JukeboxPanel");
         Cursor = GetNode<Cursor>("Cursor");
         MapList = PlayMenu.GetNode<MapList>("MapList");
         MapInfo = PlayMenu.GetNode<MapInfo>("MapInfo");
@@ -69,7 +69,7 @@ public partial class MainMenu : BaseScene
 				case Key.Space:
 					if (Lobby.Map != null && CurrentMenu == PlayMenu)
 					{
-                        LegacyRunner.Play(Lobby.Map, Lobby.Speed, Lobby.StartFrom, Lobby.Mods);
+                        LegacyRunner.Play(Lobby.Map, Lobby.Speed, Lobby.StartFrom, Lobby.Modifiers);
                     }
                     break;
 				case Key.Escape:

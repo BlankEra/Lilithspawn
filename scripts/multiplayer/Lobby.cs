@@ -1,10 +1,11 @@
+using Godot;
 using System.Collections.Generic;
 
-public class Lobby
+public partial class Lobby : Node
 {
-    public static Dictionary<string, Player> Players = [];
-    
-    public static int PlayerCount = 0;
+    public static Lobby Instance;
+
+    public static List<Player> Players = [];
 
     public static int PlayersReady = 0;
 
@@ -19,8 +20,8 @@ public class Lobby
     /// Millisecond timestamp to start the map from
     /// </summary>
     public static double StartFrom = 0;
-
-    public static Dictionary<string, bool> Mods = new()
+    
+    public static Dictionary<string, bool> Modifiers = new()
     {
         ["NoFail"] = false,
         ["Ghost"] = false,
@@ -30,8 +31,25 @@ public class Lobby
         ["HardRock"] = false
     };
 
+    [Signal]
     public delegate void AllReadyEventHandler();
-    public static event AllReadyEventHandler AllReady;
+
+    [Signal]
+    public delegate void MapChangedEventHandler(Map map);
+
+    [Signal]
+    public delegate void SpeedChangedEventHandler(double speed);
+
+    [Signal]
+    public delegate void StartFromChangedEventHandler(double startFrom);
+
+    [Signal]
+    public delegate void ModifiersChangedEventHandler(Godot.Collections.Dictionary<string, bool> mods);
+
+    public override void _Ready()
+    {
+        Instance = this;
+    }
 
     public static void Enter()
     {
@@ -41,43 +59,72 @@ public class Lobby
     public static void Leave()
     {
         Players = [];
-        PlayerCount = 0;
     }
 
-    public static void Ready(string name, bool ready = true)
+    public static void PlayerReady(string name, bool ready = true)
     {
-        if (Players.ContainsKey(name))
-        {
-            if (Players[name].Ready == ready)
-            {
-                return;
-            }
+        // if (Players.ContainsKey(name))
+        // {
+        //     if (Players[name].Ready == ready)
+        //     {
+        //         return;
+        //     }
 
-            Players[name].Ready = ready;
-        }
+        //     Players[name].Ready = ready;
+        // }
 
         PlayersReady += ready ? 1 : -1;
 
-        if (PlayersReady == PlayerCount)
+        if (PlayersReady == Players.Count)
         {
-            AllReady?.Invoke();
+            Instance.EmitSignal(SignalName.AllReady);
         }
     }
 
-    public static void Unready(string name)
+    public static void PlayerUnready(string name)
     {
-        Ready(name, false);
+        PlayerReady(name, false);
     }
 
     public static void AddPlayer(Player player)
     {
-        Players[player.Name] = player;
-        PlayerCount++;
+        Players.Add(player);
     }
 
     public static void RemovePlayer(Player player)
     {
-        Players[player.Name] = null;
-        PlayerCount--;
+        Players.Remove(player);
+    }
+
+    public static void SetMap(Map map)
+    {
+        Map = map;
+
+        Instance.EmitSignal(SignalName.MapChanged, Map);
+    }
+
+    public static void SetSpeed(double speed)
+    {
+        Speed = speed;
+
+        Instance.EmitSignal(SignalName.SpeedChanged, Speed);
+    }
+
+    public static void SetStartFrom(double startFrom)
+    {
+        StartFrom = startFrom;
+
+        Instance.EmitSignal(SignalName.StartFromChanged, StartFrom);
+    }
+
+    public static void SetModifier(string mod, bool active)
+    {
+        if (!Modifiers.ContainsKey(mod)) { return; }
+
+        Modifiers[mod] = active;
+
+        Godot.Collections.Dictionary<string, bool> mods = new(Modifiers);
+
+        Instance.EmitSignal(SignalName.ModifiersChanged, mods);
     }
 }

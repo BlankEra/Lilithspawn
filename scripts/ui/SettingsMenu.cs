@@ -141,9 +141,9 @@ public partial class SettingsMenu : ColorRect
         Shown = show;
         hideButton.MouseFilter = show ? MouseFilterEnum.Stop : MouseFilterEnum.Ignore;
 
-        MoveToFront();
+        CallDeferred("move_to_front");
 
-		if (Shown)
+        if (Shown)
 		{
             Visible = true;
             holder.OffsetTop = 25;

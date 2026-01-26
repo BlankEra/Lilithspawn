@@ -42,4 +42,27 @@ public class Misc
 
         return tex;
     }
+
+    public static void CopyProperties(Node node, Node reference)
+    {
+        foreach (Godot.Collections.Dictionary property in reference.GetPropertyList())
+		{
+            string key = (string)property["name"];
+
+            if (key == "size" || key == "script")
+            {
+                continue;
+            }
+            
+            node.Set(key, reference.Get(key));
+        }
+    }
+
+    public static void CopyReference(Node node, Node reference)
+    {
+        Util.Misc.CopyProperties(node, reference);
+
+        reference.ReplaceBy(node);
+        reference.QueueFree();
+    }
 }

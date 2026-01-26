@@ -29,8 +29,8 @@ public partial class SettingsManager : Node
     {
         Instance = this;
 
-        Menu = GD.Load<PackedScene>("res://prefabs//settings.tscn").Instantiate<ColorRect>();
-        
+        Menu = SceneManager.Instance.GetNode<ColorRect>("Settings");
+
         HideMenu();
     }
 
@@ -45,100 +45,6 @@ public partial class SettingsManager : Node
     {
         ShowMenu(false);
     }
-
-    // public static void ApplySetting(string setting, Variant value)
-    // {
-    //     switch (setting)
-    //     {
-    //         case "Sensitivity":
-    //             Instance.Settings.Sensitivity.Value = (float)value;
-    //             break;
-    //         case "ApproachRate":
-    //             Instance.Settings.ApproachRate.Value = (float)value;
-    //             break;
-    //         case "ApproachDistance":
-    //             Instance.Settings.ApproachDistance.Value = (float)value;
-    //             break;
-    //         case "FadeIn":
-    //             Instance.Settings.FadeIn.Value = (float)value;
-    //             break;
-    //         case "Parallax":
-    //             Instance.Settings.Parallax.Value = (float)value;
-    //             break;
-    //         case "FoV":
-    //             Instance.Settings.FoV.Value = (float)value;
-    //             break;
-    //         case "VolumeMaster":
-    //             Instance.Settings.VolumeMaster.Value = (float)value;
-    //             break;
-    //         case "VolumeMusic":
-    //             Instance.Settings.VolumeMusic.Value = (float)value;
-    //             break;
-    //         case "VolumeSFX":
-    //             Instance.Settings.VolumeSFX.Value = (float)value;
-    //             break;
-    //         case "AlwaysPlayHitSound":
-    //             Instance.Settings.AlwaysPlayHitSound.Value = (bool)value;
-    //             break;
-    //         case "NoteSize":
-    //             Instance.Settings.NoteSize.Value = (float)value;
-    //             break;
-    //         case "CursorScale":
-    //             Instance.Settings.CursorScale.Value = (float)value;
-    //             break;
-    //         case "FadeOut":
-    //             Instance.Settings.FadeOut.Value = (bool)value;
-    //             break;
-    //         case "Pushback":
-    //             Instance.Settings.Pushback.Value = (bool)value;
-    //             break;
-    //         case "Fullscreen":
-    //             Instance.Settings.Fullscreen.Value = (bool)value;
-    //             break;
-    //         case "CursorTrail":
-    //             Instance.Settings.CursorTrail.Value = (bool)value;
-    //             break;
-    //         case "TrailTime":
-    //             Instance.Settings.TrailTime.Value = (float)value;
-    //             break;
-    //         case "TrailDetail":
-    //             Instance.Settings.TrailDetail.Value = (float)value;
-    //             break;
-    //         case "CursorDrift":
-    //             Instance.Settings.CursorDrift.Value = (bool)value;
-    //             break;
-    //         case "VideoDim":
-    //             Instance.Settings.VideoDim.Value = (float)value;
-    //             break;
-    //         case "VideoRenderScale":
-    //             Instance.Settings.VideoRenderScale.Value = (float)value;
-    //             break;
-    //         case "SimpleHUD":
-    //             Instance.Settings.SimpleHUD.Value = (bool)value;
-    //             break;
-    //         case "AutoplayJukebox":
-    //             Instance.Settings.AutoplayJukebox.Value = (bool)value;
-    //             break;
-    //         case "AbsoluteInput":
-    //             Instance.Settings.AbsoluteInput.Value = (bool)value;
-    //             break;
-    //         case "RecordReplays":
-    //             Instance.Settings.RecordReplays.Value = (bool)value;
-    //             break;
-    //         case "HitPopups":
-    //             Instance.Settings.HitPopups.Value = (bool)value;
-    //             break;
-    //         case "MissPopups":
-    //             Instance.Settings.MissPopups.Value = (bool)value;
-    //             break;
-    //         case "FPS":
-    //             Instance.Settings.FPS.Value = (int)value;
-    //             break;
-    //         case "UnlockFPS":
-    //             Instance.Settings.UnlockFPS.Value = (bool)value;
-    //             break;
-    //     }
-    // }
 
     public static void Save(string profile = null)
     {

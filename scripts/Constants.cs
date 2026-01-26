@@ -12,8 +12,6 @@ public partial class Constants : Node
 
     public static readonly string DEFAULT_MAP_EXT = "phxm";
 
-    public static readonly string DEFAULT_REPLAY_EXT = "phxr";
-
     public static readonly bool TEMP_MAP_MODE = false;//OS.GetCmdlineArgs().Length > 0;
 
 	public static readonly double CURSOR_SIZE = 0.2625;

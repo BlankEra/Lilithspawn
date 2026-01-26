@@ -13,6 +13,10 @@ public partial class Map : RefCounted
 
     public string Artist { get; set; } = string.Empty;
 
+    public string ArtistLink { get; set; } = string.Empty;
+
+    public string ArtistPlatform { get; set; } = string.Empty;
+
     public string Title { get; set; } = string.Empty;
 
     public string PrettyTitle { get; set; } = string.Empty;
@@ -41,13 +45,15 @@ public partial class Map : RefCounted
 
     public Map() { }
 
-    public Map(string filePath, Note[] data = null, string id = null, string artist = "", string title = "", float rating = 0, string[] mappers = null, int difficulty = 0, string difficultyName = null, int? length = null, byte[] audioBuffer = null, byte[] coverBuffer = null, byte[] videoBuffer = null, bool ephemeral = false)
+    public Map(string filePath, Note[] data = null, string id = null, string artist = "", string title = "", float rating = 0, string[] mappers = null, int difficulty = 0, string difficultyName = null, int? length = null, byte[] audioBuffer = null, byte[] coverBuffer = null, byte[] videoBuffer = null, bool ephemeral = false, string artistLink = "", string artistPlatform = "")
     {
         FilePath = filePath;
         Ephemeral = ephemeral;
-        Artist = (artist ?? "").Replace("\n", "");
-        Title = (title ?? "").Replace("\n", "");
-        PrettyTitle = artist != "" ? $"{artist} - {title}" : title;
+        Artist = (artist ?? "").StripEscapes();
+        ArtistLink = artistLink;
+        ArtistPlatform = artistPlatform;
+        Title = (title ?? "").StripEscapes();
+        PrettyTitle = Artist != "" ? $"{Artist} - {Title}" : Title;
         Rating = rating;
         Mappers = mappers ?? ["N/A"];
         PrettyMappers = "";
@@ -75,6 +81,8 @@ public partial class Map : RefCounted
         {
             ["ID"] = ID,
             ["Artist"] = Artist,
+            ["ArtistLink"] = ArtistLink,
+            ["ArtistPlatform"] = ArtistPlatform,
             ["Title"] = Title,
             ["Rating"] = Rating,
             ["Mappers"] = Mappers,

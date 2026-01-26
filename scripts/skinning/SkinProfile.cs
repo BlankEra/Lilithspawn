@@ -46,6 +46,18 @@ public partial class SkinProfile : GodotObject
 
     public ImageTexture SearchButtonImage { get; set; } = new();
 
+    public ImageTexture LayoutListButtonImage { get; set; } = new();
+
+    public ImageTexture LayoutGridButtonImage { get; set; } = new();
+
+    public ImageTexture SpeedPresetMinusButtonImage { get; set; } = new();
+
+    public ImageTexture SpeedPresetMinusMinusButtonImage { get; set; } = new();
+
+    public ImageTexture SpeedPresetPlusButtonImage { get; set; } = new();
+
+    public ImageTexture SpeedPresetPlusPlusButtonImage { get; set; } = new();
+
     public ImageTexture PlayButtonImage { get; set; } = new();
 
     public ImageTexture FavoriteButtonImage { get; set; } = new();

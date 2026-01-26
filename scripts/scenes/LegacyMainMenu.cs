@@ -305,7 +305,7 @@ public partial class LegacyMainMenu : Control
 						value = Util.String.PadMagnitude(Stats.HighestScore.ToString());
 						break;
 					case "TotalScore":
-						value = Util.String.PadMagnitude(Stats.Total_Score.ToString());
+						value = Util.String.PadMagnitude(Stats.TotalScore.ToString());
 						break;
 					case "AverageAccuracy":
 						double sum = 0;
@@ -671,13 +671,13 @@ public partial class LegacyMainMenu : Control
 
 		foreach (TextureButton modButton in ModifierButtons)
 		{
-			modButton.SelfModulate = Color.Color8(255, 255, 255, (byte)(Lobby.Mods[modButton.Name] ? 255 : 128));
+			modButton.SelfModulate = Color.Color8(255, 255, 255, (byte)(Lobby.Modifiers[modButton.Name] ? 255 : 128));
 			modButton.Pressed += () =>
 			{
-				Lobby.Mods[modButton.Name] = !Lobby.Mods[modButton.Name];
+				Lobby.Modifiers[modButton.Name] = !Lobby.Modifiers[modButton.Name];
 
 				Tween tween = modButton.CreateTween();
-				tween.TweenProperty(modButton, "self_modulate", Color.Color8(255, 255, 255, (byte)(Lobby.Mods[modButton.Name] ? 255 : 128)), 1 / 4);
+				tween.TweenProperty(modButton, "self_modulate", Color.Color8(255, 255, 255, (byte)(Lobby.Modifiers[modButton.Name] ? 255 : 128)), 1 / 4);
 				tween.Play();
 			};
 		}
@@ -887,7 +887,7 @@ public partial class LegacyMainMenu : Control
 						SoundManager.Song.Stop();
 						
 						SceneManager.Load("res://scenes/game.tscn");
-						LegacyRunner.Play(map, Lobby.Speed, Lobby.StartFrom, Lobby.Mods);
+						LegacyRunner.Play(map, Lobby.Speed, Lobby.StartFrom, Lobby.Modifiers);
 
 					}
 					break;
@@ -1106,7 +1106,7 @@ public partial class LegacyMainMenu : Control
 					SoundManager.Song.Stop();
 					
 					SceneManager.Load("res://scenes/game.tscn");
-					LegacyRunner.Play(map, Lobby.Speed, Lobby.StartFrom, Lobby.Mods);
+					LegacyRunner.Play(map, Lobby.Speed, Lobby.StartFrom, Lobby.Modifiers);
 				}
 			}
 
