@@ -5,7 +5,7 @@ public partial class MapInfo : AspectRatioContainer
 {
     public static MapInfo Instance;
 
-    public Map SelectedMap;
+    public Map Map;
     public MapInfoContainer InfoContainer;
 
     private MapList mapList;
@@ -30,9 +30,9 @@ public partial class MapInfo : AspectRatioContainer
 
 	public void Select(Map map)
 	{
-        if (map == SelectedMap) { return; }
+        if (Map != null && map.ID == Map.ID) { return; }
 
-        SelectedMap = map;
+        Map = map;
 		
         var oldContainer = InfoContainer;
         InfoContainer?.Transition(false).TweenCallback(Callable.From(() => { holder.RemoveChild(oldContainer); oldContainer.QueueFree(); }));

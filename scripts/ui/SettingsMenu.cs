@@ -136,6 +136,14 @@ public partial class SettingsMenu : ColorRect
         hideButton.Pressed += () => { ShowMenu(false); };
     }
 
+    public override void _Input(InputEvent @event)
+    {
+        if (@event is InputEventKey eventKey && eventKey.Pressed && eventKey.Keycode == Key.O && eventKey.CtrlPressed)
+        {
+            ShowMenu(!Shown);
+        }
+    }
+
 	public void ShowMenu(bool show)
 	{
         Shown = show;

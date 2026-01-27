@@ -40,7 +40,7 @@ public partial class Rhythia : Node
                 string userFile = $"{userDir}/{resFile}";
                 string ext = resFile.GetExtension();
 
-                if (File.Exists(userFile) || ext == "import" || ext == "uid")
+                if (File.Exists(userFile) || ext == "import" || ext == "uid" || ext == "gitkeep")
                 {
                     continue;
                 }

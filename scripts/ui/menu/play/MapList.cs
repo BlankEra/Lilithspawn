@@ -141,8 +141,8 @@ public partial class MapList : Panel, ISkinnable
         }
 
         Vector2 mousePos = DisplayServer.MouseGetPosition();
-
-        if (DragScroll)
+        
+        if (DragScroll && IsVisibleInTree())
         {
             float dragDelta = (lastMousePos.Y - mousePos.Y) * 30;
 
@@ -289,9 +289,22 @@ public partial class MapList : Panel, ISkinnable
         }
     }
 
+    public override void _Input(InputEvent @event)
+    {
+        if (@event is InputEventKey eventKey && eventKey.Pressed)
+        {
+            switch (eventKey.Keycode)
+            {
+                case Key.F2:
+                    shuffle();
+                    break;
+            }
+        }
+    }
+
     public override void _UnhandledInput(InputEvent @event)
     {
-        if (@event is InputEventMouseButton mouseButton && !mouseButton.CtrlPressed)
+        if (@event is InputEventMouseButton mouseButton && !mouseButton.CtrlPressed && !mouseButton.AltPressed)
 		{
 			switch (mouseButton.ButtonIndex)
 			{
@@ -303,7 +316,7 @@ public partial class MapList : Panel, ISkinnable
 		}
     }
 
-    public void Select(Map map)
+    public void Select(Map map, bool playIfPreSelected = true)
     {
         if (selectedMapID != null && selectedMapID != map.ID && mapButtons.TryGetValue(selectedMapID, out MapButton value))
         {
@@ -316,21 +329,26 @@ public partial class MapList : Panel, ISkinnable
             SoundManager.PlayJukebox(map);
         }
 
-        Lobby.SetMap(map);
+        if (Lobby.Map != map)
+        {
+            Lobby.SetMap(map);
+        }
 
-        if (selectedMapID == map.ID)
+        if (selectedMapID == map.ID && playIfPreSelected)
         {
             LegacyRunner.Play(Lobby.Map, Lobby.Speed, Lobby.StartFrom, Lobby.Modifiers);
         }
 
         selectedMapID = map.ID;
-        
-        if (Layout == ListLayout.List)
-        {
-            TargetScroll = Maps.FindIndex(otherMap => otherMap.ID == map.ID) * (buttonMinSize + Spacing) + buttonMinSize - Size.Y / 2;
-        }
+
+        Focus(map);
 
         MapInfo.Instance.Select(map);
+    }
+
+    public void Focus(Map map)
+    {
+        TargetScroll = Maps.FindIndex(otherMap => otherMap.ID == map.ID) * (buttonMinSize + Spacing) / buttonsPerContainer + buttonMinSize - Size.Y / 2;
     }
 
     public void UpdateMaps(string search = "", string author = "")
@@ -439,5 +457,14 @@ public partial class MapList : Panel, ISkinnable
 
         Tween tween = CreateTween().SetTrans(Tween.TransitionType.Quad).SetParallel();
         tween.TweenProperty(selectionCursor, "modulate", Color.Color8(255, 255, 255, (byte)(display ? 255 : 0)), 0.1);
+    }
+
+    private void shuffle()
+    {
+        List<Map> shuffled = [];
+        shuffled.AddRange(Maps.Shuffle());
+        Maps = shuffled;
+
+        UpdateLayout(Layout);
     }
 }

@@ -32,10 +32,10 @@ public partial class LinkPopupButton : Button
 	{
         base._Ready();
 
-        Pressed += Press;
+        Pressed += PressLink;
     }
 
-	public void Press()
+	public void PressLink()
 	{
         popup?.Show();
     }

@@ -44,11 +44,14 @@
 [ext_resource type="Script" uid="uid://b47jydbbjdh3i" path="res://scripts/ui/menu/SoundSpaceButton.cs" id="33_yxnar"]
 [ext_resource type="Texture2D" uid="uid://bg3gjft0mamud" path="res://user/skins/default/ui/buttons/search.png" id="34_h5mb6"]
 [ext_resource type="Script" uid="uid://chb17y8gabhta" path="res://scripts/ui/menu/JukeboxPanel.cs" id="35_jvjdd"]
-[ext_resource type="Script" uid="uid://bqidqko521o1v" path="res://scripts/ui/menu/DiscordButton.cs" id="37_c6nra"]
 [ext_resource type="Script" uid="uid://783e032bf2o3" path="res://scripts/ui/menu/extras/StatsPanel.cs" id="37_wadof"]
 [ext_resource type="Script" uid="uid://bss5l0q8yh47u" path="res://scripts/ui/menu/extras/CreditsPanel.cs" id="39_b4jiv"]
 [ext_resource type="PackedScene" uid="uid://rl7w0xl4w77l" path="res://prefabs/fps_counter.tscn" id="39_u43bj"]
+[ext_resource type="Texture2D" uid="uid://de86kol23e55h" path="res://textures/ui/github.png" id="41_akqfu"]
 [ext_resource type="Script" uid="uid://carutkgoqpr4e" path="res://scripts/ui/Cursor.cs" id="41_yxnar"]
+[ext_resource type="Texture2D" uid="uid://c60rl8itmawe7" path="res://textures/ui/github_pressed.png" id="42_mb34c"]
+[ext_resource type="Texture2D" uid="uid://cfl8us0rpkpqs" path="res://textures/ui/github_hovered.png" id="43_sgh51"]
+[ext_resource type="Script" uid="uid://c1235cyjfh4rl" path="res://scripts/ui/LinkPopupButton.cs" id="44_ybca7"]
 [ext_resource type="Texture2D" uid="uid://8du82a5dxjdk" path="res://user/skins/default/ui/jukebox_play.png" id="48_q1l3m"]
 [ext_resource type="Texture2D" uid="uid://bpsvcunhigs6c" path="res://user/skins/default/ui/jukebox_skip.png" id="49_7u5pb"]
 [ext_resource type="Texture2D" uid="uid://3e1tjlr4m0wt" path="res://user/skins/default/game/cursor.png" id="50_mxl5i"]
@@ -277,8 +280,6 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="LabelSettings" id="LabelSettings_1o5ig"]
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h3j6r"]
 shader = ExtResource("4_1a85y")
 shader_parameter/brightness = 0.5
@@ -297,8 +298,10 @@ draw_center = false
 [sub_resource type="LabelSettings" id="LabelSettings_wksxa"]
 font = ExtResource("7_6h3lr")
 font_size = 17
-outline_size = 6
-outline_color = Color(0, 0, 0, 0.501961)
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 6
+shadow_color = Color(0, 0, 0, 0.5019608)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t0m3h"]
 
@@ -750,7 +753,7 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 offset_left = 8.0
-offset_top = 64.0
+offset_top = 72.0
 offset_right = -8.0
 offset_bottom = 128.0
 mouse_filter = 2
@@ -1002,6 +1005,7 @@ offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 0
+mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.25098)
 theme_override_fonts/font = ExtResource("19_c6nra")
 flat = true
@@ -1628,12 +1632,12 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eku7s")
 
 [node name="TopBar" type="Panel" parent="." unique_id=560351556]
-anchors_preset = 10
+anchors_preset = -1
 anchor_right = 1.0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = -8.0
-offset_bottom = 64.0
+offset_bottom = 72.0
 mouse_filter = 2
 theme = ExtResource("6_engjn")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_18lcc")
@@ -1660,41 +1664,120 @@ texture = ExtResource("18_eku7s")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="Version" type="Label" parent="TopBar" unique_id=1528811188]
+[node name="Version" type="RichTextLabel" parent="TopBar" unique_id=604655034]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.5
+anchor_right = 0.25
 anchor_bottom = 0.5
 offset_left = 64.0
-grow_vertical = 2
-text = "Rhythia"
-label_settings = SubResource("LabelSettings_1o5ig")
-vertical_alignment = 1
-
-[node name="Discord" type="TextureButton" parent="TopBar" unique_id=36147158]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 136.0
 offset_top = -16.0
-offset_right = 168.0
 offset_bottom = 16.0
 grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("19_c6nra")
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "Rhythia [font_size=12][color=ffffffa0]early-26feb01"
+shortcut_keys_enabled = false
+vertical_alignment = 1
+
+[node name="MenuButtons" type="HBoxContainer" parent="TopBar" unique_id=1927365414]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_right = 0.75
+anchor_bottom = 1.0
+offset_top = 4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Home" type="Button" parent="TopBar/MenuButtons" unique_id=1813963162]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 18
+disabled = true
+text = "Home"
+flat = true
+
+[node name="Play" type="Button" parent="TopBar/MenuButtons" unique_id=614751930]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 18
+text = "Play"
+flat = true
+
+[node name="Extras" type="Button" parent="TopBar/MenuButtons" unique_id=782410257]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 18
+text = "Extras"
+flat = true
+
+[node name="LinkButtons" type="HBoxContainer" parent="TopBar" unique_id=1020882602]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 4.0
+offset_right = -8.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="GitHub" type="TextureButton" parent="TopBar/LinkButtons" unique_id=1795081095]
+layout_mode = 2
+size_flags_vertical = 4
 focus_mode = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("41_akqfu")
+texture_pressed = ExtResource("42_mb34c")
+texture_hover = ExtResource("43_sgh51")
+
+[node name="Button" type="Button" parent="TopBar/LinkButtons/GitHub" unique_id=1445414563]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+flat = true
+script = ExtResource("44_ybca7")
+Link = "https://github.com/Rhythia"
+
+[node name="Discord" type="TextureButton" parent="TopBar/LinkButtons" unique_id=36147158]
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("20_qw82i")
 texture_pressed = ExtResource("21_1468l")
 texture_hover = ExtResource("22_01xyg")
-script = ExtResource("37_c6nra")
+
+[node name="Button" type="Button" parent="TopBar/LinkButtons/Discord" unique_id=2080562322]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+flat = true
+script = ExtResource("44_ybca7")
+Link = "https://discord.gg/kaFPWkfZeS"
 
 [node name="JukeboxPanel" type="Panel" parent="." unique_id=1253575]
 clip_contents = true
-anchors_preset = 12
+anchors_preset = -1
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 8.0
-offset_top = -64.0
+offset_top = -72.0
 offset_right = -8.0
 offset_bottom = -8.0
 grow_horizontal = 2
@@ -1731,12 +1814,14 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_engjn")
 script = ExtResource("27_hl5e0")
 MinFreq = 0
 MaxFreq = 6000
+BarMinSize = 1.0
 Align = 1.0
 
 [node name="Title" type="Label" parent="JukeboxPanel" unique_id=849405407]
 self_modulate = Color(1, 1, 1, 0.74509805)
 layout_mode = 1
 anchors_preset = -1
+anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
@@ -1748,18 +1833,29 @@ theme = ExtResource("6_engjn")
 label_settings = SubResource("LabelSettings_wksxa")
 horizontal_alignment = 2
 vertical_alignment = 1
-text_overrun_behavior = 3
 
-[node name="GoTo" type="Button" parent="JukeboxPanel" unique_id=1813448466]
-self_modulate = Color(1, 1, 1, 0.74509805)
+[node name="ColorRect" type="ColorRect" parent="JukeboxPanel/Title" unique_id=1567485694]
+show_behind_parent = true
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_top = -10.0
-offset_right = -60.0
-offset_bottom = 11.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -2.0
+offset_right = 4.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.3764706)
+
+[node name="GoTo" type="Button" parent="JukeboxPanel/Title" unique_id=1813448466]
+self_modulate = Color(1, 1, 1, 0.74509805)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 focus_mode = 0
 mouse_default_cursor_shape = 2
 flat = true
@@ -1780,7 +1876,7 @@ focus_mode = 1
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("48_q1l3m")
 ignore_texture_size = true
-stretch_mode = 0
+stretch_mode = 5
 
 [node name="Skip" type="TextureButton" parent="JukeboxPanel" unique_id=2044401727]
 self_modulate = Color(1, 1, 1, 0.74509805)
@@ -1797,7 +1893,7 @@ focus_mode = 1
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("49_7u5pb")
 ignore_texture_size = true
-stretch_mode = 0
+stretch_mode = 5
 
 [node name="Rewind" type="TextureButton" parent="JukeboxPanel" unique_id=1208395284]
 self_modulate = Color(1, 1, 1, 0.74509805)
@@ -1814,7 +1910,7 @@ focus_mode = 1
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("49_7u5pb")
 ignore_texture_size = true
-stretch_mode = 0
+stretch_mode = 5
 flip_h = true
 
 [node name="NotificationHolder" type="VBoxContainer" parent="." unique_id=2124523142]
@@ -1862,6 +1958,7 @@ custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 0
+mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(1, 1, 0.501961, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 0.768627, 1)
 theme_override_fonts/font = ExtResource("19_c6nra")
@@ -1874,6 +1971,7 @@ custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 0
+mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(1, 0.501961, 0.501961, 1)
 theme_override_colors/font_hover_color = Color(1, 0.768627, 0.768627, 1)
 theme_override_fonts/font = ExtResource("19_c6nra")
@@ -1886,6 +1984,7 @@ custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 0
+mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(0.501961, 0.501961, 1, 1)
 theme_override_colors/font_hover_color = Color(0.768627, 0.768627, 1, 1)
 theme_override_fonts/font = ExtResource("19_c6nra")
@@ -1898,6 +1997,7 @@ custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 0
+mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(0.501961, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0.768627, 1, 1, 1)
 theme_override_fonts/font = ExtResource("19_c6nra")

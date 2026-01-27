@@ -24,6 +24,9 @@ public partial class SoundManager : Node, ISkinnable
     public static ulong LastRewind = 0;
     public static Map Map;
 
+    private static bool volumePopupShown = false;
+    private static ulong lastVolumeChange = 0;
+
     public override void _Ready()
     {
         Instance = this;
@@ -71,6 +74,52 @@ public partial class SoundManager : Node, ISkinnable
         if (SettingsManager.Instance.Settings.AutoplayJukebox)
         {
             PlayJukebox();
+        }
+    }
+
+    public override void _Process(double delta)
+    {
+        if (volumePopupShown && Time.GetTicksMsec() - lastVolumeChange >= 1000)
+        {
+            volumePopupShown = false;
+
+            Tween tween = SceneManager.VolumePanel.CreateTween().SetTrans(Tween.TransitionType.Quad).SetParallel();
+            tween.TweenProperty(SceneManager.VolumePanel, "modulate", Color.FromHtml("ffffff00"), 0.25);
+            tween.TweenProperty(SceneManager.VolumePanel.GetNode<Label>("Label"), "anchor_bottom", 1, 0.35);
+        }
+    }
+
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        var settings = SettingsManager.Instance.Settings;
+
+        if (@event is InputEventMouseButton eventMouseButton && eventMouseButton.Pressed)
+        {
+            if ((eventMouseButton.CtrlPressed || eventMouseButton.AltPressed) && (eventMouseButton.ButtonIndex == MouseButton.WheelUp || eventMouseButton.ButtonIndex == MouseButton.WheelDown))
+            {
+                switch (eventMouseButton.ButtonIndex)
+                {
+                    case MouseButton.WheelUp:
+                        settings.VolumeMaster.Value = (float)Mathf.Min(100, Math.Round(settings.VolumeMaster) + 5);
+                        break;
+                    case MouseButton.WheelDown:
+                        settings.VolumeMaster.Value = (float)Mathf.Max(0, Math.Round(settings.VolumeMaster) - 5);
+                        break;
+                }
+
+                Label label = SceneManager.VolumePanel.GetNode<Label>("Label");
+                label.Text = settings.VolumeMaster.Value.ToString();
+
+                Tween tween = SceneManager.VolumePanel.CreateTween().SetTrans(Tween.TransitionType.Quad).SetParallel();
+                tween.TweenProperty(SceneManager.VolumePanel, "modulate", Color.FromHtml("ffffffff"), 0.25);
+                tween.TweenProperty(SceneManager.VolumePanel.GetNode<ColorRect>("Main"), "anchor_right", settings.VolumeMaster.Value / 100, 0.15);
+                tween.TweenProperty(label, "anchor_bottom", 0, 0.15);
+
+                volumePopupShown = true;
+                lastVolumeChange = Time.GetTicksMsec();
+
+                UpdateVolume();
+            }
         }
     }
 
@@ -130,7 +179,7 @@ public partial class SoundManager : Node, ISkinnable
     {
         var settings = SettingsManager.Instance.Settings;
 
-        Song.VolumeDb = -80 + 70 * (float)Math.Pow(settings.VolumeMusic.Value / 100, 0.1) * (float)Math.Pow(settings.VolumeMaster.Value / 100, 0.1);
+        Song.VolumeDb = -80 + 80 * (float)Math.Pow(settings.VolumeMusic.Value / 100, 0.1) * (float)Math.Pow(settings.VolumeMaster.Value / 100, 0.1);
         HitSound.VolumeDb = -80 + 80 * (float)Math.Pow(settings.VolumeSFX.Value / 100, 0.1) * (float)Math.Pow(settings.VolumeMaster.Value / 100, 0.1);
         FailSound.VolumeDb = -80 + 80 * (float)Math.Pow(settings.VolumeSFX.Value / 100, 0.1) * (float)Math.Pow(settings.VolumeMaster.Value / 100, 0.1);
     }

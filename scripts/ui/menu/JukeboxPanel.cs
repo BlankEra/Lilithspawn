@@ -8,6 +8,8 @@ public partial class JukeboxPanel : Panel, ISkinnable
 {
     public static JukeboxPanel Instance;
 
+    public Map Map;
+
     private Label title;
     private TextureButton pauseButton;
     private TextureButton skipButton;
@@ -24,7 +26,7 @@ public partial class JukeboxPanel : Panel, ISkinnable
         pauseButton = GetNode<TextureButton>("Pause");
         skipButton = GetNode<TextureButton>("Skip");
         rewindButton = GetNode<TextureButton>("Rewind");
-        selectButton = GetNode<Button>("GoTo");
+        selectButton = title.GetNode<Button>("GoTo");
         spectrum = GetNode<AudioSpectrum>("Spectrum");
         spectrumMaterial = spectrum.Material as ShaderMaterial;
 
@@ -92,6 +94,8 @@ public partial class JukeboxPanel : Panel, ISkinnable
 
 	public void UpdateMap(Map map)
 	{
+        Map = map;
+
         title.Text = map.PrettyTitle;
 
         pauseButton.TextureNormal = SkinManager.Instance.Skin.JukeboxPauseImage;
@@ -134,6 +138,6 @@ public partial class JukeboxPanel : Panel, ISkinnable
 
     private void select()
     {
-
+        MapList.Instance.Select(Map, false);
     }
 }
