@@ -1,16 +1,17 @@
-[gd_scene load_steps=34 format=3 uid="uid://bhcvypmhm5rke"]
+[gd_scene format=3 uid="uid://bhcvypmhm5rke"]
 
-[ext_resource type="Script" uid="uid://c0ap38lmc2x0r" path="res://scripts/menu/Results.cs" id="1_llpx6"]
-[ext_resource type="Theme" uid="uid://dhuhu3mmaew1a" path="res://theme/theme.tres" id="2_dgnpu"]
+[ext_resource type="Script" uid="uid://c0ap38lmc2x0r" path="res://scripts/scenes/Results.cs" id="1_llpx6"]
+[ext_resource type="Theme" uid="uid://dhuhu3mmaew1a" path="res://themes/theme.tres" id="2_dgnpu"]
 [ext_resource type="FontFile" uid="uid://4bnnn01f4dqr" path="res://fonts/Ubuntu-Medium.ttf" id="2_f4qdi"]
 [ext_resource type="Shader" uid="uid://bp2sv5ynsubi2" path="res://scripts/shaders/alpha_gradient.gdshader" id="2_oatel"]
-[ext_resource type="Texture2D" uid="uid://3e1tjlr4m0wt" path="res://skin/cursor.png" id="2_ow183"]
+[ext_resource type="Texture2D" uid="uid://3e1tjlr4m0wt" path="res://user/skins/default/game/cursor.png" id="2_ow183"]
 [ext_resource type="FontFile" uid="uid://bopde8iqsld1o" path="res://fonts/Ubuntu-Regular.ttf" id="3_rsbg1"]
-[ext_resource type="Script" uid="uid://ci36kf1g7wv5j" path="res://scripts/menu/Graph.cs" id="4_b55ol"]
+[ext_resource type="Script" uid="uid://ci36kf1g7wv5j" path="res://scripts/ui/results/Graph.cs" id="4_b55ol"]
 [ext_resource type="FontFile" uid="uid://dvb6fvy008bhv" path="res://fonts/Roboto-Medium.ttf" id="4_yxv8s"]
 [ext_resource type="Shader" uid="uid://cqqs8uux7hqyb" path="res://scripts/shaders/ui_blur.gdshader" id="5_eo0oh"]
 [ext_resource type="Shader" uid="uid://5sq1jdmlom6w" path="res://scripts/shaders/dotted.gdshader" id="8_ldb53"]
 [ext_resource type="Texture2D" uid="uid://baivqqkfll133" path="res://textures/RhythiaSquircle.png" id="10_00qb5"]
+[ext_resource type="Script" uid="uid://carutkgoqpr4e" path="res://scripts/ui/Cursor.cs" id="12_00fns"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6rn6l"]
 shader = ExtResource("2_oatel")
@@ -90,24 +91,10 @@ font_size = 32
 shader = ExtResource("5_eo0oh")
 shader_parameter/brightness = 1.25
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dc6lk"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_6rb22"]
-font_size = 18
-outline_size = 5
-outline_color = Color(0, 0, 0, 0.501961)
-
-[node name="SceneResults" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="SceneResults" type="Node" unique_id=11944572]
 script = ExtResource("1_llpx6")
 
-[node name="Background" type="ColorRect" parent="."]
-layout_mode = 1
+[node name="Background" type="ColorRect" parent="." unique_id=1514676561]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -115,26 +102,23 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0252979, 0.0178548, 0.0358456, 1)
 
-[node name="CoverBackground" type="TextureRect" parent="."]
+[node name="CoverBackground" type="TextureRect" parent="." unique_id=1406868645]
 modulate = Color(1, 1, 1, 0.14902)
-layout_mode = 1
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 expand_mode = 1
 stretch_mode = 6
 
-[node name="Cover" type="TextureRect" parent="."]
+[node name="Cover" type="TextureRect" parent="." unique_id=1275304585]
 material = SubResource("ShaderMaterial_6rn6l")
-layout_mode = 1
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Holder" type="Panel" parent="."]
-layout_mode = 1
+[node name="Holder" type="Panel" parent="." unique_id=1475290778]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -142,7 +126,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_wqycr")
 
-[node name="GraphBlur" type="Panel" parent="Holder"]
+[node name="GraphBlur" type="Panel" parent="Holder" unique_id=253002573]
 material = SubResource("ShaderMaterial_p7eil")
 layout_mode = 1
 anchors_preset = -1
@@ -156,7 +140,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_1olmk")
 
-[node name="Title" type="Label" parent="Holder"]
+[node name="Title" type="Label" parent="Holder" unique_id=1173526425]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -169,7 +153,7 @@ label_settings = SubResource("LabelSettings_13vky")
 vertical_alignment = 1
 text_overrun_behavior = 3
 
-[node name="Difficulty" type="Label" parent="Holder"]
+[node name="Difficulty" type="Label" parent="Holder" unique_id=1795897830]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -182,7 +166,7 @@ label_settings = SubResource("LabelSettings_wwu1g")
 vertical_alignment = 1
 text_overrun_behavior = 3
 
-[node name="Mappers" type="Label" parent="Holder"]
+[node name="Mappers" type="Label" parent="Holder" unique_id=76894303]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -195,7 +179,7 @@ label_settings = SubResource("LabelSettings_sbrx2")
 vertical_alignment = 1
 text_overrun_behavior = 3
 
-[node name="Speed" type="Label" parent="Holder"]
+[node name="Speed" type="Label" parent="Holder" unique_id=715001883]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.2
@@ -208,7 +192,7 @@ label_settings = SubResource("LabelSettings_utq7d")
 vertical_alignment = 1
 text_overrun_behavior = 3
 
-[node name="Modifiers" type="Panel" parent="Holder"]
+[node name="Modifiers" type="Panel" parent="Holder" unique_id=1071365620]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.25
@@ -219,7 +203,7 @@ offset_right = -32.0
 offset_bottom = 296.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_l8mvi")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Holder/Modifiers"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Holder/Modifiers" unique_id=1105577697]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -231,14 +215,14 @@ grow_vertical = 2
 theme_override_constants/separation = 8
 alignment = 2
 
-[node name="ModifierTemplate" type="TextureRect" parent="Holder/Modifiers/HBoxContainer"]
+[node name="ModifierTemplate" type="TextureRect" parent="Holder/Modifiers/HBoxContainer" unique_id=170743314]
 visible = false
 custom_minimum_size = Vector2(44, 0)
 layout_mode = 2
 texture = ExtResource("2_ow183")
 expand_mode = 1
 
-[node name="Separator" type="ColorRect" parent="Holder"]
+[node name="Separator" type="ColorRect" parent="Holder" unique_id=1656607203]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -247,7 +231,7 @@ offset_top = 300.0
 offset_right = -32.0
 offset_bottom = 302.0
 
-[node name="Accuracy" type="Label" parent="Holder"]
+[node name="Accuracy" type="Label" parent="Holder" unique_id=678663131]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.3
@@ -260,7 +244,7 @@ label_settings = SubResource("LabelSettings_e5ove")
 vertical_alignment = 1
 text_overrun_behavior = 3
 
-[node name="Hits" type="Label" parent="Holder"]
+[node name="Hits" type="Label" parent="Holder" unique_id=984343345]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.3
@@ -275,7 +259,7 @@ horizontal_alignment = 2
 vertical_alignment = 1
 text_overrun_behavior = 3
 
-[node name="Score" type="Label" parent="Holder"]
+[node name="Score" type="Label" parent="Holder" unique_id=1784139753]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.3
@@ -288,7 +272,7 @@ label_settings = SubResource("LabelSettings_7f2j3")
 vertical_alignment = 1
 text_overrun_behavior = 3
 
-[node name="Status" type="Label" parent="Holder"]
+[node name="Status" type="Label" parent="Holder" unique_id=1621789555]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.3
@@ -303,7 +287,7 @@ horizontal_alignment = 2
 vertical_alignment = 1
 text_overrun_behavior = 3
 
-[node name="Graph" type="ColorRect" parent="Holder"]
+[node name="Graph" type="ColorRect" parent="Holder" unique_id=1813663350]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
@@ -315,7 +299,7 @@ offset_bottom = -96.0
 color = Color(1, 1, 1, 0)
 script = ExtResource("4_b55ol")
 
-[node name="OffsetTop" type="Label" parent="Holder/Graph"]
+[node name="OffsetTop" type="Label" parent="Holder/Graph" unique_id=465789986]
 layout_mode = 1
 anchors_preset = -1
 offset_left = -32.0
@@ -325,7 +309,7 @@ label_settings = SubResource("LabelSettings_6anxq")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="OffsetBottom" type="Label" parent="Holder/Graph"]
+[node name="OffsetBottom" type="Label" parent="Holder/Graph" unique_id=2053550374]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
@@ -338,7 +322,7 @@ label_settings = SubResource("LabelSettings_6anxq")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="ScoreDropoffLine" type="ColorRect" parent="Holder/Graph"]
+[node name="ScoreDropoffLine" type="ColorRect" parent="Holder/Graph" unique_id=411211979]
 material = SubResource("ShaderMaterial_b4pmo")
 layout_mode = 1
 anchors_preset = -1
@@ -348,9 +332,8 @@ anchor_bottom = 0.455
 offset_bottom = 1.0
 color = Color(1, 1, 1, 0.12549)
 
-[node name="TopBar" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = -1
+[node name="TopBar" type="Panel" parent="." unique_id=571217894]
+anchors_preset = 10
 anchor_right = 1.0
 offset_left = 8.0
 offset_top = 8.0
@@ -359,7 +342,7 @@ offset_bottom = 64.0
 theme = ExtResource("2_dgnpu")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ttaov")
 
-[node name="Background" type="ColorRect" parent="TopBar"]
+[node name="Background" type="ColorRect" parent="TopBar" unique_id=894318878]
 material = SubResource("ShaderMaterial_v6imt")
 layout_mode = 1
 anchors_preset = 15
@@ -368,7 +351,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Logo" type="TextureRect" parent="TopBar"]
+[node name="Logo" type="TextureRect" parent="TopBar" unique_id=1129669805]
 layout_mode = 1
 anchors_preset = -1
 anchor_bottom = 1.0
@@ -379,7 +362,7 @@ texture = ExtResource("10_00qb5")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="TopBar"]
+[node name="Label" type="Label" parent="TopBar" unique_id=424784939]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.6
@@ -393,9 +376,8 @@ label_settings = SubResource("LabelSettings_f104l")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Footer" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = -1
+[node name="Footer" type="Panel" parent="." unique_id=367936054]
+anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -406,7 +388,7 @@ offset_bottom = -4.0
 theme = ExtResource("2_dgnpu")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_bop88")
 
-[node name="Background" type="ColorRect" parent="Footer"]
+[node name="Background" type="ColorRect" parent="Footer" unique_id=154102556]
 material = SubResource("ShaderMaterial_4a50n")
 layout_mode = 1
 anchors_preset = 15
@@ -415,7 +397,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Back" type="Button" parent="Footer"]
+[node name="Back" type="Button" parent="Footer" unique_id=1252711574]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.075
@@ -424,11 +406,12 @@ offset_left = 8.0
 offset_top = 8.0
 offset_bottom = -8.0
 focus_mode = 0
+mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 22
 text = "Back"
 flat = true
 
-[node name="Play" type="Button" parent="Footer"]
+[node name="Play" type="Button" parent="Footer" unique_id=1948227195]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.925
@@ -438,11 +421,12 @@ offset_top = 8.0
 offset_right = -8.0
 offset_bottom = -8.0
 focus_mode = 0
+mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 22
 text = "Play"
 flat = true
 
-[node name="Replay" type="Button" parent="Footer"]
+[node name="Replay" type="Button" parent="Footer" unique_id=103413454]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.925
@@ -453,72 +437,22 @@ offset_right = -32.0
 offset_bottom = -8.0
 grow_horizontal = 0
 focus_mode = 0
+mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 22
 text = "Watch Replay"
 flat = true
 
-[node name="Volume" type="Panel" parent="."]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -128.0
-offset_top = -38.0
-offset_right = 128.0
-offset_bottom = -32.0
-grow_horizontal = 2
-grow_vertical = 0
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_dc6lk")
-
-[node name="Label" type="Label" parent="Volume"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 2.0
-offset_top = -14.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "100"
-label_settings = SubResource("LabelSettings_6rb22")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Background" type="ColorRect" parent="Volume"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 2.0
-offset_bottom = 2.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 0.768627)
-
-[node name="Main" type="ColorRect" parent="Volume"]
-layout_mode = 1
-anchors_preset = -1
-anchor_bottom = 1.0
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Cursor" type="TextureRect" parent="."]
-layout_mode = 0
+[node name="Cursor" type="TextureRect" parent="." unique_id=1024175156]
+z_index = 2
 offset_right = 32.0
 offset_bottom = 32.0
 mouse_filter = 2
 texture = ExtResource("2_ow183")
 expand_mode = 1
+script = ExtResource("12_00fns")
 
-[node name="Transition" type="ColorRect" parent="."]
+[node name="Transition" type="ColorRect" parent="." unique_id=529428316]
 self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

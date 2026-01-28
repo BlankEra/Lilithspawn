@@ -4,8 +4,27 @@ using System.Security.Cryptography;
 using Godot;
 using Godot.Collections;
 
-public class Stats
+[GlobalClass]
+public partial class Stats : Node
 {
+    public static Stats Instance { get; private set; }
+
+    public override void _Ready()
+    {
+        
+        Instance = this;
+        var db = DatabaseService.Instance.DB;
+
+        var collection = db.GetCollection<Stats>();
+        var stats = collection.FindById("_STATS");
+
+        if (stats == null)
+        {
+            stats = new Stats();
+            collection.Insert("_STATS", stats);
+        }
+    }
+
     public static ulong GamePlaytime = 0;
     public static ulong TotalPlaytime = 0;
     public static ulong GamesOpened = 0;
@@ -115,7 +134,7 @@ public class Stats
         catch (Exception exception)
         {
             ToastNotification.Notify("Stats file corrupt or modified", 2);
-            throw Logger.Error($"Stats file corrupt or modified; {exception.Message}");
+            Logger.Error(exception);
         }
 
         Logger.Log("Loaded stats");

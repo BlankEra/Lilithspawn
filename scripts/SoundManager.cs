@@ -1,18 +1,20 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Godot;
-using Menu;
 
-public partial class SoundManager : Node
+public partial class SoundManager : Node, ISkinnable
 {
+    public static SoundManager Instance;
+
     public static AudioStreamPlayer HitSound;
     public static AudioStreamPlayer MissSound;
     public static AudioStreamPlayer FailSound;
     public static AudioStreamPlayer Song;
 
-    public delegate void JukeboxPlayedHandler(Map map);
-    public static event JukeboxPlayedHandler JukeboxPlayed;
+    [Signal]
+    public delegate void JukeboxPlayedEventHandler(Map map);
 
     public static string[] JukeboxQueue = [];
     public static Dictionary<string, int> JukeboxQueueInverse = [];
@@ -21,8 +23,13 @@ public partial class SoundManager : Node
     public static ulong LastRewind = 0;
     public static Map Map;
 
+    private static bool volumePopupShown = false;
+    private static ulong lastVolumeChange = 0;
+
     public override void _Ready()
     {
+        Instance = this;
+
         HitSound = new();
         MissSound = new();
         FailSound = new();
@@ -35,25 +42,121 @@ public partial class SoundManager : Node
         AddChild(FailSound);
         AddChild(Song);
 
-        Song.Finished += () =>
-        {
+        SkinManager.Instance.Loaded += UpdateSkin;
+        
+        UpdateSkin(SkinManager.Instance.Skin);
+
+        Song.Finished += () => {
             switch (SceneManager.Scene.Name)
             {
                 case "SceneMenu":
-                    JukeboxIndex++;
-                    PlayJukebox(JukeboxIndex);
+                    if (SettingsManager.Instance.Settings.AutoplayJukebox)
+                    {
+                        JukeboxIndex++;
+                        PlayJukebox(JukeboxIndex);
+                    }
                     break;
                 case "SceneResults":
-                    PlayJukebox(JukeboxIndex);
+                    PlayJukebox(JukeboxIndex);  // play skinnable results song here in the future
                     break;
                 default:
                     break;
             }
         };
+
+        SettingsManager.Instance.Loaded += UpdateVolume;
+        Lobby.Instance.SpeedChanged += (speed) => { SoundManager.Song.PitchScale = (float)speed; };
+
+        UpdateVolume();
+        UpdateJukeboxQueue();
+
+        if (SettingsManager.Instance.Settings.AutoplayJukebox)
+        {
+            PlayJukebox();
+        }
+    }
+
+    public override void _Process(double delta)
+    {
+        if (volumePopupShown && Time.GetTicksMsec() - lastVolumeChange >= 1000)
+        {
+            volumePopupShown = false;
+
+            Tween tween = SceneManager.VolumePanel.CreateTween().SetTrans(Tween.TransitionType.Quad).SetParallel();
+            tween.TweenProperty(SceneManager.VolumePanel, "modulate", Color.FromHtml("ffffff00"), 0.25);
+            tween.TweenProperty(SceneManager.VolumePanel.GetNode<Label>("Label"), "anchor_bottom", 1, 0.35);
+        }
+    }
+
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        var settings = SettingsManager.Instance.Settings;
+
+        if (@event is InputEventMouseButton eventMouseButton && eventMouseButton.Pressed)
+        {
+            if ((eventMouseButton.CtrlPressed || eventMouseButton.AltPressed) && (eventMouseButton.ButtonIndex == MouseButton.WheelUp || eventMouseButton.ButtonIndex == MouseButton.WheelDown))
+            {
+                switch (eventMouseButton.ButtonIndex)
+                {
+                    case MouseButton.WheelUp:
+                        settings.VolumeMaster.Value = (float)Mathf.Min(100, Math.Round(settings.VolumeMaster) + 5);
+                        break;
+                    case MouseButton.WheelDown:
+                        settings.VolumeMaster.Value = (float)Mathf.Max(0, Math.Round(settings.VolumeMaster) - 5);
+                        break;
+                }
+
+                Label label = SceneManager.VolumePanel.GetNode<Label>("Label");
+                label.Text = settings.VolumeMaster.Value.ToString();
+
+                Tween tween = SceneManager.VolumePanel.CreateTween().SetTrans(Tween.TransitionType.Quad).SetParallel();
+                tween.TweenProperty(SceneManager.VolumePanel, "modulate", Color.FromHtml("ffffffff"), 0.25);
+                tween.TweenProperty(SceneManager.VolumePanel.GetNode<ColorRect>("Main"), "anchor_right", settings.VolumeMaster.Value / 100, 0.15);
+                tween.TweenProperty(label, "anchor_bottom", 0, 0.15);
+
+                volumePopupShown = true;
+                lastVolumeChange = Time.GetTicksMsec();
+
+                UpdateVolume();
+            }
+        }
+    }
+
+    public void UpdateSkin(SkinProfile skin)
+    {
+        HitSound.Stream = Util.Audio.LoadStream(skin.HitSoundBuffer);
+        FailSound.Stream = Util.Audio.LoadStream(skin.FailSoundBuffer);
+    }
+
+    public static void PlayJukebox(Map map, bool setRichPresence = true)
+    {
+        Map = map;
+
+        if (map.AudioBuffer == null)
+        {
+            JukeboxIndex++;
+            PlayJukebox(JukeboxIndex);
+            return;
+        }
+
+        Song.Stream = Util.Audio.LoadStream(map.AudioBuffer);
+        Song.Play();
+
+        Instance.EmitSignal(SignalName.JukeboxPlayed, map);
+
+        if (setRichPresence)
+        {
+            Discord.Client.UpdateState($"Listening to {map.PrettyTitle}");
+        }
     }
 
     public static void PlayJukebox(int index = -1, bool setRichPresence = true)
     {
+        if (JukeboxQueue.Length == 0)
+        {
+            return;
+        }
+
         index = index == -1 ? JukeboxIndex : index;
 
         if (index >= JukeboxQueue.Length)
@@ -65,57 +168,25 @@ public partial class SoundManager : Node
             index = JukeboxQueue.Length - 1;
         }
 
-        if (JukeboxQueue.Length == 0)
-        {
-            return;
-        }
-
-        Map = MapParser.Decode(JukeboxQueue[index], null, false);
-
-        if (Map.AudioBuffer == null)
-        {
-            JukeboxIndex++;
-            PlayJukebox(JukeboxIndex);
-        }
-
-        JukeboxPlayed.Invoke(Map);
-
-        if (SceneManager.Scene.Name == "SceneMenu")
-        {
-            MainMenu.Control.GetNode("Jukebox").GetNode<Label>("Title").Text = Map.PrettyTitle;
-        }
-
-        Song.Stream = Lib.Audio.LoadStream(Map.AudioBuffer);
-        Song.Play();
-
-        if (setRichPresence)
-        {
-            Discord.Client.UpdateState($"Listening to {Map.PrettyTitle}");
-        }
-    }
-
-    public static void UpdateJukeboxQueue()
-    {
-        JukeboxQueue = Directory.GetFiles($"{Constants.USER_FOLDER}/maps");
-
-        for (int i = 0; i < JukeboxQueue.Length; i++)
-        {
-            JukeboxQueueInverse[JukeboxQueue[i].GetFile().GetBaseName()] = i;
-        }
-    }
-
-    public static void UpdateSounds()
-    {
-        HitSound.Stream = Lib.Audio.LoadStream(SkinManager.Instance.Skin.HitSoundBuffer);
-        FailSound.Stream = Lib.Audio.LoadStream(SkinManager.Instance.Skin.FailSoundBuffer);
+        PlayJukebox(MapParser.Decode(JukeboxQueue[index]), setRichPresence);
     }
 
     public static void UpdateVolume()
     {
         var settings = SettingsManager.Instance.Settings;
 
-        Song.VolumeDb = -80 + 70 * (float)Math.Pow(settings.VolumeMusic / 100, 0.1) * (float)Math.Pow(settings.VolumeMaster / 100, 0.1);
-        HitSound.VolumeDb = -80 + 80 * (float)Math.Pow(settings.VolumeSFX / 100, 0.1) * (float)Math.Pow(settings.VolumeMaster / 100, 0.1);
-        FailSound.VolumeDb = -80 + 80 * (float)Math.Pow(settings.VolumeSFX / 100, 0.1) * (float)Math.Pow(settings.VolumeMaster / 100, 0.1);
+        Song.VolumeDb = -80 + 80 * (float)Math.Pow(settings.VolumeMusic.Value / 100, 0.1) * (float)Math.Pow(settings.VolumeMaster.Value / 100, 0.1);
+        HitSound.VolumeDb = -80 + 80 * (float)Math.Pow(settings.VolumeSFX.Value / 100, 0.1) * (float)Math.Pow(settings.VolumeMaster.Value / 100, 0.1);
+        FailSound.VolumeDb = -80 + 80 * (float)Math.Pow(settings.VolumeSFX.Value / 100, 0.1) * (float)Math.Pow(settings.VolumeMaster.Value / 100, 0.1);
+    }
+
+    public static void UpdateJukeboxQueue()
+    {
+        JukeboxQueue = [.. Directory.GetFiles($"{Constants.USER_FOLDER}/maps").Shuffle()];
+
+        for (int i = 0; i < JukeboxQueue.Length; i++)
+        {
+            JukeboxQueueInverse[JukeboxQueue[i].GetFile().GetBaseName()] = i;
+        }
     }
 }

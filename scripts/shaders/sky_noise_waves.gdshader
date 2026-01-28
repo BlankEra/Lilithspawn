@@ -1,8 +1,13 @@
 shader_type sky;
 
+uniform bool sine_color_swap = false;
 uniform float opacity : hint_range(0.0, 1.0) = 1.0;
 uniform float coverage : hint_range(0.0, 1.0) = 1.0;
 uniform vec3 background_color : source_color = vec3(0.0);
+uniform sampler2D image_a;
+uniform sampler2D image_b;
+uniform float image_lerp : hint_range(0.0, 1.0) = 0.0;
+uniform float image_lod : hint_range(0.0, 8.0, 0.1) = 5.0;
 
 //	Simplex 3D Noise
 //	by Ian McEwan, Stefan Gustavson (https://github.com/stegu/webgl-noise)
@@ -94,9 +99,17 @@ void sky() {
 	bool primaryWaves = mod(floor(noiseValue * 96.0), 20.0) == 0.0;
 	bool secondaryWaves = mod(floor(noiseValue * 384.0), 20.0) == 0.0;
 	float t = primaryWaves ? 1.0 : secondaryWaves ? 0.2 : 0.0;
+	float sine = sin(TIME / 70.0) / 2.0 + 0.5;
 
-	vec3 color = mix(background_color, vec3(1.0, 0.25, noiseValue / 1.75), (t + (1.0 - pow(noiseValue, 100.0)) / 50.0) * opacity * coverage);
-	color = mix(color, color.bgr, sin(TIME / 10.0) / 2.0 + 0.5);
+	vec2 sample = vec2(noiseValue, sine) * 0.9 + vec2(0.05);
+	vec4 imageColor = mix(textureLod(image_b, sample, image_lod), textureLod(image_a, sample, image_lod), image_lerp);
+	vec3 color = mix(vec3(1.0, 0.1, noiseValue / 4.0), imageColor.rgb * 1.5, imageColor.a);
+	color = mix(background_color, color, (t + (1.0 - pow(noiseValue, 100.0)) / 50.0) * opacity * coverage);
+
+	if (sine_color_swap) {
+		color = mix(color, color.bgr, sin(TIME / 10.0) / 2.0 + 0.5);
+	}
+
 	color = mix(vec3(0.0), color, min(1.0, 2.0 * coverage - abs(EYEDIR.y)));
 
 	COLOR = color;

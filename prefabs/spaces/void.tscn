@@ -1,8 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://dfr03mt0m4f8t"]
+[gd_scene load_steps=3 format=3 uid="uid://dfr03mt0m4f8t"]
+
+[ext_resource type="Script" uid="uid://dhq7mkhlfw5ci" path="res://scripts/spaces/Void.cs" id="1_31nrd"]
 
 [sub_resource type="Environment" id="Environment_uposg"]
+background_mode = 1
 
 [node name="Void" type="Node3D"]
+script = ExtResource("1_31nrd")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_uposg")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+fov = 70.0

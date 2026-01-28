@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dtkff13bgd1u4"]
 
-[ext_resource type="Script" uid="uid://cbopgunbjoch1" path="res://scripts/spaces/grid/Grid.gd" id="1_wac2s"]
-[ext_resource type="Texture2D" uid="uid://cnqebcj2iorfr" path="res://textures/grid_tile.png" id="2_mnxl2"]
+[ext_resource type="Script" uid="uid://bxx72dwqlrh2o" path="res://scripts/spaces/Grid.cs" id="1_wac2s"]
+[ext_resource type="Texture2D" uid="uid://cnqebcj2iorfr" path="res://textures/grid_tile.png" id="2_83vuq"]
 
 [sub_resource type="Environment" id="Environment_ge866"]
 ambient_light_source = 1
@@ -16,7 +16,7 @@ fog_depth_end = 60.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n0yhb"]
 shading_mode = 0
-albedo_texture = ExtResource("2_mnxl2")
+albedo_texture = ExtResource("2_83vuq")
 uv1_scale = Vector3(34, 34, 34)
 texture_filter = 5
 billboard_keep_scale = true
@@ -41,6 +41,9 @@ script = ExtResource("1_wac2s")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ge866")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+fov = 70.0
 
 [node name="Bottom" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -10, 0)

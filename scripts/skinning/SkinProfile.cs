@@ -1,12 +1,9 @@
 ﻿using Godot;
-using System;
 
 [GlobalClass]
 public partial class SkinProfile : GodotObject
 {
-    public Color[] Colors { get; set; } = [new(0x00ffedff), new(0xff8ff9ff)];
-
-    public string RawColors { get; set; } = "00ffed,ff8ff9";
+    public SkinConfig Config { get; set; } = new();
 
     public ImageTexture CursorImage { get; set; } = new();
 
@@ -30,6 +27,54 @@ public partial class SkinProfile : GodotObject
 
     public ImageTexture MissFeedbackImage { get; set; } = new();
 
+    public ImageTexture SettingsButtonImage { get; set; } = new();
+
+    public ImageTexture OpenFolderButtonImage { get; set; } = new();
+
+    public ImageTexture ImportButtonImage { get; set; } = new();
+
+    public ImageTexture RandomButtonImage { get; set; } = new();
+
+    public ImageTexture FilterButtonImage { get; set; } = new();
+
+    public ImageTexture SortButtonImage { get; set; } = new();
+
+    public ImageTexture AuthorButtonImage { get; set; } = new();
+
+    public ImageTexture SearchButtonImage { get; set; } = new();
+
+    public ImageTexture LayoutListButtonImage { get; set; } = new();
+
+    public ImageTexture LayoutGridButtonImage { get; set; } = new();
+
+    public ImageTexture SpeedPresetMinusMinusButtonImage { get; set; } = new();
+
+    public ImageTexture SpeedPresetMinusButtonImage { get; set; } = new();
+
+    public ImageTexture SpeedPresetMiddleButtonImage { get; set; } = new();
+
+    public ImageTexture SpeedPresetPlusButtonImage { get; set; } = new();
+
+    public ImageTexture SpeedPresetPlusPlusButtonImage { get; set; } = new();
+
+    public ImageTexture PlayButtonImage { get; set; } = new();
+
+    public ImageTexture FavoriteButtonImage { get; set; } = new();
+
+    public ImageTexture CopyButtonImage { get; set; } = new();
+
+    public ImageTexture DeleteButtonImage { get; set; } = new();
+
+    public ImageTexture AddVideoButtonImage { get; set; } = new();
+
+    public ImageTexture RemoveVideoButtonImage { get; set; } = new();
+
+    public ImageTexture GrabberNormalImage { get; set; } = new();
+
+    public ImageTexture GrabberPressedImage { get; set; } = new();
+
+    public ImageTexture GrabberTickImage { get; set; } = new();
+
     public ImageTexture JukeboxPlayImage { get; set; } = new();
 
     public ImageTexture JukeboxPauseImage { get; set; } = new();
@@ -37,6 +82,26 @@ public partial class SkinProfile : GodotObject
     public ImageTexture JukeboxSkipImage { get; set; } = new();
 
     public ImageTexture FavoriteImage { get; set; } = new();
+
+    public ImageTexture MapListMaskImage { get; set; } = new();
+
+    public ImageTexture MapListSelectionCursorImage { get; set; } = new();
+
+    public ImageTexture MapListScrollBarTopImage { get; set; } = new();
+
+    public ImageTexture MapListScrollBarMiddleImage { get; set; } = new();
+
+    public ImageTexture MapListScrollBarBottomImage { get; set; } = new();
+
+    public ImageTexture MapListScrollBarBackgroundTopImage { get; set; } = new();
+
+    public ImageTexture MapListScrollBarBackgroundMiddleImage { get; set; } = new();
+
+    public ImageTexture MapListScrollBarBackgroundBottomImage { get; set; } = new();
+
+    public ImageTexture MapListGridCoverBackgroundImage { get; set; } = new();
+
+    public ImageTexture MapInfoCoverBackgroundImage { get; set; } = new();
 
     public ImageTexture ModNofailImage { get; set; } = new();
 
@@ -50,17 +115,21 @@ public partial class SkinProfile : GodotObject
 
     public ImageTexture ModHardrockImage { get; set; } = new();
 
+    public ImageTexture BackgroundTileImage { get; set; } = new();
+
+    public Shader BackgroundTileShader { get; set; } = new();
+
+    public Shader MapButtonCoverShader { get; set; } = new();
+
     public byte[] HitSoundBuffer { get; set; } = [];
 
     public byte[] FailSoundBuffer { get; set; } = [];
 
+    public Color[] NoteColors { get; set; } = [new(0xff0059), new(0xffd8e6)];
+
     public ArrayMesh NoteMesh { get; set; } = new();
 
-    public string MenuSpaceName = "waves";
+    public BaseSpace MenuSpace { get; set; }
 
-    public string GameSpaceName = "grid";
-
-    public Node3D MenuSpace { get; set; }
-
-    public Node3D GameSpace { get; set; }
+    public BaseSpace GameSpace { get; set; }
 }

@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://v4d7lpllbx57"]
 
 [ext_resource type="Script" uid="uid://ucehkkcmc7xy" path="res://scripts/game/GameComponent.cs" id="1_l8kns"]
-[ext_resource type="Texture2D" uid="uid://b3g4aw54n6bow" path="res://skin/grid.png" id="2_cwj52"]
+[ext_resource type="Texture2D" uid="uid://b3g4aw54n6bow" path="res://skin/game/grid.png" id="2_cwj52"]
 [ext_resource type="Script" uid="uid://ddtnij8m4eipl" path="res://scripts/game/ui/Grid.cs" id="3_s1qwq"]
-[ext_resource type="Texture2D" uid="uid://3e1tjlr4m0wt" path="res://skin/cursor.png" id="4_4op33"]
+[ext_resource type="Texture2D" uid="uid://3e1tjlr4m0wt" path="res://skin/game/cursor.png" id="4_4op33"]
 [ext_resource type="Script" uid="uid://cvaggwr3rrenl" path="res://scripts/game/renderers/NoteRenderer.cs" id="5_oee5v"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a6jk1"]

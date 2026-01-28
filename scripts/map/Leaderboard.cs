@@ -44,7 +44,7 @@ public struct Leaderboard
         }
         catch (Exception exception)
         {
-            Logger.Error($"Leaderboard file corrupted; {exception.Message}");
+            Logger.Error(exception);
             Reset();
         }
 

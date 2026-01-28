@@ -1,114 +1,123 @@
+using System.Collections.Generic;
 using Godot;
 
 public partial class SceneManager : Node
 {
-
     private static SubViewportContainer backgroundContainer;
 
     private static SubViewport backgroundViewport;
 
-    private static Node3D space;
-
     private static string activeScenePath;
 
-    private static bool skipNextTransition = false;
+    public static SceneManager Instance { get; private set; }
 
-    public static Node Node { get; private set; }
+    public static Window Root;
 
-    public static Node Scene;
+    public static Dictionary<string, BaseScene> Scenes = [];
+
+    public static BaseScene Scene;
+
+    public static BaseSpace Space;
+
+    public static Panel VolumePanel;
+
+    public override void _EnterTree()
+    {
+        Instance = this;
+        Root = GetTree().Root;
+        VolumePanel = GetNode<Panel>("Volume");
+    }
 
     public override void _Ready()
     {
-        if (Name != "Main")
-        {
-            return;
-        }
-
-        Node = this;
-        backgroundContainer = Node.GetNode<SubViewportContainer>("Background");
-
+        backgroundContainer = GetNode<SubViewportContainer>("Background");
         backgroundViewport = backgroundContainer.GetNode<SubViewport>("SubViewport");
 
-        Load("res://scenes/loading.tscn", true);
-
-        Node.GetTree().Connect("node_added", Callable.From((System.Action<Node>)((Node child) =>
-        {
-            if (child.Name != "SceneMenu" && child.Name != "SceneGame" && child.Name != "SceneResults")
-            {
-                return;
-            }
-
-            if (skipNextTransition)
-            {
-                skipNextTransition = false;
-                return;
-            }
-
-            ColorRect inTransition = SceneManager.Scene.GetNode<ColorRect>("Transition");
-            inTransition.SelfModulate = Color.FromHtml("ffffffff");
-            var inTween = inTransition.CreateTween();
-            inTween.TweenProperty(inTransition, "self_modulate", Color.FromHtml("ffffff00"), 0.25).SetTrans(Tween.TransitionType.Quad);
-            inTween.Play();
-        })));
+        Load("res://scenes/loading.tscn");
     }
 
     public static void ReloadCurrentScene()
     {
-        Load(activeScenePath);
+        Load(activeScenePath, true);
     }
 
     public static void Load(string path, bool skipTransition = false)
     {
+        bool isSceneLoaded = Scenes.TryGetValue(path, out BaseScene loadedScene);
+        BaseScene newScene = isSceneLoaded ? loadedScene : (BaseScene)ResourceLoader.Load<PackedScene>(path).Instantiate();
 
-        if (skipTransition)
+        //                  temp solution until these scenes are non-static
+        if (!isSceneLoaded && newScene.Name != "SceneGame" && newScene.Name != "SceneResults")
         {
-            skipNextTransition = true;
-            swapScene(path);
+            Scenes[path] = newScene;
         }
-        else
+
+        Tween outTween = Instance.CreateTween().SetTrans(Tween.TransitionType.Quad);
+        
+        if (Scene != null)
         {
-            ColorRect outTransition = Scene.GetNode<ColorRect>("Transition");
-            Tween outTween = outTransition.CreateTween();
-            outTween.TweenProperty(outTransition, "self_modulate", Color.FromHtml("ffffffff"), 0.25).SetTrans(Tween.TransitionType.Quad);
-            outTween.TweenCallback(Callable.From(() =>
-            {
-                swapScene(path);
-            }));
-            outTween.Play();
+            outTween.TweenProperty(Scene.Transition, "self_modulate", Color.FromHtml("ffffffff"), skipTransition ? 0 : 0.25);
+        }
+
+        outTween.TweenCallback(Callable.From(() => {
+            removeScene(Scene);
+            addScene(newScene);
+
+            newScene.Transition.SelfModulate = Color.FromHtml("ffffffff");
+            Instance.CreateTween().SetTrans(Tween.TransitionType.Quad).TweenProperty(newScene.Transition, "self_modulate", Color.FromHtml("ffffff00"), skipTransition ? 0 : 0.25);
+
+            activeScenePath = path;
+            Scene = newScene;
+        }));
+    }
+
+    private static void addScene(BaseScene scene, bool updateSpace = true)
+    {
+        if (scene == null || scene.GetParent() == Instance) { return; }
+
+        if (updateSpace)
+        {
+            addSpace(scene.GetSpace());
+        }
+        
+        Instance.AddChild(scene);
+        scene.Load();
+    }
+
+    private static void removeScene(BaseScene scene, bool updateSpace = true)
+    {
+        if (scene == null || scene.GetParent() != Instance) { return; }
+
+        scene.Unload();
+        Instance.RemoveChild(scene);
+
+        // also temp
+        if (scene.Name == "SceneGame" || scene.Name == "SceneResults")
+        {
+            scene.QueueFree();
+        }
+
+        if (updateSpace)
+        {
+            removeSpace();
         }
     }
 
-    private static void swapScene(string path)
+    private static void addSpace(BaseSpace space)
     {
-        var node = ResourceLoader.Load<PackedScene>(path).Instantiate();
-        
-        if (Scene != null && Scene.GetParent() != null)
-        {
-            Node.RemoveChild(Scene);
-            
-            if (space != null && space.GetParent() != null)
-            {
-                backgroundViewport.RemoveChild(space);
-            }
-            
-            switch (node.Name)
-            {
-                case "SceneMenu":
-                    space = SkinManager.Instance.Skin.MenuSpace;
-                    break;
-                case "SceneGame":
-                    space = SkinManager.Instance.Skin.GameSpace;
-                    break;
-            }
+        if (space == null || space.GetParent() == backgroundViewport) { return; }
 
-            // temp solution until the game scene is non-static
-            backgroundViewport.TransparentBg = node.Name != "SceneMenu";
+        backgroundViewport.AddChild(space);
 
-            backgroundViewport.AddChild(space);
-        }
+        Space = space;
+    }
 
-        activeScenePath = path;
-        Scene = node;
-        Node.AddChild(node);
+    private static void removeSpace()
+    {
+        if (Space == null || Space.GetParent() != backgroundViewport) { return; }
+
+        backgroundViewport.RemoveChild(Space);
+
+        Space = null;
     }
 }

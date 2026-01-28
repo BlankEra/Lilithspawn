@@ -92,6 +92,7 @@ void fragment() {
 	vec2 uv = SCREEN_UV;
 	float ripple = snoise(vec3(uv * (50.0 + fresnel * 100.0), TIME)) / (500.0 - fresnel * 500.0);
 	uv.x += ripple;
+	uv.y += ripple * 2.0;
 	
 	vec3 color = texture(screen_texture, uv).rgb / 2.0;
 	color = mix(water_color, color, fresnel);

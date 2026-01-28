@@ -1,28 +1,43 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
+using System.Runtime.InteropServices.Marshalling;
 using System.Text;
 using Godot;
 
 public partial class MapParser : Node
 {
-    public static Dictionary<string, bool> BulkImport(string[] files)
+    [Signal]
+    public delegate void MapsImportedEventHandler(Map[] maps);
+
+    public static MapParser Instance;
+
+    public override void _Ready()
+    {
+        Instance = this;
+    }
+
+    public static bool IsValidExt(string ext)
+    {
+        return ext == "phxm" || ext == "sspm" || ext == "txt";
+    }
+
+    public static void BulkImport(string[] files)
     {
         double start = Time.GetTicksUsec();
         int good = 0;
         int corrupted = 0;
-        Dictionary<string, bool> results = [];
+        List<Map> maps = [];
 
         foreach (string file in files)
         {
-            results[file] = false;
-
             try
             {
-                Decode(file, null, false);
+                maps.Add(Decode(file, null, false, true));
                 good++;
-                results[file] = true;
             }
             catch
             {
@@ -33,26 +48,33 @@ public partial class MapParser : Node
 
         Logger.Log($"BULK IMPORT: {(Time.GetTicksUsec() - start) / 1000}ms; TOTAL: {good + corrupted}; CORRUPT: {corrupted}");
 
-        return results;
+        SoundManager.UpdateJukeboxQueue();
+
+        if (maps.Count > 0)
+        {
+            Instance.EmitSignal(SignalName.MapsImported, maps.ToArray());
+        }
     }
 
     public static void Encode(Map map, bool logBenchmark = true)
     {
         double start = Time.GetTicksUsec();
+        string mapPath = $"{Constants.USER_FOLDER}/maps/{map.ID}.{Constants.DEFAULT_MAP_EXT}";
+        string encodePath = $"{Constants.USER_FOLDER}/cache/{Constants.DEFAULT_MAP_EXT}encode";
 
-        if (File.Exists($"{Constants.USER_FOLDER}/maps/{map.ID}.phxm"))
+        if (!Directory.Exists(encodePath))
         {
-            File.Delete($"{Constants.USER_FOLDER}/maps/{map.ID}.phxm");
+            Directory.CreateDirectory(encodePath);
         }
 
-        if (!Directory.Exists($"{Constants.USER_FOLDER}/cache/phxmencode"))
+        foreach (string file in Directory.GetFiles(encodePath))
         {
-            Directory.CreateDirectory($"{Constants.USER_FOLDER}/cache/phxmencode");
+            File.Delete(file);
         }
 
-        File.WriteAllText($"{Constants.USER_FOLDER}/cache/phxmencode/metadata.json", map.EncodeMeta());
+        File.WriteAllText($"{encodePath}/metadata.json", map.EncodeMeta());
 
-        Godot.FileAccess objects = Godot.FileAccess.Open($"{Constants.USER_FOLDER}/cache/phxmencode/objects.phxmo", Godot.FileAccess.ModeFlags.Write);
+        Godot.FileAccess objects = Godot.FileAccess.Open($"{Constants.USER_FOLDER}/cache/{Constants.DEFAULT_MAP_EXT}encode/objects.phxmo", Godot.FileAccess.ModeFlags.Write);
 
         /*
 			uint32; ms
@@ -60,10 +82,10 @@ public partial class MapParser : Node
 			1 byte OR int32; x
 			1 byte OR int32; y
 		*/
-
+        
         objects.Store32(12);    // type count
         objects.Store32((uint)map.Notes.Length);    // note count
-
+        
         foreach (Note note in map.Notes)
         {
             bool quantum = (int)note.X != note.X || (int)note.Y != note.Y || note.X < -1 || note.X > 1 || note.Y < -1 || note.Y > 1;
@@ -99,52 +121,61 @@ public partial class MapParser : Node
 
         if (map.AudioBuffer != null)
         {
-            Godot.FileAccess audio = Godot.FileAccess.Open($"{Constants.USER_FOLDER}/cache/phxmencode/audio.{map.AudioExt}", Godot.FileAccess.ModeFlags.Write);
+            Godot.FileAccess audio = Godot.FileAccess.Open($"{encodePath}/audio.{map.AudioExt}", Godot.FileAccess.ModeFlags.Write);
             audio.StoreBuffer(map.AudioBuffer);
             audio.Close();
         }
 
         if (map.CoverBuffer != null)
         {
-            Godot.FileAccess cover = Godot.FileAccess.Open($"{Constants.USER_FOLDER}/cache/phxmencode/cover.png", Godot.FileAccess.ModeFlags.Write);
+            Godot.FileAccess cover = Godot.FileAccess.Open($"{encodePath}/cover.png", Godot.FileAccess.ModeFlags.Write);
             cover.StoreBuffer(map.CoverBuffer);
             cover.Close();
         }
 
         if (map.VideoBuffer != null)
         {
-            Godot.FileAccess video = Godot.FileAccess.Open($"{Constants.USER_FOLDER}/cache/phxmencode/video.mp4", Godot.FileAccess.ModeFlags.Write);
+            Godot.FileAccess video = Godot.FileAccess.Open($"{encodePath}/video.mp4", Godot.FileAccess.ModeFlags.Write);
             video.StoreBuffer(map.VideoBuffer);
             video.Close();
         }
 
-        ZipFile.CreateFromDirectory($"{Constants.USER_FOLDER}/cache/phxmencode", $"{Constants.USER_FOLDER}/maps/{map.ID}.phxm", CompressionLevel.NoCompression, false);
+        if (File.Exists(mapPath))
+        {
+            File.Delete(mapPath);
+        }
+        
+        ZipFile.CreateFromDirectory(encodePath, mapPath, CompressionLevel.Fastest, false);
 
-        foreach (string filePath in Directory.GetFiles($"{Constants.USER_FOLDER}/cache/phxmencode"))
+        foreach (string filePath in Directory.GetFiles(encodePath))
         {
             File.Delete(filePath);
         }
 
-        Directory.Delete($"{Constants.USER_FOLDER}/cache/phxmencode");
-
         if (logBenchmark)
         {
-            Logger.Log($"ENCODING PHXM: {(Time.GetTicksUsec() - start) / 1000}ms");
+            Logger.Log($"ENCODING {Constants.DEFAULT_MAP_EXT.ToUpper()}: {(Time.GetTicksUsec() - start) / 1000}ms");
         }
     }
 
-    public static Map Decode(string path, string audio = null, bool logBenchmark = true, bool save = true)
+    public static Map Decode(string path, string audio = null, bool logBenchmark = false, bool save = false)
     {
         if (!File.Exists(path))
         {
-            ToastNotification.Notify("Invalid file path", 2);
-            throw Logger.Error($"Invalid file path; {path}");
+            ToastNotification.Notify($"Invalid file path", 2);
+            throw Logger.Error($"Invalid file path ({path})");
         }
 
         Map map;
         string ext = path.GetExtension();
         double start = Time.GetTicksUsec();
 
+        if (!IsValidExt(ext))
+        {
+            ToastNotification.Notify("Unsupported file format", 1);
+            throw Logger.Error($"Unsupported file format ({ext})");
+        }
+        
         switch (ext)
         {
             case "phxm":
@@ -157,16 +188,16 @@ public partial class MapParser : Node
                 map = SSMapV1(path, audio);
                 break;
             default:
-                ToastNotification.Notify("File extension not supported", 2);
-                throw Logger.Error("File extension not supported");
+                map = new();
+                break;
         }
 
         if (logBenchmark)
         {
             Logger.Log($"DECODING {ext.ToUpper()}: {(Time.GetTicksUsec() - start) / 1000}ms");
         }
-
-        if (save && !File.Exists($"{Constants.USER_FOLDER}/maps/{map.ID}.phxm"))
+        
+        if (save)
         {
             Encode(map, logBenchmark);
         }
@@ -207,7 +238,8 @@ public partial class MapParser : Node
         catch (Exception exception)
         {
             ToastNotification.Notify($"SSMapV1 file corrupted", 2);
-            throw Logger.Error($"SSMapV1 file corrupted; {exception.Message}");
+            Logger.Error(exception);
+            throw;
         }
 
         file.Close();
@@ -228,7 +260,7 @@ public partial class MapParser : Node
             }
 
             ushort version = file.GetUInt16(); // SSPM version
-
+            
             if (version == 1)
             {
                 map = sspmV1(file, path);
@@ -246,7 +278,8 @@ public partial class MapParser : Node
         catch (Exception exception)
         {
             ToastNotification.Notify($"SSPM file corrupted", 2);
-            throw Logger.Error($"SSPM file {path} corrupted; {exception.Message}");
+            Logger.Error(exception);
+            throw;
         }
 
         return map;
@@ -282,7 +315,8 @@ public partial class MapParser : Node
         catch (Exception exception)
         {
             ToastNotification.Notify($"SSPM file corrupted", 2);
-            throw Logger.Error($"SSPM file corrupted; {exception.Message}");
+            Logger.Error(exception);
+            throw;
         }
 
         return map;
@@ -372,7 +406,8 @@ public partial class MapParser : Node
         catch (Exception exception)
         {
             ToastNotification.Notify($"SSPMV1 file corrupted", 2);
-            throw Logger.Error($"SSPMV1 file {path} corrupted; {exception.Message}");
+            Logger.Error(exception);
+            throw;
         }
 
         return map;
@@ -381,6 +416,7 @@ public partial class MapParser : Node
     private static Map sspmV2(FileParser file, string path = null)
     {
         Map map;
+
         try
         {
             file.Skip(4);   // reserved
@@ -485,7 +521,7 @@ public partial class MapParser : Node
             }
 
             file.Seek((int)markerByteOffset);
-
+            
             Note[] notes = new Note[noteCount];
 
             for (int i = 0; i < noteCount; i++)
@@ -511,20 +547,21 @@ public partial class MapParser : Node
 
                 notes[i] = new Note(0, millisecond, x - 1, -y + 1);
             }
-
+            
             Array.Sort(notes);
-
+            
             for (int i = 0; i < notes.Length; i++)
             {
                 notes[i].Index = i;
             }
-
+            
             map = new(path, notes, id, artist, song, 0, mappers, difficulty, difficultyName, (int)mapLength, audioBuffer, coverBuffer);
         }
         catch (Exception exception)
         {
             ToastNotification.Notify($"SSPMV2 file corrupted", 2);
-            throw Logger.Error($"SSPMV2 file {path} corrupted; {exception.Message}");
+            Logger.Error(exception);
+            throw;
         }
 
         return map;
@@ -532,14 +569,16 @@ public partial class MapParser : Node
 
     public static Map PHXM(string path)
     {
-        if (Directory.Exists($"{Constants.USER_FOLDER}/cache/phxmdecode"))
-        {
-            foreach (string filePath in Directory.GetFiles($"{Constants.USER_FOLDER}/cache/phxmdecode"))
-            {
-                File.Delete(filePath);
-            }
+        string decodePath = $"{Constants.USER_FOLDER}/cache/{Constants.DEFAULT_MAP_EXT}decode";
 
-            Directory.Delete($"{Constants.USER_FOLDER}/cache/phxmdecode");
+        if (!Directory.Exists(decodePath))
+        {
+            Directory.CreateDirectory(decodePath);
+        }
+
+        foreach (string filePath in Directory.GetFiles(decodePath))
+        {
+            File.Delete(filePath);
         }
 
         Map map;
@@ -547,44 +586,44 @@ public partial class MapParser : Node
         try
         {
             ZipArchive file = ZipFile.OpenRead(path);
-            Stream metaStream = file.GetEntry("metadata.json").Open();
-            Stream objectsStream = file.GetEntry("objects.phxmo").Open();
 
-            byte[] metaBuffer = new byte[metaStream.Length];
-            byte[] objectsBuffer = new byte[objectsStream.Length];
+            byte[] getEntryBuffer(string entryName)
+            {
+                ZipArchiveEntry entry = file.GetEntry(entryName) ?? throw new($"Entry {entryName} for map {path} is missing!");
+                Stream stream = entry.Open();
+                MemoryStream memoryStream = new();
+
+                stream.CopyTo(memoryStream);
+                stream.Dispose();
+                
+                byte[] buffer = memoryStream.GetBuffer();
+                memoryStream.Dispose();
+
+                return buffer;
+            }
+
+            byte[] metaBuffer = getEntryBuffer("metadata.json");
+            byte[] objectsBuffer = getEntryBuffer("objects.phxmo");
             byte[] audioBuffer = null;
             byte[] coverBuffer = null;
             byte[] videoBuffer = null;
-            metaStream.Read(metaBuffer, 0, (int)metaStream.Length);
-            objectsStream.Read(objectsBuffer, 0, (int)objectsStream.Length);
-            metaStream.Close();
-            objectsStream.Close();
-
+            
             Godot.Collections.Dictionary metadata = (Godot.Collections.Dictionary)Json.ParseString(Encoding.UTF8.GetString(metaBuffer));
             FileParser objects = new(objectsBuffer);
-
+            
             if ((bool)metadata["HasAudio"])
             {
-                Stream audioStream = file.GetEntry($"audio.{metadata["AudioExt"]}").Open();
-                audioBuffer = new byte[audioStream.Length];
-                audioStream.Read(audioBuffer, 0, (int)audioStream.Length);
-                audioStream.Close();
+                audioBuffer = getEntryBuffer($"audio.{metadata["AudioExt"]}");
             }
 
             if ((bool)metadata["HasCover"])
             {
-                Stream coverStream = file.GetEntry("cover.png").Open();
-                coverBuffer = new byte[coverStream.Length];
-                coverStream.Read(coverBuffer, 0, (int)coverStream.Length);
-                coverStream.Close();
+                coverBuffer = getEntryBuffer("cover.png");
             }
 
             if ((bool)metadata["HasVideo"])
             {
-                Stream videoStream = file.GetEntry("video.mp4").Open();
-                videoBuffer = new byte[videoStream.Length];
-                videoStream.Read(videoBuffer, 0, (int)videoStream.Length);
-                videoStream.Close();
+                videoBuffer = getEntryBuffer("video.mp4");
             }
 
             uint typeCount = objects.GetUInt32();
@@ -615,12 +654,34 @@ public partial class MapParser : Node
 
             file.Dispose();
 
-            map = new(path, notes, (string)metadata["ID"], (string)metadata["Artist"], (string)metadata["Title"], 0, (string[])metadata["Mappers"], (int)metadata["Difficulty"], (string)metadata["DifficultyName"], (int)metadata["Length"], audioBuffer, coverBuffer, videoBuffer);
+            // temp
+            metadata.TryGetValue("ArtistLink", out Variant artistLink);
+            metadata.TryGetValue("ArtistLink", out Variant artistPlatform);
+
+            map = new(
+                path,
+                notes,
+                (string)metadata["ID"],
+                (string)metadata["Artist"],
+                (string)metadata["Title"],
+                0,
+                (string[])metadata["Mappers"],
+                (int)metadata["Difficulty"],
+                (string)metadata["DifficultyName"],
+                (int)metadata["Length"],
+                audioBuffer,
+                coverBuffer,
+                videoBuffer,
+                false,
+                (string)artistLink ?? "",
+                (string)artistPlatform ?? ""
+            );
         }
         catch (Exception exception)
         {
             ToastNotification.Notify($"PHXM file corrupted", 2);
-            throw Logger.Error($"PHXM file corrupted; {exception.Message}");
+            Logger.Error(exception);
+            throw;
         }
 
         return map;

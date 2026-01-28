@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c14sd5pdkof4x"]
 
-[ext_resource type="Theme" uid="uid://dhuhu3mmaew1a" path="res://theme/theme.tres" id="1_3cmdo"]
+[ext_resource type="Theme" uid="uid://dhuhu3mmaew1a" path="res://themes/theme.tres" id="1_3cmdo"]
 [ext_resource type="FontFile" uid="uid://bopde8iqsld1o" path="res://fonts/Ubuntu-Regular.ttf" id="2_bcotu"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_jovrf"]
