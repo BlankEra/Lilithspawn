@@ -107,6 +107,12 @@ public partial class SettingsManager : Node
         SkinManager.Load();
     }
 
+    public static void Reload()
+    {
+        Save();
+        Load();
+    }
+
     public static void SetCurrentProfile(string profile = null)
     {
         profile ??= GetCurrentProfile();

@@ -1,8 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
+using System.IO;
 
 public partial class SettingsMenu : ColorRect
 {
@@ -11,6 +10,8 @@ public partial class SettingsMenu : ColorRect
     private Dictionary<string, Panel> settingPanels = [];
     private Button hideButton;
     private Panel holder;
+    private Panel header;
+    private OptionButton profilesButton;
     private VBoxContainer sidebar;
     private Panel categories;
 
@@ -23,6 +24,8 @@ public partial class SettingsMenu : ColorRect
     {
         hideButton = GetNode<Button>("Hide");
         holder = GetNode<Panel>("Holder");
+        header = holder.GetNode<Panel>("Header");
+        profilesButton = header.GetNode<OptionButton>("Profiles");
         sidebar = holder.GetNode("Sidebar").GetNode<VBoxContainer>("Container");
         categories = holder.GetNode<Panel>("Categories");
 
@@ -32,6 +35,49 @@ public partial class SettingsMenu : ColorRect
         Modulate = Color.Color8(255, 255, 255, 0);
 
         SettingsManager.Instance.MenuToggled += ShowMenu;
+
+        LineEdit profileEdit = header.GetNode<LineEdit>("ProfileEdit");
+
+        header.GetNode<Button>("CreateProfile").Pressed += () => {
+            profileEdit.Visible = !profileEdit.Visible;
+        };
+
+        profileEdit.TextSubmitted += (profile) => {
+            profileEdit.Visible = false;
+
+            SettingsManager.Save();
+            SettingsManager.SetCurrentProfile(profile);
+            SettingsManager.Reload();
+
+            updateProfileSelection();
+        };
+
+        profilesButton.ItemSelected += (index) => {
+            string profile = profilesButton.GetItemText((int)index);
+
+            if (profile == SettingsManager.GetCurrentProfile()) { return; }
+
+            SettingsManager.Save();
+            SettingsManager.SetCurrentProfile(profile);
+            SettingsManager.Load();
+        };
+
+        updateProfileSelection();
+        
+        Panel settingTemplate = categoryTemplate.GetNode("Container").GetNode<Panel>("SettingTemplate");
+        CheckButton checkButtonTemplate = settingTemplate.GetNode<CheckButton>("CheckButton");
+        HSlider sliderTemplate = settingTemplate.GetNode<HSlider>("Slider");
+        LineEdit sliderLineEditTemplate = settingTemplate.GetNode<LineEdit>("SliderLineEdit");
+        LineEdit lineEditTemplate = settingTemplate.GetNode<LineEdit>("LineEdit");
+        OptionButton optionButtonTemplate = settingTemplate.GetNode<OptionButton>("OptionButton");
+        Button buttonTemplate = settingTemplate.GetNode<Button>("Button");
+
+        foreach (Node child in settingTemplate.GetChildren())
+        {
+            if (child.Name == "Title") { continue; };
+
+            settingTemplate.RemoveChild(child);
+        }
 
         double start = Time.GetTicksUsec();
 
@@ -62,25 +108,11 @@ public partial class SettingsMenu : ColorRect
             }
 
             VBoxContainer container = category.GetNode<VBoxContainer>("Container");
-            Panel settingTemplate = container.GetNode<Panel>("SettingTemplate");
-            CheckButton checkButtonTemplate = settingTemplate.GetNode<CheckButton>("CheckButton");
-            HSlider sliderTemplate = settingTemplate.GetNode<HSlider>("Slider");
-            LineEdit sliderLineEditTemplate = settingTemplate.GetNode<LineEdit>("SliderLineEdit");
-            LineEdit lineEditTemplate = settingTemplate.GetNode<LineEdit>("LineEdit");
-            OptionButton optionButtonTemplate = settingTemplate.GetNode<OptionButton>("OptionButton");
-            Button buttonTemplate = settingTemplate.GetNode<Button>("Button");
 
             foreach (ISettingsItem setting in section.Value)
             {
                 Panel panel = settingTemplate.Duplicate() as Panel;
                 panel.Name = setting.Id;
-                
-                foreach (Node child in panel.GetChildren())
-                {
-                    if (child.Name == "Title") { continue; };
-
-                    child.QueueFree();
-                }
 
                 Label title = panel.GetNode<Label>("Title");
                 title.Text = setting.Title;
@@ -180,6 +212,33 @@ public partial class SettingsMenu : ColorRect
 
         selectedCategory.Visible = true;
 		sidebar.GetNode<ColorRect>(new(selectedCategory.Name)).Color = Color.Color8(255, 255, 255, 8);
+    }
+
+    private void updateProfileSelection()
+    {
+        // skip default
+        for (int i = 1; i < profilesButton.ItemCount; i++)
+        {
+            profilesButton.RemoveItem(i);
+        }
+
+        string current = SettingsManager.GetCurrentProfile();
+        string[] profiles = Directory.GetFiles($"{Constants.USER_FOLDER}/profiles");
+
+        for (int i = 0; i < profiles.Length; i++)
+        {
+            string name = profiles[i].GetFile().GetBaseName();
+            
+            if (name != "default")
+            {
+                profilesButton.AddItem(name);
+            }
+
+            if (current == name)
+            {
+                profilesButton.Select(i);
+            }
+        }
     }
 
     private void setupToggle(ISettingsItem setting, CheckButton button)

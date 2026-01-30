@@ -409,7 +409,7 @@ public partial class SettingsProfile
             Title = "Skin",
             Description = "Selected skin for the game",
             Section = SettingsSection.Visual,
-            UpdateAction = _ => SkinManager.Reload(),
+            UpdateAction = _ => SkinManager.Load(),
             Buttons =
             [
                 new() { Title = "Skin Folder", Description = "Open the skin folder", OnPressed = () => { OS.ShellOpen($"{Constants.USER_FOLDER}/skins/{SettingsManager.Instance.Settings.Skin}"); } }
@@ -426,7 +426,7 @@ public partial class SettingsProfile
             Title = "Game Space",
             Description = "Overrides the skin's background space for gameplay",
             Section = SettingsSection.Visual,
-            UpdateAction = _ => SkinManager.Reload(),
+            UpdateAction = _ => SkinManager.Load(),
             List = new("skin")
             {
                 Values = [ "skin", "void", "grid", "squircles", "waves" ]
@@ -439,7 +439,7 @@ public partial class SettingsProfile
             Title = "Menu Space",
             Description = "Overrides the skin's background space for the menu",
             Section = SettingsSection.Visual,
-            UpdateAction = _ => SkinManager.Reload(),
+            UpdateAction = _ => SkinManager.Load(),
             List = new("skin")
             {
                 Values = [ "skin", "void", "grid", "squircles", "waves" ]
@@ -452,7 +452,7 @@ public partial class SettingsProfile
             Title = "Colors",
             Description = "Overrides the skin's colorset",
             Section = SettingsSection.Visual,
-            UpdateAction = _ => SkinManager.Reload(),
+            UpdateAction = _ => SkinManager.Load(),
             List = new("skin")
             {
                 Values = [ "skin", "default" ]
@@ -479,7 +479,7 @@ public partial class SettingsProfile
             Title = "Note Mesh",
             Description = "Overrides the skin's note mesh",
             Section = SettingsSection.Visual,
-            UpdateAction = _ => SkinManager.Reload(),
+            UpdateAction = _ => SkinManager.Load(),
             List = new("skin")
             {
                 Values = [ "skin", "squircle", "square" ]
