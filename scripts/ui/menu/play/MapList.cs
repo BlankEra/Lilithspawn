@@ -58,6 +58,8 @@ public partial class MapList : Panel, ISkinnable
     public bool DragScroll = false;
     public bool MouseScroll = false;
     public bool DisplaySelectionCursor = false;
+    public string SearchQuery = "";
+    public string AuthorQuery = "";
 
     /// <summary>
     /// Queried and ordered maps to display in the list
@@ -113,8 +115,14 @@ public partial class MapList : Panel, ISkinnable
         Resized += clear;
         SkinManager.Instance.Loaded += UpdateSkin;
         MapParser.Instance.MapsImported += maps => {
+            MapCache.Load(false);
             UpdateMaps();
             Select(maps[0]);
+        };
+        MapManager.MapsInitialized += _ => UpdateMaps();
+        MapManager.MapUpdated += map => {
+            clear();
+            UpdateMaps();
         };
 
         Task.Run(() => UpdateMaps());
@@ -326,15 +334,7 @@ public partial class MapList : Panel, ISkinnable
             value.UpdateOutline(0f);
         }
 
-        if (SoundManager.Map == null || SoundManager.Map.Name != map.Name)
-        {
-            SoundManager.PlayJukebox(map);
-        }
-
-        if (Lobby.Map != map)
-        {
-            Lobby.SetMap(map);
-        }
+        MapManager.Selected.Value = MapManager.GetMapById(map.Id);
 
         if (selectedMapID == map.Name && playIfPreSelected)
         {
@@ -345,7 +345,6 @@ public partial class MapList : Panel, ISkinnable
 
         Focus(map);
 
-        MapInfo.Instance.Select(map);
         SceneManager.Space.UpdateMap(map);
     }
 
@@ -359,17 +358,24 @@ public partial class MapList : Panel, ISkinnable
         }
     }
 
-    public void UpdateMaps(string search = "", string author = "")
+    public void Search(string query = "", string author = "")
+    {
+        SearchQuery = query ?? SearchQuery;
+        AuthorQuery = author ?? AuthorQuery;
+
+        UpdateMaps();
+        clear();
+    }
+
+    public void UpdateMaps()
     {
         Maps.Clear();
 
+        List<Map> queried = [.. MapManager.Maps.Where(x => x.PrettyTitle.Contains(SearchQuery, StringComparison.CurrentCultureIgnoreCase) && x.PrettyMappers.Contains(AuthorQuery, StringComparison.CurrentCultureIgnoreCase))];
         List<Map> unfavorited = [];
 
-        // temporary until db is implemented
-        foreach (string path in Directory.GetFiles($"{Constants.USER_FOLDER}/maps", $"*.{Constants.DEFAULT_MAP_EXT}", SearchOption.AllDirectories))
+        foreach (Map map in queried)
 		{
-            Map map = MapParser.Decode(path);
-
             (map.Favorite ? Maps : unfavorited).Add(map);
         }
 
@@ -484,9 +490,7 @@ public partial class MapList : Panel, ISkinnable
 
     private void shuffle()
     {
-        List<Map> shuffled = [];
-        shuffled.AddRange(Maps.Shuffle());
-        Maps = shuffled;
+        Maps = [.. Maps.Shuffle()];
 
         clear();
     }

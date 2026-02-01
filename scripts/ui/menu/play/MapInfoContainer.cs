@@ -72,6 +72,43 @@ public partial class MapInfoContainer : Panel, ISkinnable
         copyDialog = copyButton.GetNode<FileDialog>("CopyDialog");
         deleteButton = mapButtonsContainer.GetNode<Button>("Delete");
 
+        favoriteButton.Pressed += () =>
+        {
+            Map.Favorite = !Map.Favorite;
+            MapManager.Update(Map);
+
+            var skin = SkinManager.Instance.Skin;
+
+            favoriteButton.TooltipText = Map.Favorite ? "Unfavorite" : "Favorite";
+            favoriteButton.Icon = Map.Favorite ? skin.UnfavoriteButtonImage : skin.FavoriteButtonImage;
+        };
+
+        //videoButton.Pressed += () =>
+        //{
+        //    videoDialog.Popup();
+        //};
+
+        //videoDialog.FileSelected += (file) =>
+        //{
+        //    MapManager.InsertVideo(Map, file);
+        //};
+
+        copyButton.Pressed += () =>
+        {
+            copyDialog.Popup();
+
+        };
+
+        copyDialog.FileSelected += (path) =>
+        {
+            File.Copy(Map.FilePath, path);
+            _ = ToastNotification.Notify($"Copied to {path}");
+        };
+
+        deleteButton.Pressed += () =>
+        {
+            MapManager.Delete(Map);
+        };
 
         void updateOffset() { infoSubholder.OffsetLeft = coverBackground.Size.X + 8; }
 
@@ -272,8 +309,13 @@ public partial class MapInfoContainer : Panel, ISkinnable
         }
     }
 
-    public void Setup(Map map)
-    {
+	public void Setup(Map map)
+	{
+        if (Name == map.Name)
+        {
+            return;
+        }
+
         Map = map;
         Name = map.Name;
 
@@ -306,39 +348,8 @@ public partial class MapInfoContainer : Panel, ISkinnable
         extraLabel.Text = string.Format(extraLabelFormat, Util.String.FormatTime(map.Length / 1000), map.Notes.Length, map.Name);
         coverBackground.SelfModulate = Constants.DIFFICULTY_COLORS[map.Difficulty];
         cover.Texture = map.Cover;
-
-        favoriteButton.Pressed += () =>
-        {
-            map.Favorite = !map.Favorite;
-            MapManager.Update(map);
-        };
-
-        //videoButton.Pressed += () =>
-        //{
-        //    videoDialog.Popup();
-        //};
-
-        //videoDialog.FileSelected += (file) =>
-        //{
-        //    MapManager.InsertVideo(map, file);
-        //};
-
-        copyButton.Pressed += () =>
-        {
-            copyDialog.Popup();
-            
-        };
-
-        copyDialog.FileSelected += (path) =>
-        {
-            File.Copy(map.FilePath, path);
-            _ = ToastNotification.Notify($"Copied to {path}");
-        };
-
-        deleteButton.Pressed += () =>
-        {
-            MapManager.Delete(map);
-        };
+        favoriteButton.TooltipText = map.Favorite ? "Unfavorite" : "Favorite";
+        favoriteButton.Icon = map.Favorite ? SkinManager.Instance.Skin.UnfavoriteButtonImage : SkinManager.Instance.Skin.FavoriteButtonImage;
 
         artistLink.Visible = map.ArtistLink != "";
         artistLink.Text = string.Format(artistLinkFormat, map.ArtistPlatform);
@@ -372,7 +383,7 @@ public partial class MapInfoContainer : Panel, ISkinnable
 
             lbContainer.AddChild(panel);
             panel.Setup(Leaderboard.Scores[i]);
-            panel.GetNode<ColorRect>("Background").Color = Color.Color8(255, 255, 255, (byte)(i % 2 == 0 ? 0 : 8));
+            panel.GetNode<ColorRect>("Background").Color = Color.Color8(255, 255, 255, (byte)(i % 2 * 8));
 
             panel.Button.Pressed += () => { toggleLeaderboard(false); };
         }

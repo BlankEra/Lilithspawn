@@ -63,12 +63,12 @@ public partial class MapButton : Control, ISkinnable
         Cover = Holder.GetNode<TextureRect>("Cover");
         Favorited = Holder.GetNode<TextureRect>("Favorited");
         Favorited.Texture = (Texture2D)Favorited.Texture.Duplicate();
-        
+
 		Panel outline = Holder.GetNode<Panel>("Outline");
 
         OutlineShader = (ShaderMaterial)outline.Material.Duplicate();
         outline.Material = OutlineShader;
-        
+
 		Button.MouseEntered += () => { Hover(true); };
 		Button.MouseExited += () => { Hover(false); };
 		Button.Pressed += () => { EmitSignal(SignalName.Pressed); };
@@ -116,10 +116,10 @@ public partial class MapButton : Control, ISkinnable
 	{
         Map = map;
         Name = map.Name;
-        
+
         Title.Text = map.PrettyTitle;
         Favorited.Visible = map.Favorite;
-        Cover.Texture = (Texture2D)map.Cover;
+        Cover.Texture = map.Cover;
         Favorited.SelfModulate = Constants.DIFFICULTY_COLORS[map.Difficulty];
 
         if (selected)

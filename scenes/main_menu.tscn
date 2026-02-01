@@ -42,19 +42,18 @@
 [ext_resource type="Texture2D" uid="uid://bl6ten82nkjmd" path="res://user/skins/default/ui/buttons/sort.png" id="32_2wgix"]
 [ext_resource type="Texture2D" uid="uid://c6k1k4817che2" path="res://user/skins/default/ui/buttons/author.png" id="33_b56yx"]
 [ext_resource type="Script" uid="uid://b47jydbbjdh3i" path="res://scripts/ui/menu/SoundSpaceButton.cs" id="33_yxnar"]
+[ext_resource type="Script" uid="uid://dtnrcumiy038m" path="res://scripts/ui/menu/play/SearchPanel.cs" id="34_71lbq"]
 [ext_resource type="Texture2D" uid="uid://bg3gjft0mamud" path="res://user/skins/default/ui/buttons/search.png" id="34_h5mb6"]
 [ext_resource type="Script" uid="uid://chb17y8gabhta" path="res://scripts/ui/menu/JukeboxPanel.cs" id="35_jvjdd"]
 [ext_resource type="Script" uid="uid://783e032bf2o3" path="res://scripts/ui/menu/extras/StatsPanel.cs" id="37_wadof"]
 [ext_resource type="Script" uid="uid://bss5l0q8yh47u" path="res://scripts/ui/menu/extras/CreditsPanel.cs" id="39_b4jiv"]
 [ext_resource type="PackedScene" uid="uid://rl7w0xl4w77l" path="res://prefabs/fps_counter.tscn" id="39_u43bj"]
 [ext_resource type="Texture2D" uid="uid://de86kol23e55h" path="res://textures/ui/github.png" id="41_akqfu"]
-[ext_resource type="Script" uid="uid://carutkgoqpr4e" path="res://scripts/ui/Cursor.cs" id="41_yxnar"]
 [ext_resource type="Texture2D" uid="uid://c60rl8itmawe7" path="res://textures/ui/github_pressed.png" id="42_mb34c"]
 [ext_resource type="Texture2D" uid="uid://cfl8us0rpkpqs" path="res://textures/ui/github_hovered.png" id="43_sgh51"]
 [ext_resource type="Script" uid="uid://c1235cyjfh4rl" path="res://scripts/ui/LinkPopupButton.cs" id="44_ybca7"]
 [ext_resource type="Texture2D" uid="uid://8du82a5dxjdk" path="res://user/skins/default/ui/jukebox_play.png" id="48_q1l3m"]
 [ext_resource type="Texture2D" uid="uid://bpsvcunhigs6c" path="res://user/skins/default/ui/jukebox_skip.png" id="49_7u5pb"]
-[ext_resource type="Texture2D" uid="uid://3e1tjlr4m0wt" path="res://user/skins/default/game/cursor.png" id="50_mxl5i"]
 
 [sub_resource type="SystemFont" id="SystemFont_lsskb"]
 font_names = PackedStringArray("Ubuntu")
@@ -912,6 +911,8 @@ layout_mode = 2
 mouse_filter = 2
 theme = ExtResource("6_engjn")
 theme_override_styles/panel = SubResource("StyleBoxFlat_68b7m")
+script = ExtResource("34_71lbq")
+SearchAuthor = true
 
 [node name="LineEdit" type="LineEdit" parent="Menus/Play/SubTopBar/HBoxContainer/SearchAuthor" unique_id=1225947712]
 custom_minimum_size = Vector2(120, 32)
@@ -952,6 +953,7 @@ layout_mode = 2
 mouse_filter = 2
 theme = ExtResource("6_engjn")
 theme_override_styles/panel = SubResource("StyleBoxFlat_68b7m")
+script = ExtResource("34_71lbq")
 
 [node name="LineEdit" type="LineEdit" parent="Menus/Play/SubTopBar/HBoxContainer/Search" unique_id=325643057]
 custom_minimum_size = Vector2(120, 32)
@@ -2049,15 +2051,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_sgh51")
-
-[node name="Cursor" type="TextureRect" parent="." unique_id=1301201839]
-z_index = 2
-offset_right = 32.0
-offset_bottom = 32.0
-mouse_filter = 2
-texture = ExtResource("50_mxl5i")
-expand_mode = 1
-script = ExtResource("41_yxnar")
 
 [node name="Transition" type="ColorRect" parent="." unique_id=86050768]
 self_modulate = Color(1, 1, 1, 0)

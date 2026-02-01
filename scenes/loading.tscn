@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dpvrcewd6adj4" path="res://scripts/scenes/Loading.cs" id="1_dhqfv"]
 [ext_resource type="Shader" uid="uid://ujothoxymyrm" path="res://scripts/shaders/loading_splash.gdshader" id="2_dhqfv"]
 [ext_resource type="Texture2D" uid="uid://ccbh012f7wiij" path="res://textures/boot_splash.png" id="2_yt702"]
+[ext_resource type="FontFile" uid="uid://bopde8iqsld1o" path="res://fonts/Ubuntu-Regular.ttf" id="4_2ytni"]
 [ext_resource type="Shader" uid="uid://cxckrd6xtplnx" path="res://scripts/shaders/jukebox_progress.gdshader" id="4_yt702"]
 [ext_resource type="Script" uid="uid://dx2wecnf76cyo" path="res://scripts/ui/AudioSpectrum.cs" id="5_2ytni"]
 
@@ -11,6 +12,10 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dhqfv"]
 shader = ExtResource("2_dhqfv")
 shader_parameter/shift = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_nxo4k"]
+font = ExtResource("4_2ytni")
+font_color = Color(1, 1, 1, 0.8627451)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nxo4k"]
 shader = ExtResource("4_yt702")
@@ -60,15 +65,18 @@ texture = ExtResource("2_yt702")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Transition" type="ColorRect" parent="." unique_id=472667306]
-self_modulate = Color(1, 1, 1, 0)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="Label" type="Label" parent="." unique_id=1976898353]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.9
+anchor_right = 0.5
+anchor_bottom = 0.9
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
+text = "Initializing maps"
+label_settings = SubResource("LabelSettings_nxo4k")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Spectrum" type="Panel" parent="." unique_id=797692806]
 material = SubResource("ShaderMaterial_nxo4k")
@@ -91,3 +99,13 @@ BarColor = Color(1, 1, 1, 0.1254902)
 BarSize = 6.0
 BarMinSize = 1.0
 Align = 1.0
+
+[node name="Transition" type="ColorRect" parent="." unique_id=472667306]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text.Json;
@@ -48,7 +49,7 @@ public partial class SettingsManager : Node
 
     public static void Save(string profile = null)
     {
-        profile ??= Util.Misc.GetProfile();
+        profile ??= GetCurrentProfile();
 
         string data = SettingsProfileConverter.Serialize(Instance.Settings);
 
@@ -63,7 +64,7 @@ public partial class SettingsManager : Node
 
     public static void Load(string profile = null)
     {
-        profile ??= Util.Misc.GetProfile();
+        profile ??= GetCurrentProfile();
 
         try
         {
@@ -83,10 +84,51 @@ public partial class SettingsManager : Node
             ToastNotification.Notify($"Could not find skin {Instance.Settings.Skin.Value}", 1);
         }
 
+        void addUserContentToSettingsList(SettingsItem<string> settingsItem, IEnumerable<string> options)
+        {
+            foreach (string option in options)
+            {
+                string name = option.GetFile().GetBaseName();
+
+                if (settingsItem.List.Values.IndexOf(name) == -1)
+                {
+                    settingsItem.List.Values.Add(name);
+                }
+            }
+        }
+
+        addUserContentToSettingsList(Instance.Settings.Skin, Directory.GetDirectories($"{Constants.USER_FOLDER}/skins"));
+        addUserContentToSettingsList(Instance.Settings.NoteColors, Directory.GetFiles($"{Constants.USER_FOLDER}/colorsets"));
+
         Logger.Log($"Loaded settings {profile}");
 
         Instance.EmitSignal(SignalName.Loaded);
 
         SkinManager.Load();
+    }
+
+    public static void Reload()
+    {
+        Save();
+        Load();
+    }
+
+    public static void SetCurrentProfile(string profile = null)
+    {
+        profile ??= GetCurrentProfile();
+
+        File.WriteAllText($"{Constants.USER_FOLDER}/current_profile.txt", profile);
+    }
+
+    public static string GetCurrentProfile()
+    {
+        string file = $"{Constants.USER_FOLDER}/current_profile.txt";
+
+        if (File.Exists(file))
+        {
+            return File.ReadAllText(file);
+        }
+
+        return "default";
     }
 }

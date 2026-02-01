@@ -1,8 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
+using System.IO;
 
 public partial class SettingsMenu : ColorRect
 {
@@ -11,6 +10,8 @@ public partial class SettingsMenu : ColorRect
     private Dictionary<string, Panel> settingPanels = [];
     private Button hideButton;
     private Panel holder;
+    private Panel header;
+    private OptionButton profilesButton;
     private VBoxContainer sidebar;
     private Panel categories;
 
@@ -23,6 +24,8 @@ public partial class SettingsMenu : ColorRect
     {
         hideButton = GetNode<Button>("Hide");
         holder = GetNode<Panel>("Holder");
+        header = holder.GetNode<Panel>("Header");
+        profilesButton = header.GetNode<OptionButton>("Profiles");
         sidebar = holder.GetNode("Sidebar").GetNode<VBoxContainer>("Container");
         categories = holder.GetNode<Panel>("Categories");
 
@@ -32,6 +35,49 @@ public partial class SettingsMenu : ColorRect
         Modulate = Color.Color8(255, 255, 255, 0);
 
         SettingsManager.Instance.MenuToggled += ShowMenu;
+
+        LineEdit profileEdit = header.GetNode<LineEdit>("ProfileEdit");
+
+        header.GetNode<Button>("CreateProfile").Pressed += () => {
+            profileEdit.Visible = !profileEdit.Visible;
+        };
+
+        profileEdit.TextSubmitted += (profile) => {
+            profileEdit.Visible = false;
+
+            SettingsManager.Save();
+            SettingsManager.SetCurrentProfile(profile);
+            SettingsManager.Reload();
+
+            updateProfileSelection();
+        };
+
+        profilesButton.ItemSelected += (index) => {
+            string profile = profilesButton.GetItemText((int)index);
+
+            if (profile == SettingsManager.GetCurrentProfile()) { return; }
+
+            SettingsManager.Save();
+            SettingsManager.SetCurrentProfile(profile);
+            SettingsManager.Load();
+        };
+
+        updateProfileSelection();
+        
+        Panel settingTemplate = categoryTemplate.GetNode("Container").GetNode<Panel>("SettingTemplate");
+        CheckButton checkButtonTemplate = settingTemplate.GetNode<CheckButton>("CheckButton");
+        HSlider sliderTemplate = settingTemplate.GetNode<HSlider>("Slider");
+        LineEdit sliderLineEditTemplate = settingTemplate.GetNode<LineEdit>("SliderLineEdit");
+        LineEdit lineEditTemplate = settingTemplate.GetNode<LineEdit>("LineEdit");
+        OptionButton optionButtonTemplate = settingTemplate.GetNode<OptionButton>("OptionButton");
+        Button buttonTemplate = settingTemplate.GetNode<Button>("Button");
+
+        foreach (Node child in settingTemplate.GetChildren())
+        {
+            if (child.Name == "Title") { continue; };
+
+            settingTemplate.RemoveChild(child);
+        }
 
         double start = Time.GetTicksUsec();
 
@@ -62,25 +108,11 @@ public partial class SettingsMenu : ColorRect
             }
 
             VBoxContainer container = category.GetNode<VBoxContainer>("Container");
-            Panel settingTemplate = container.GetNode<Panel>("SettingTemplate");
-            CheckButton checkButtonTemplate = settingTemplate.GetNode<CheckButton>("CheckButton");
-            HSlider sliderTemplate = settingTemplate.GetNode<HSlider>("Slider");
-            LineEdit sliderLineEditTemplate = settingTemplate.GetNode<LineEdit>("SliderLineEdit");
-            LineEdit lineEditTemplate = settingTemplate.GetNode<LineEdit>("LineEdit");
-            OptionButton optionButtonTemplate = settingTemplate.GetNode<OptionButton>("OptionButton");
-            Button buttonTemplate = settingTemplate.GetNode<Button>("Button");
 
             foreach (ISettingsItem setting in section.Value)
             {
                 Panel panel = settingTemplate.Duplicate() as Panel;
                 panel.Name = setting.Id;
-                
-                foreach (Node child in panel.GetChildren())
-                {
-                    if (child.Name == "Title") { continue; };
-
-                    child.QueueFree();
-                }
 
                 Label title = panel.GetNode<Label>("Title");
                 title.Text = setting.Title;
@@ -116,12 +148,13 @@ public partial class SettingsMenu : ColorRect
                     setupList(setting, optionButton);
                     panel.AddChild(optionButton);
                 }
-                else if (setting.Type == typeof(Variant))
+                
+                if (setting.Type == typeof(Variant))
                 {
-                    Button button = buttonTemplate.Duplicate() as Button;
+                //     Button button = buttonTemplate.Duplicate() as Button;
 
-                    setupButton(setting, button);
-                    panel.AddChild(button);
+                //     setupButton(setting, button);
+                //     panel.AddChild(button);
                 }
 
                 container.AddChild(panel);
@@ -181,13 +214,40 @@ public partial class SettingsMenu : ColorRect
 		sidebar.GetNode<ColorRect>(new(selectedCategory.Name)).Color = Color.Color8(255, 255, 255, 8);
     }
 
-    // IMPLEMENT SETTINGSITEM UPDATE SIGNAL IN THESE //
+    private void updateProfileSelection()
+    {
+        // skip default
+        for (int i = 1; i < profilesButton.ItemCount; i++)
+        {
+            profilesButton.RemoveItem(i);
+        }
+
+        string current = SettingsManager.GetCurrentProfile();
+        string[] profiles = Directory.GetFiles($"{Constants.USER_FOLDER}/profiles");
+
+        for (int i = 0; i < profiles.Length; i++)
+        {
+            string name = profiles[i].GetFile().GetBaseName();
+            
+            if (name != "default")
+            {
+                profilesButton.AddItem(name);
+            }
+
+            if (current == name)
+            {
+                profilesButton.Select(i);
+            }
+        }
+    }
 
     private void setupToggle(ISettingsItem setting, CheckButton button)
 	{
         button.Toggled += value => {
             if ((bool)setting.GetVariant() != value) { setting.SetVariant(value); }
         };
+
+        setting.Updated += (value) => { updateToggle(button, (bool)value); };
 
         updateToggle(button, (bool)setting.GetVariant());
     }
@@ -206,11 +266,17 @@ public partial class SettingsMenu : ColorRect
             if ((double)setting.GetVariant() != value) { setting.SetVariant(value); }
         }
 
+        slider.Step = setting.Slider.Step;
+        slider.MinValue = setting.Slider.MinValue;
+        slider.MaxValue = setting.Slider.MaxValue;
+
         lineEdit.FocusExited += applyLineEdit;
         lineEdit.TextSubmitted += (_) => { applyLineEdit(); };
         slider.ValueChanged += value => {
             if ((double)setting.GetVariant() != value) { setting.SetVariant(value); }
         };
+
+        setting.Updated += (value) => { updateSlider(slider, lineEdit, (double)value); };
 
         updateSlider(slider, lineEdit, (double)setting.GetVariant());
     }
@@ -238,6 +304,8 @@ public partial class SettingsMenu : ColorRect
 
         lineEdit.FocusExited += applyLineEdit;
         lineEdit.TextSubmitted += (_) => { applyLineEdit(); };
+
+        setting.Updated += (value) => { updateInput(lineEdit, (string)value); };
         
         updateInput(lineEdit, (string)setting.GetVariant());
     }
@@ -266,28 +334,35 @@ public partial class SettingsMenu : ColorRect
             if (oldVal != newVal) { setting.SetVariant(newVal); }
         };
 
-        int index = 0;
-
-        foreach (string value in setting.List.Values)
+        int getIndex()
         {
-            if (value == (string)setting.List.SelectedValue)
+            int index = 0;
+
+            foreach (string value in setting.List.Values)
             {
-                break;
+                if (value == (string)setting.List.SelectedValue)
+                {
+                    break;
+                }
+
+                index++;
             }
 
-            index++;
+            return index;
         }
 
-        updateList(optionButton, index);
+        setting.Updated += (_) => { updateList(optionButton, getIndex()); };
+
+        updateList(optionButton, getIndex());
     }
 
-    private void updateList(OptionButton optionButton, int value)
+    private void updateList(OptionButton optionButton, int index)
     {
-        optionButton.Selected = value;
+        optionButton.Selected = index;
     }
 
-    private void setupButton(ISettingsItem setting, Button button)
-    {
+    // private void setupButton(ISettingsItem setting, Button button)
+    // {
         
-    }
+    // }
 }

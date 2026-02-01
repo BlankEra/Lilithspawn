@@ -47,7 +47,13 @@ public partial class Squircles : BaseSpace
 		if (Cover != null)
 		{
 			Image coverImage = Cover.GetImage();
-			Vector3 avg = Vector3.Zero;
+
+            if (coverImage.IsCompressed())
+            {
+                return;
+            }
+
+            Vector3 avg = Vector3.Zero;
 			int pixelCount = 0;
 
 			for (int x = 0; x < coverImage.GetWidth(); x++)

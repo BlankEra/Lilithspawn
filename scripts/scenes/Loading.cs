@@ -23,10 +23,22 @@ public partial class Loading : BaseScene
         inTween.Chain().TweenProperty(splashShift, "modulate", Color.Color8(255, 255, 255, 0), 2.5);
 
         inTween.Chain().TweenCallback(Callable.From(() => {
-            Tween outTween = CreateTween().SetTrans(Tween.TransitionType.Quad).SetParallel();
-            outTween.TweenProperty(background, "color", Color.Color8(0, 0, 0, 255), 0.5);
-            outTween.TweenProperty(splash, "modulate", Color.Color8(0, 0, 0, 255), 0.5);
-            outTween.Chain().TweenCallback(Callable.From(() => { SceneManager.Load("res://scenes/main_menu.tscn"); }));
+            if (MapManager.Initialized)
+            {
+                Exit();
+            }
+            else
+            {
+                MapManager.MapsInitialized += _ => Exit();
+            }
         }));
+    }
+
+    public void Exit()
+    {
+        Tween outTween = CreateTween().SetTrans(Tween.TransitionType.Quad).SetParallel();
+        outTween.TweenProperty(background, "color", Color.Color8(0, 0, 0, 255), 0.5);
+        outTween.TweenProperty(splash, "modulate", Color.Color8(0, 0, 0, 255), 0.5);
+        outTween.Chain().TweenCallback(Callable.From(() => { SceneManager.Load("res://scenes/main_menu.tscn"); }));
     }
 }
