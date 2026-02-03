@@ -9,6 +9,10 @@ using Godot;
 
 public static class MapCache
 {
+    public static Bindable<int> FilesToSync = new(0);
+    public static Bindable<int> FilesSynced = new(0);
+    public static event Action<int> OnFilesSyncFinished;
+
     public static void Initialize()
     {
         DatabaseService.Connection.CreateTable<Map>();
@@ -24,6 +28,10 @@ public static class MapCache
             {
                 syncFiles(files);
                 addNonCachedFiles(files);
+
+                OnFilesSyncFinished?.Invoke(FilesSynced.Value);
+                FilesToSync.Value = 0;
+                FilesSynced.Value = 0;
             }
 
             OrderAndSetMaps();
@@ -38,6 +46,9 @@ public static class MapCache
     {
         var maps = FetchAll();
 
+        FilesToSync.Value = maps.Count;
+        FilesSynced.Value = 0;
+
         for (int i = 0; i < files.Length; i++)
         {
             files[i] = BackSlashToForwardSlash(files[i]);
@@ -48,7 +59,7 @@ public static class MapCache
         foreach (var map in maps)
         {
             string filePath = BackSlashToForwardSlash(map.FilePath);
-
+            
             if (filesHashSet.Contains(filePath))
             {
                 string checksum = GetMd5Checksum(filePath);
@@ -59,6 +70,8 @@ public static class MapCache
                     {
                         InsertIntoMapCacheFolder(map);
                     }
+                    
+                    FilesSynced.Value += 1;
                     continue;
                 }
 
@@ -73,6 +86,8 @@ public static class MapCache
                     Logger.Error(ex);
                     File.Delete(filePath);
                     DatabaseService.Connection.Delete(map);
+
+                    FilesSynced.Value += 1;
                     continue;
                 }
 
@@ -83,6 +98,7 @@ public static class MapCache
                 InsertIntoMapCacheFolder(map);
                 Logger.Log($"Updated cached map: {newMap.Name}");
 
+                FilesSynced.Value += 1;
                 continue;
             }
             else
@@ -90,6 +106,8 @@ public static class MapCache
                 removeCacheFolder(map);
                 DatabaseService.Connection.Delete(map);
                 Logger.Log($"Removed {filePath} from the cache, as it no longer exists.");
+
+                FilesSynced.Value += 1;
             }
         }
     }
@@ -134,6 +152,8 @@ public static class MapCache
                 continue;
             }
 
+            FilesToSync.Value += 1;
+
             try
             {
                 var map = MapParser.Decode(file);
@@ -148,6 +168,8 @@ public static class MapCache
                 File.Delete(file);
                 Logger.Log($"Failed to add map non-cached map");
             }
+
+            FilesSynced.Value += 1;
         }
     }
 

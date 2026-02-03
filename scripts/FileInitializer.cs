@@ -4,7 +4,7 @@ using Godot;
 
 public partial class FileInitializer : Node
 {
-    Node objExporter;
+    private Node objExporter;
 
     public override void _Ready()
     {
@@ -17,7 +17,7 @@ public partial class FileInitializer : Node
         deepCopy();
     }
 
-    void deepCopy(string resDir = "")
+    private void deepCopy(string resDir = "")
     {
         string userDir = $"{Constants.USER_FOLDER}{resDir}";
 
