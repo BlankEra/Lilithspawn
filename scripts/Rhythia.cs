@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
+using System.Threading.Tasks;
 using Godot;
 
 public partial class Rhythia : Node
 {
     private static bool loaded = false;
-
-    public static readonly System.Net.Http.HttpClient HTTP_CLIENT = new();
 
     [Signal]
     public delegate void FilesDroppedEventHandler(string[] files);
