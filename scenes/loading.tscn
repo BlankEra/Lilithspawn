@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dpvrcewd6adj4" path="res://scripts/scenes/Loading.cs" id="1_dhqfv"]
 [ext_resource type="Shader" uid="uid://ujothoxymyrm" path="res://scripts/shaders/loading_splash.gdshader" id="2_dhqfv"]
+[ext_resource type="Texture2D" uid="uid://mh1knh54q73l" path="res://textures/cutesquircle2-1280nobg.png" id="2_nxo4k"]
 [ext_resource type="Texture2D" uid="uid://ccbh012f7wiij" path="res://textures/boot_splash.png" id="2_yt702"]
 [ext_resource type="FontFile" uid="uid://bopde8iqsld1o" path="res://fonts/Ubuntu-Regular.ttf" id="4_2ytni"]
 [ext_resource type="Shader" uid="uid://cxckrd6xtplnx" path="res://scripts/shaders/jukebox_progress.gdshader" id="4_yt702"]
@@ -23,14 +24,14 @@ border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.7882353, 0, 0.27058825, 1)
+border_color = Color(1, 1, 1, 1)
 expand_margin_left = 4.0
 expand_margin_top = 4.0
 expand_margin_right = 4.0
 expand_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nxo4k"]
-bg_color = Color(0.7882353, 0, 0.27058825, 1)
+bg_color = Color(1, 0.31764707, 0.8156863, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nxo4k"]
 shader = ExtResource("4_yt702")
@@ -63,11 +64,12 @@ anchor_right = 1.0
 anchor_bottom = 0.8
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_yt702")
+texture = ExtResource("2_nxo4k")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="SplashShift" type="TextureRect" parent="." unique_id=138854244]
+visible = false
 modulate = Color(1, 1, 1, 0)
 material = SubResource("ShaderMaterial_dhqfv")
 anchors_preset = -1
@@ -89,7 +91,7 @@ anchor_bottom = 0.9
 offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "Initializing maps"
+text = "Injecting estrogen..."
 label_settings = SubResource("LabelSettings_nxo4k")
 horizontal_alignment = 1
 vertical_alignment = 1

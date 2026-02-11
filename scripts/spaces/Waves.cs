@@ -12,9 +12,9 @@ public partial class Waves : BaseSpace
 
 	public override void _Ready()
 	{
-        base._Ready();
+		base._Ready();
 
-        environment = GetNode<WorldEnvironment>("WorldEnvironment").Environment;
+		environment = GetNode<WorldEnvironment>("WorldEnvironment").Environment;
 		skyMaterial = environment.Sky.SkyMaterial as ShaderMaterial;
 		waterMaterial = (GetNode<MeshInstance3D>("Water").Mesh as PlaneMesh).Material as ShaderMaterial;
 
@@ -37,9 +37,9 @@ public partial class Waves : BaseSpace
 
 	public override void _Process(double delta)
 	{
-        base._Process(delta);
+		base._Process(delta);
 
-        if (!Playing)
+		if (!Playing)
 		{
 			Viewport viewport = GetViewport();
 			Vector2 centerOffset = viewport.GetMousePosition() - viewport.GetVisibleRect().Size / 2;
@@ -62,14 +62,14 @@ public partial class Waves : BaseSpace
 		}), 0.0, 1.0, 0.2);
 	}
 
-    public override void UpdateState(bool playing)
-    {
-        base.UpdateState(playing);
+	public override void UpdateState(bool playing)
+	{
+		base.UpdateState(playing);
 
-        if (Playing)
-        {
-            skyMaterial.SetShaderParameter("image_a", empty);
-		    skyMaterial.SetShaderParameter("image_lerp", 0.0);
-        }
-    }
+		if (Playing)
+		{
+			skyMaterial.SetShaderParameter("image_a", empty);
+			skyMaterial.SetShaderParameter("image_lerp", 0.0);
+		}
+	}
 }

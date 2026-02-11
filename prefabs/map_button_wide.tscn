@@ -14,10 +14,10 @@ corner_radius_bottom_left = 5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_boybo"]
 shader = ExtResource("2_84wsl")
-shader_parameter/outline_color = Color(0.05, 0.05, 0.05, 1)
+shader_parameter/outline_color = Color(0.3764706, 0, 0.29411766, 1)
 shader_parameter/outline_opacity = 1.0
-shader_parameter/light_color = Color(0.7882353, 0, 0.27058825, 1)
-shader_parameter/cursor_light_color = Color(0.15, 0.15, 0.15, 1)
+shader_parameter/light_color = Color(1, 0.5647059, 0.85882354, 1)
+shader_parameter/cursor_light_color = Color(1, 0.6627451, 0.88235295, 1)
 shader_parameter/fill = 0.0
 shader_parameter/glow_radius = 350.0
 shader_parameter/glow_exponent = 2.0
