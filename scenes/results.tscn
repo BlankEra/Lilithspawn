@@ -10,7 +10,7 @@
 [ext_resource type="FontFile" uid="uid://dvb6fvy008bhv" path="res://fonts/Roboto-Medium.ttf" id="4_yxv8s"]
 [ext_resource type="Shader" uid="uid://cqqs8uux7hqyb" path="res://scripts/shaders/ui_blur.gdshader" id="5_eo0oh"]
 [ext_resource type="Shader" uid="uid://5sq1jdmlom6w" path="res://scripts/shaders/dotted.gdshader" id="8_ldb53"]
-[ext_resource type="Texture2D" uid="uid://baivqqkfll133" path="res://textures/RhythiaSquircle.png" id="10_00qb5"]
+[ext_resource type="Texture2D" uid="uid://btiqb74p84tgc" path="res://textures/cutesquircle64nobg.png" id="10_00qb5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6rn6l"]
 shader = ExtResource("2_oatel")
@@ -356,7 +356,8 @@ anchors_preset = -1
 anchor_bottom = 1.0
 offset_left = 6.0
 offset_top = 6.0
-offset_bottom = -6.0
+offset_right = 70.0
+offset_bottom = 14.0
 texture = ExtResource("10_00qb5")
 expand_mode = 2
 stretch_mode = 5

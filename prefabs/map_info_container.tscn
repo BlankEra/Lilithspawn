@@ -27,7 +27,7 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_50xtp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1q06g"]
-bg_color = Color(0, 0, 0, 0.8784314)
+bg_color = Color(0, 0, 0, 0.2509804)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
@@ -50,10 +50,10 @@ corner_radius_bottom_left = 4
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4d08m"]
 shader = ExtResource("2_nrche")
-shader_parameter/outline_color = Color(0.05, 0.05, 0.05, 1)
+shader_parameter/outline_color = Color(0.3764706, 0, 0.29411766, 1)
 shader_parameter/outline_opacity = 1.0
-shader_parameter/light_color = Color(0.79, 0, 0.27, 1)
-shader_parameter/cursor_light_color = Color(0.15, 0.15, 0.15, 1)
+shader_parameter/light_color = Color(1, 0.5647059, 0.85882354, 1)
+shader_parameter/cursor_light_color = Color(1, 0.6627451, 0.88235295, 1)
 shader_parameter/fill = 0.0
 shader_parameter/glow_radius = 350.0
 shader_parameter/glow_exponent = 2.0
@@ -82,72 +82,6 @@ content_margin_bottom = 2.0
 font_color = Color(1, 1, 1, 0.2509804)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8cypg"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dccrs"]
-content_margin_top = 6.0
-content_margin_bottom = 6.0
-bg_color = Color(0, 0, 0, 1)
-border_width_bottom = 2
-border_color = Color(0.7882353, 0, 0.27058825, 1)
-border_blend = true
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-expand_margin_left = 16.0
-expand_margin_right = 16.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i21mh"]
-content_margin_top = 6.0
-content_margin_bottom = 6.0
-bg_color = Color(0.1254902, 0.1254902, 0.1254902, 1)
-border_width_bottom = 2
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-expand_margin_left = 16.0
-expand_margin_right = 16.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6xsea"]
-content_margin_top = 6.0
-content_margin_bottom = 6.0
-bg_color = Color(0.09411765, 0.09411765, 0.09411765, 1)
-border_width_bottom = 2
-border_color = Color(0.7882353, 0, 0.27058825, 1)
-border_blend = true
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-expand_margin_left = 16.0
-expand_margin_right = 16.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8wv8f"]
-content_margin_top = 6.0
-content_margin_bottom = 6.0
-bg_color = Color(0.09411765, 0.09411765, 0.09411765, 1)
-border_width_bottom = 2
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-expand_margin_left = 16.0
-expand_margin_right = 16.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wk5qh"]
-content_margin_top = 6.0
-content_margin_bottom = 6.0
-bg_color = Color(0, 0, 0, 0.23529412)
-border_color = Color(1, 1, 1, 1)
-border_blend = true
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-expand_margin_left = 16.0
-expand_margin_right = 16.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4d08m"]
 
@@ -826,11 +760,6 @@ theme = ExtResource("4_4d08m")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/icon_max_width = 32
 theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_dccrs")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_i21mh")
-theme_override_styles/hover = SubResource("StyleBoxFlat_6xsea")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_8wv8f")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_wk5qh")
 text = "START"
 icon = ExtResource("20_ir45w")
 icon_alignment = 2

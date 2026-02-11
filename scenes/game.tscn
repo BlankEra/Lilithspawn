@@ -251,8 +251,382 @@ stretch = true
 transparent_bg = true
 handle_input_locally = false
 screen_space_aa = 1
+<<<<<<< HEAD
 size = Vector2i(1280, 720)
 render_target_update_mode = 0
+=======
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport" unique_id=112686709]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.75)
+current = true
+fov = 70.0
+size = 5.0
+
+[node name="Notes" type="MultiMeshInstance3D" parent="SubViewportContainer/SubViewport" unique_id=77746100]
+material_override = SubResource("StandardMaterial3D_73q55")
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_almyi")
+script = ExtResource("3_ew8wr")
+
+[node name="Grid" type="MeshInstance3D" parent="SubViewportContainer/SubViewport" unique_id=730517176]
+mesh = SubResource("QuadMesh_aih2q")
+skeleton = NodePath("../../..")
+
+[node name="CursorTrail" type="MultiMeshInstance3D" parent="SubViewportContainer/SubViewport" unique_id=913051903]
+material_override = SubResource("StandardMaterial3D_ssr8x")
+multimesh = SubResource("MultiMesh_e28va")
+
+[node name="Cursor" type="MeshInstance3D" parent="SubViewportContainer/SubViewport" unique_id=292067677]
+mesh = SubResource("QuadMesh_xij4d")
+skeleton = NodePath("../../..")
+
+[node name="Health" type="MeshInstance3D" parent="SubViewportContainer/SubViewport" unique_id=449857227]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, -6.3, -10)
+visible = false
+cast_shadow = 0
+mesh = SubResource("QuadMesh_b1hbo")
+skeleton = NodePath("../../..")
+
+[node name="HealthViewport" type="SubViewport" parent="SubViewportContainer/SubViewport/Health" unique_id=1637011839]
+disable_3d = true
+transparent_bg = true
+canvas_item_default_texture_filter = 2
+size = Vector2i(544, 40)
+size_2d_override = Vector2i(1088, 80)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="Background" type="TextureRect" parent="SubViewportContainer/SubViewport/Health/HealthViewport" unique_id=2016213185]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_bbly8")
+
+[node name="Main" type="TextureRect" parent="SubViewportContainer/SubViewport/Health/HealthViewport" unique_id=366630384]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_wjg6i")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="ProgressBar" type="MeshInstance3D" parent="SubViewportContainer/SubViewport" unique_id=528447019]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 6.3, -10)
+visible = false
+cast_shadow = 0
+mesh = SubResource("QuadMesh_7mook")
+skeleton = NodePath("../../..")
+
+[node name="ProgressBarViewport" type="SubViewport" parent="SubViewportContainer/SubViewport/ProgressBar" unique_id=658400463]
+disable_3d = true
+transparent_bg = true
+canvas_item_default_texture_filter = 2
+size = Vector2i(544, 40)
+size_2d_override = Vector2i(1088, 80)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="Background" type="TextureRect" parent="SubViewportContainer/SubViewport/ProgressBar/ProgressBarViewport" unique_id=1129572664]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_eu3ux")
+
+[node name="Main" type="TextureRect" parent="SubViewportContainer/SubViewport/ProgressBar/ProgressBarViewport" unique_id=2016165310]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_nde5v")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Video" type="MeshInstance3D" parent="SubViewportContainer/SubViewport" unique_id=1036410191]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.479675, -0.459572, -99.9929)
+visible = false
+material_override = SubResource("StandardMaterial3D_rj3ky")
+transparency = 1.0
+cast_shadow = 0
+mesh = SubResource("QuadMesh_3p7x2")
+skeleton = NodePath("../../..")
+
+[node name="VideoViewport" type="SubViewport" parent="SubViewportContainer/SubViewport/Video" unique_id=866766269]
+transparent_bg = true
+canvas_item_default_texture_filter = 2
+size = Vector2i(1920, 1080)
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="SubViewportContainer/SubViewport/Video/VideoViewport" unique_id=61327167]
+material = SubResource("ShaderMaterial_4qlgx")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+volume_db = -80.0
+expand = true
+
+[node name="PanelLeft" type="MeshInstance3D" parent="SubViewportContainer/SubViewport" unique_id=2045187203]
+transform = Transform3D(0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, 0.984808, -7.5, 0, -9)
+visible = false
+material_override = SubResource("StandardMaterial3D_nody0")
+mesh = SubResource("QuadMesh_ssyve")
+skeleton = NodePath("../../..")
+
+[node name="PanelLeftViewport" type="SubViewport" parent="SubViewportContainer/SubViewport/PanelLeft" unique_id=944518522]
+disable_3d = true
+transparent_bg = true
+canvas_item_default_texture_filter = 2
+size = Vector2i(250, 625)
+
+[node name="Background" type="TextureRect" parent="SubViewportContainer/SubViewport/PanelLeft/PanelLeftViewport" unique_id=1374853699]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_sdncv")
+
+[node name="MultiplierProgress" type="Panel" parent="SubViewportContainer/SubViewport/PanelLeft/PanelLeftViewport" unique_id=1067613329]
+clip_children = 2
+material = SubResource("ShaderMaterial_x2xye")
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.65
+anchor_right = 0.5
+anchor_bottom = 0.65
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_56f8v")
+
+[node name="Score" type="Label" parent="SubViewportContainer/SubViewport/PanelLeft/PanelLeftViewport" unique_id=1330190508]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.35
+anchor_right = 0.5
+anchor_bottom = 0.35
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_rvp5o")
+text = "0"
+label_settings = SubResource("LabelSettings_usmyc")
+horizontal_alignment = 1
+
+[node name="Multiplier" type="Label" parent="SubViewportContainer/SubViewport/PanelLeft/PanelLeftViewport" unique_id=1660490363]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.65
+anchor_right = 0.5
+anchor_bottom = 0.65
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_rvp5o")
+text = "1x"
+label_settings = SubResource("LabelSettings_usmyc")
+horizontal_alignment = 1
+
+[node name="PanelRight" type="MeshInstance3D" parent="SubViewportContainer/SubViewport" unique_id=1993445313]
+transform = Transform3D(0.984808, 0, -0.173648, 0, 1, 0, 0.173648, 0, 0.984808, 9, 0, -9)
+material_override = SubResource("StandardMaterial3D_ro5ir")
+mesh = SubResource("QuadMesh_ssyve")
+skeleton = NodePath("../../..")
+
+[node name="PanelRightViewport" type="SubViewport" parent="SubViewportContainer/SubViewport/PanelRight" unique_id=623021244]
+process_mode = 3
+disable_3d = true
+transparent_bg = true
+canvas_item_default_texture_filter = 2
+size = Vector2i(250, 625)
+
+[node name="Background" type="TextureRect" parent="SubViewportContainer/SubViewport/PanelRight/PanelRightViewport" unique_id=1856482217]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_whe6p")
+
+[node name="Accuracy" type="Label" parent="SubViewportContainer/SubViewport/PanelRight/PanelRightViewport" unique_id=1669266042]
+visible = false
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.35
+anchor_right = 0.5
+anchor_bottom = 0.35
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_rvp5o")
+text = "100.00%"
+label_settings = SubResource("LabelSettings_usmyc")
+horizontal_alignment = 1
+
+[node name="Hits" type="Label" parent="SubViewportContainer/SubViewport/PanelRight/PanelRightViewport" unique_id=2096630009]
+anchors_preset = -1
+anchor_top = 0.625
+anchor_right = 0.53
+anchor_bottom = 0.68
+offset_left = 53.0
+offset_top = -21.625
+offset_right = 70.0
+offset_bottom = 13.375
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(2, 2)
+size_flags_horizontal = 4
+theme = ExtResource("4_rvp5o")
+text = "0"
+label_settings = SubResource("LabelSettings_5bid2")
+
+[node name="Misses" type="Label" parent="SubViewportContainer/SubViewport/PanelRight/PanelRightViewport" unique_id=1379241442]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.625
+anchor_right = 0.5
+anchor_bottom = 0.625
+offset_left = -72.0
+offset_top = 45.375
+offset_right = 15.0
+offset_bottom = 80.375
+grow_vertical = 2
+scale = Vector2(2, 2)
+size_flags_horizontal = 4
+theme = ExtResource("4_rvp5o")
+text = "0"
+label_settings = SubResource("LabelSettings_v63ri")
+
+[node name="SimpleMisses" type="Label" parent="SubViewportContainer/SubViewport/PanelRight/PanelRightViewport" unique_id=1871751782]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_rvp5o")
+text = "0"
+label_settings = SubResource("LabelSettings_g4ffu")
+
+[node name="Sum" type="Label" parent="SubViewportContainer/SubViewport/PanelRight/PanelRightViewport" unique_id=150248329]
+visible = false
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.7
+anchor_right = 0.5
+anchor_bottom = 0.7
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_rvp5o")
+text = "0"
+label_settings = SubResource("LabelSettings_s1j5a")
+horizontal_alignment = 1
+
+[node name="HitsIcon" type="TextureRect" parent="SubViewportContainer/SubViewport/PanelRight/PanelRightViewport" unique_id=482771805]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.625
+anchor_right = 0.5
+anchor_bottom = 0.625
+offset_left = -120.0
+offset_top = -10.625
+offset_right = -101.0
+offset_bottom = 8.375
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(2, 2)
+theme = ExtResource("4_rvp5o")
+texture = ExtResource("13_6rhgc")
+expand_mode = 2
+
+[node name="MissesIcon" type="TextureRect" parent="SubViewportContainer/SubViewport/PanelRight/PanelRightViewport" unique_id=901292564]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.625
+anchor_right = 0.5
+anchor_bottom = 0.625
+offset_left = -120.0
+offset_top = 59.375
+offset_right = -101.0
+offset_bottom = 78.375
+grow_vertical = 2
+scale = Vector2(2, 2)
+theme = ExtResource("4_rvp5o")
+texture = ExtResource("14_bqf11")
+expand_mode = 2
+
+[node name="Line" type="ColorRect" parent="SubViewportContainer/SubViewport/PanelRight/PanelRightViewport" unique_id=629344643]
+visible = false
+material = SubResource("ShaderMaterial_gc8yu")
+anchors_preset = -1
+anchor_top = 0.65
+anchor_right = 1.0
+anchor_bottom = 0.65
+offset_left = 16.0
+offset_right = -16.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Progress" type="Label3D" parent="SubViewportContainer/SubViewport" unique_id=496335082]
+transform = Transform3D(3.5, 0, 0, 0, 3.38074, -0.905867, 0, 0.905867, 3.38074, 0, 7, -10)
+visible = false
+pixel_size = 0.0025
+modulate = Color(1, 1, 1, 0.74509805)
+outline_modulate = Color(0, 0, 0, 0)
+text = "0:00 / 0:00"
+font = ExtResource("12_axsek")
+font_size = 64
+
+[node name="Title" type="Label3D" parent="SubViewportContainer/SubViewport" unique_id=841289409]
+transform = Transform3D(2, 0, 0, 0, 1.93185, -0.517638, 0, 0.517638, 1.93185, 0, 8.25, -10)
+visible = false
+outline_modulate = Color(0, 0, 0, 0)
+text = "N/A - N/A"
+font = ExtResource("12_axsek")
+font_size = 64
+autowrap_mode = 3
+width = 2500.0
+
+[node name="Combo" type="Label3D" parent="SubViewportContainer/SubViewport" unique_id=1330017059]
+transform = Transform3D(7, 0, 0, 0, 6.89365, -1.21554, 0, 1.21554, 6.89365, 0, 3.5, -10)
+visible = false
+pixel_size = 0.0025
+modulate = Color(1, 1, 1, 0)
+outline_modulate = Color(1, 1, 1, 0.39215687)
+text = "0"
+font = ExtResource("5_pxgh4")
+font_size = 64
+outline_size = 4
+
+[node name="Speed" type="Label3D" parent="SubViewportContainer/SubViewport" unique_id=1294863906]
+transform = Transform3D(7, 0, 0, 0, 6.76148, 1.81173, 0, -1.81173, 6.76148, 0, -7.5, -10)
+pixel_size = 0.0025
+modulate = Color(1, 1, 1, 0.39215687)
+outline_modulate = Color(0, 0, 0, 0)
+text = "1.00x"
+font = ExtResource("5_pxgh4")
+
+[node name="Skip" type="Label3D" parent="SubViewportContainer/SubViewport" unique_id=1231864437]
+transform = Transform3D(7, 0, 0, 0, 6.76148, 1.81173, 0, -1.81173, 6.76148, 0, -5, -10)
+pixel_size = 0.0025
+modulate = Color(1, 1, 1, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Press Space to skip"
+font = ExtResource("12_axsek")
+>>>>>>> 3686f24 (Initial early-26feb05 version)
 
 [node name="ReplayViewer" type="Panel" parent="." unique_id=1117476839]
 visible = false

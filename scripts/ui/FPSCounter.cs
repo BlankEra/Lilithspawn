@@ -3,10 +3,11 @@ using System;
 
 public partial class FPSCounter : Label
 {
-    public uint Frames = 0;
+	public uint Frames = 0;
 
-    private double time = 0;
+	private double time = 0;
 
+<<<<<<< HEAD
     public override void _Ready()
     {
         var settings = SettingsManager.Instance.Settings;
@@ -29,4 +30,19 @@ public partial class FPSCounter : Label
             Frames = 0;
         }
     }
+=======
+	public override void _Process(double delta)
+	{
+		Frames++;
+		time += delta;
+
+		if (time >= 1)
+		{
+			Text = $"{Frames} FPS";
+			
+			time--;
+			Frames = 0;
+		}
+	}
+>>>>>>> 3686f24 (Initial early-26feb05 version)
 }

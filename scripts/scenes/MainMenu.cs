@@ -89,6 +89,7 @@ public partial class MainMenu : BaseScene
 
 		MapInfo.InfoContainer?.Refresh();
 		SceneManager.Space?.UpdateState(false);
+<<<<<<< HEAD
 
 		var map = MapManager.Selected.Value;
 
@@ -96,6 +97,8 @@ public partial class MainMenu : BaseScene
 		{
 			SceneManager.Space?.UpdateMap(map);
 		}
+=======
+>>>>>>> 3686f24 (Initial early-26feb05 version)
 	}
 
 	public void Transition(Panel menu, bool instant = false)

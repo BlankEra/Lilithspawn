@@ -15,10 +15,10 @@ corner_radius_bottom_left = 5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ii2dr"]
 shader = ExtResource("1_si20u")
-shader_parameter/outline_color = Color(0.05, 0.05, 0.05, 1)
+shader_parameter/outline_color = Color(0.4117647, 0, 0.32156864, 1)
 shader_parameter/outline_opacity = 1.0
-shader_parameter/light_color = Color(0.79, 0, 0.27, 1)
-shader_parameter/cursor_light_color = Color(1, 1, 1, 0.1254902)
+shader_parameter/light_color = Color(1, 0.5647059, 0.85882354, 1)
+shader_parameter/cursor_light_color = Color(1, 0.6627451, 0.88235295, 1)
 shader_parameter/fill = 0.0
 shader_parameter/glow_radius = 350.0
 shader_parameter/glow_exponent = 2.0
@@ -83,6 +83,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_xysv8")
 theme_override_styles/panel = SubResource("StyleBoxFlat_oqmn1")
 
 [node name="CoverBackground" type="TextureRect" parent="Holder" unique_id=2122755475]
@@ -180,4 +181,5 @@ grow_vertical = 2
 focus_mode = 0
 mouse_filter = 1
 mouse_default_cursor_shape = 2
+theme = ExtResource("3_xysv8")
 flat = true

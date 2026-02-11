@@ -72,7 +72,10 @@ public partial class Waves : BaseSpace
 		if (Playing)
 		{
 			skyMaterial.SetShaderParameter("image_a", empty);
+<<<<<<< HEAD
 			skyMaterial.SetShaderParameter("image_b", empty);
+=======
+>>>>>>> 3686f24 (Initial early-26feb05 version)
 			skyMaterial.SetShaderParameter("image_lerp", 0.0);
 		}
 	}
