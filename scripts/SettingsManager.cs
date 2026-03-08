@@ -10,16 +10,11 @@ using Godot.Collections;
 [GlobalClass]
 public partial class SettingsManager : Node
 {
-<<<<<<< HEAD
-    public static bool Shown = false;
-
-    public static bool HideNotifications = false;
-
-    public static ColorRect Menu;
-=======
 	public static bool Shown = false;
+
+	public static bool HideNotifications = false;
+
 	public static ColorRect Menu;
->>>>>>> 3686f24 (Initial early-26feb05 version)
 
 	public static SettingsManager Instance { get; private set; }
 
@@ -137,35 +132,30 @@ public partial class SettingsManager : Node
 			return File.ReadAllText(file);
 		}
 
-<<<<<<< HEAD
-        return "default";
-    }
-
-    // the HideNotifications bool exists to prevent a lot of toasts that inform the user of changing the skin to "default",
-    // this bool is only used inside of SkinManager - line 164.
-    public static void ResetToDefaults()
-    {
-        HideNotifications = true;
-
-        SettingsProfile defaults = new SettingsProfile();
-
-        foreach(var property in typeof(SettingsProfile).GetProperties())
-        {
-            if (!typeof(ISettingsItem).IsAssignableFrom(property.PropertyType)) continue;
-
-            ISettingsItem current = (ISettingsItem)property.GetValue(Instance.Settings);
-            ISettingsItem defs = (ISettingsItem)property.GetValue(defaults);
-
-            current.SetVariant(defs.GetVariant());
-        }
-
-        Save();
-        HideNotifications = false;
-
-        ToastNotification.Notify("Settings reset to default successfully!");
-    }
-=======
 		return "default";
 	}
->>>>>>> 3686f24 (Initial early-26feb05 version)
+
+	// the HideNotifications bool exists to prevent a lot of toasts that inform the user of changing the skin to "default",
+	// this bool is only used inside of SkinManager - line 164.
+	public static void ResetToDefaults()
+	{
+		HideNotifications = true;
+
+		SettingsProfile defaults = new SettingsProfile();
+
+		foreach(var property in typeof(SettingsProfile).GetProperties())
+		{
+			if (!typeof(ISettingsItem).IsAssignableFrom(property.PropertyType)) continue;
+
+			ISettingsItem current = (ISettingsItem)property.GetValue(Instance.Settings);
+			ISettingsItem defs = (ISettingsItem)property.GetValue(defaults);
+
+			current.SetVariant(defs.GetVariant());
+		}
+
+		Save();
+		HideNotifications = false;
+
+		ToastNotification.Notify("Settings reset to default successfully!");
+	}
 }

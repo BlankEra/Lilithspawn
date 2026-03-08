@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://do18270a428ma"]
 
 [ext_resource type="Script" uid="uid://j2paynyu362u" path="res://scripts/scenes/MainMenu.cs" id="1_yxnar"]
-[ext_resource type="Shader" uid="uid://dx4dgmcrghkcs" path="res://scripts/shaders/purpleshader.gdshader" id="2_akqfu"]
+[ext_resource type="Shader" uid="uid://dm1fxnl0so3y4" path="res://scripts/shaders/purpleshader.gdshader" id="2_k5xsf"]
 [ext_resource type="Script" uid="uid://dluebshtuc3vx" path="res://scripts/ui/menu/ImportDialog.cs" id="2_yxnar"]
 [ext_resource type="Shader" uid="uid://cqqs8uux7hqyb" path="res://scripts/shaders/ui_blur.gdshader" id="4_1a85y"]
 [ext_resource type="FontFile" uid="uid://dotb3skhwouha" path="res://fonts/Roboto-Bold.ttf" id="5_hl5e0"]
@@ -49,7 +49,7 @@
 [ext_resource type="Script" uid="uid://bss5l0q8yh47u" path="res://scripts/ui/menu/extras/CreditsPanel.cs" id="39_b4jiv"]
 [ext_resource type="Texture2D" uid="uid://de86kol23e55h" path="res://textures/ui/github.png" id="41_akqfu"]
 [ext_resource type="Texture2D" uid="uid://c60rl8itmawe7" path="res://textures/ui/github_pressed.png" id="42_mb34c"]
-[ext_resource type="Texture2D" uid="uid://btiqb74p84tgc" path="res://textures/cutesquircle64nobg.png" id="43_akqfu"]
+[ext_resource type="Texture2D" uid="uid://btiqb74p84tgc" path="res://textures/cutesquircle64nobg.png" id="43_71lbq"]
 [ext_resource type="Texture2D" uid="uid://cfl8us0rpkpqs" path="res://textures/ui/github_hovered.png" id="43_sgh51"]
 [ext_resource type="Script" uid="uid://c1235cyjfh4rl" path="res://scripts/ui/LinkPopupButton.cs" id="44_ybca7"]
 [ext_resource type="Texture2D" uid="uid://8du82a5dxjdk" path="res://user/skins/default/ui/jukebox_play.png" id="48_q1l3m"]
@@ -64,7 +64,7 @@ resource_name = "Phoenix"
 default_font = SubResource("SystemFont_lsskb")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2672j"]
-shader = ExtResource("2_akqfu")
+shader = ExtResource("2_k5xsf")
 shader_parameter/time_speed = 1.0
 shader_parameter/flip_y = false
 shader_parameter/sea_color_dark = Color(0.17254902, 0.050980393, 0.21568628, 1)
@@ -78,7 +78,7 @@ shader_parameter/light_shaft_color = Color(0.3647059, 0.09803922, 0.26666668, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dr6yk"]
 shader = ExtResource("4_1a85y")
-shader_parameter/brightness = 0.5
+shader_parameter/brightness = 0.9
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mb34c"]
 content_margin_left = 16.0
@@ -93,7 +93,7 @@ corner_radius_bottom_left = 3
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l7ueg"]
 shader = ExtResource("4_1a85y")
-shader_parameter/brightness = 0.5
+shader_parameter/brightness = 0.9
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wadof"]
 bg_color = Color(1, 1, 1, 1)
@@ -101,6 +101,7 @@ bg_color = Color(1, 1, 1, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_0uejd"]
 font = ExtResource("5_hl5e0")
 font_size = 36
+font_color = Color(1, 1, 1, 0.78431374)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5gt56"]
 bg_color = Color(0, 0, 0, 0.0627451)
@@ -142,15 +143,11 @@ content_margin_left = 8.0
 content_margin_top = 8.0
 content_margin_right = 8.0
 content_margin_bottom = 8.0
-<<<<<<< HEAD
-bg_color = Color(0, 0, 0, 0.47058824)
-=======
 bg_color = Color(0, 0, 0, 0.1254902)
->>>>>>> 3686f24 (Initial early-26feb05 version)
 corner_radius_top_left = 2
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b4jiv"]
 content_margin_left = 16.0
@@ -159,7 +156,7 @@ content_margin_right = 8.0
 content_margin_bottom = 8.0
 bg_color = Color(0.2, 0.2, 0.2, 0.078431375)
 border_width_left = 8
-border_color = Color(1, 0.566642, 0.86027014, 1)
+border_color = Color(1, 0.5647059, 0.85882354, 1)
 border_blend = true
 corner_radius_top_left = 2
 corner_radius_top_right = 8
@@ -212,8 +209,6 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="Theme" id="Theme_akqfu"]
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vanrq"]
 content_margin_left = 2.0
 content_margin_top = 4.0
@@ -231,7 +226,7 @@ border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.8, 0.8, 0.8, 0)
+border_color = Color(0.12, 0.12, 0.12, 1)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
@@ -292,27 +287,13 @@ content_margin_top = 4.0
 content_margin_right = 4.0
 content_margin_bottom = 4.0
 
-<<<<<<< HEAD
-=======
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_l7ueg"]
-shader = ExtResource("4_1a85y")
-shader_parameter/brightness = 0.9
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wadof"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-
->>>>>>> 3686f24 (Initial early-26feb05 version)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h3j6r"]
 shader = ExtResource("4_1a85y")
 shader_parameter/brightness = 0.9
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_engjn"]
 shader = ExtResource("27_engjn")
-shader_parameter/color_fill = Color(0.93, 0, 0.8060001, 0.5019608)
+shader_parameter/color_fill = Color(0.92941177, 0, 0.80784315, 0.5019608)
 shader_parameter/color_background = Color(1, 0.7921569, 0.8039216, 0.74509805)
 shader_parameter/progress = 0.0
 shader_parameter/margin = 0.0
@@ -324,23 +305,15 @@ draw_center = false
 [sub_resource type="LabelSettings" id="LabelSettings_wksxa"]
 font = ExtResource("7_6h3lr")
 font_size = 17
-outline_size = 2
+outline_size = 1
 outline_color = Color(0, 0, 0, 1)
-shadow_size = 8
+shadow_size = 6
 shadow_color = Color(0, 0, 0, 0.5019608)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71lbq"]
-bg_color = Color(0, 0, 0, 0.3764706)
-draw_center = false
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t0m3h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_akqfu"]
-bg_color = Color(0, 0, 0, 0.8784314)
+bg_color = Color(0, 0, 0, 0.78431374)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
@@ -348,10 +321,10 @@ corner_radius_bottom_left = 4
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mb34c"]
 shader = ExtResource("30_q13xq")
-shader_parameter/outline_color = Color(0.7882353, 0, 0.27058825, 1)
+shader_parameter/outline_color = Color(0.4117647, 0, 0.32156864, 1)
 shader_parameter/outline_opacity = 1.0
-shader_parameter/light_color = Color(0.79, 0, 0.27, 1)
-shader_parameter/cursor_light_color = Color(0.15, 0.15, 0.15, 1)
+shader_parameter/light_color = Color(1, 0.5647059, 0.85882354, 1)
+shader_parameter/cursor_light_color = Color(1, 0.6627451, 0.88235295, 1)
 shader_parameter/fill = 0.0
 shader_parameter/glow_radius = 350.0
 shader_parameter/glow_exponent = 2.0
@@ -376,10 +349,9 @@ UseMenuSpace = true
 
 [node name="VideoDialog" type="FileDialog" parent="." unique_id=1304771911]
 auto_translate_mode = 1
-oversampling_override = 1.0
 title = "Open a File"
 initial_position = 2
-size = Vector2i(515, 176)
+size = Vector2i(454, 175)
 theme = SubResource("Theme_nlclj")
 ok_button_text = "Open"
 file_mode = 0
@@ -387,10 +359,6 @@ access = 2
 use_native_dialog = true
 
 [node name="Background" type="ColorRect" parent="." unique_id=1217307991]
-<<<<<<< HEAD
-visible = false
-=======
->>>>>>> 3686f24 (Initial early-26feb05 version)
 material = SubResource("ShaderMaterial_2672j")
 anchors_preset = 15
 anchor_right = 1.0
@@ -558,7 +526,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_u43bj")
 script = ExtResource("10_eku7s")
 
 [node name="Tile" type="TextureRect" parent="Menus/Play/Background" unique_id=2056220550]
-visible = false
 material = SubResource("ShaderMaterial_eku7s")
 layout_mode = 1
 anchors_preset = 15
@@ -864,7 +831,7 @@ anchor_bottom = 0.5
 offset_left = 32.0
 grow_horizontal = 0
 grow_vertical = 2
-theme = SubResource("Theme_akqfu")
+theme = ExtResource("6_engjn")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_styles/normal = SubResource("StyleBoxEmpty_vanrq")
 theme_override_styles/focus = SubResource("StyleBoxFlat_rqeco")
@@ -1643,7 +1610,7 @@ text = "[font_size=20]allusionist
 fit_content = true
 horizontal_alignment = 1
 
-[node name="blankera" type="RichTextLabel" parent="Menus/Extras/Credits/ScrollContainer/VBoxContainer" unique_id=678498634]
+[node name="blankera" type="RichTextLabel" parent="Menus/Extras/Credits/ScrollContainer/VBoxContainer" unique_id=366300725]
 modulate = Color(0.7490196, 0.3764706, 0.6745098, 1)
 layout_mode = 2
 bbcode_enabled = true
@@ -1664,9 +1631,10 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eku7s")
 
 [node name="TopBar" type="Panel" parent="." unique_id=560351556]
-anchors_preset = -1
+anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 72.0
+grow_horizontal = 2
 mouse_filter = 2
 theme = ExtResource("6_engjn")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_18lcc")
@@ -1685,16 +1653,11 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_wadof")
 layout_mode = 1
 anchors_preset = -1
 anchor_bottom = 1.0
-<<<<<<< HEAD
-offset_left = 6.0
-offset_top = 8.0
-offset_bottom = -8.0
-texture = ExtResource("18_eku7s")
-=======
 offset_left = 4.0
+offset_top = 4.0
 offset_right = 68.0
-texture = ExtResource("43_akqfu")
->>>>>>> 3686f24 (Initial early-26feb05 version)
+offset_bottom = -4.0
+texture = ExtResource("43_71lbq")
 expand_mode = 2
 stretch_mode = 5
 
@@ -1711,11 +1674,7 @@ grow_vertical = 2
 theme_override_fonts/normal_font = ExtResource("19_c6nra")
 theme_override_font_sizes/normal_font_size = 18
 bbcode_enabled = true
-<<<<<<< HEAD
-text = "Rhythia [font_size=12][color=ffffffa0]early-26feb22"
-=======
-text = "Lilithspawn [font_size=12][color=ffffffa0]early-26feb05"
->>>>>>> 3686f24 (Initial early-26feb05 version)
+text = "Lilithspawn [font_size=12][color=ffffffa0]early-26feb22"
 shortcut_keys_enabled = false
 vertical_alignment = 1
 
@@ -1810,7 +1769,7 @@ Link = "https://discord.gg/kaFPWkfZeS"
 
 [node name="JukeboxPanel" type="Panel" parent="." unique_id=1253575]
 clip_contents = true
-anchors_preset = -1
+anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1849,7 +1808,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_engjn")
 script = ExtResource("27_hl5e0")
 MinFreq = 0
 MaxFreq = 6000
-BarColor = Color(1, 1, 1, 0.78431374)
 BarMinSize = 1.0
 Align = 1.0
 
@@ -1879,7 +1837,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_71lbq")
 
 [node name="GoTo" type="Button" parent="JukeboxPanel/Title" unique_id=1813448466]
 self_modulate = Color(1, 1, 1, 0.74509805)

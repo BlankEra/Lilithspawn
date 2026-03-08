@@ -23,7 +23,7 @@ config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
 boot_splash/image="uid://ch7ces8550dr"
-config/icon="uid://ubqgjgtip1wi"
+config/icon="uid://c2d7lekoty8oo"
 
 [audio]
 
