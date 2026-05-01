@@ -8,7 +8,7 @@
 [ext_resource type="Shader" uid="uid://d0g8fej0676c" path="res://scripts/shaders/linear_alpha_gradient.gdshader" id="6_frxlp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4823j"]
-bg_color = Color(1, 1, 1, 0.5019608)
+bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 5
 corner_radius_bottom_left = 5
 

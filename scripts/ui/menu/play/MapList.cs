@@ -1,10 +1,10 @@
-using Godot;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Godot;
 
 public partial class MapList : Panel, ISkinnable
 {
@@ -114,14 +114,33 @@ public partial class MapList : Panel, ISkinnable
         MouseExited += () => { toggleSelectionCursor(false); };
         Resized += clear;
         SkinManager.Instance.Loaded += UpdateSkin;
-        MapParser.Instance.MapsImportFinished += maps => {
+        MapParser.Instance.MapsImportFinished += maps =>
+        {
             MapCache.Load(false);
             UpdateMaps();
             Select(maps[0]);
         };
         MapManager.MapsInitialized += _ => UpdateMaps();
-        MapManager.MapUpdated += map => {
+        MapManager.MapUpdated += map =>
+        {
             UpdateMaps();
+        };
+        MapManager.MapDeleted += map =>
+        {
+            if (selectedMapID == map.Name)
+            {
+                selectedMapID = null;
+                if (MapManager.Maps.Count > 0)
+                {
+                    Callable.From(() => Select(MapManager.Maps[0], false)).CallDeferred();
+                }
+            }
+
+            Callable.From(() =>
+            {
+                clear();
+                UpdateMaps();
+            }).CallDeferred();
         };
 
         Task.Run(() => UpdateMaps());
@@ -319,8 +338,8 @@ public partial class MapList : Panel, ISkinnable
                 case Key.Space:
                     Control focused = GetViewport().GuiGetFocusOwner();
 
-					if (Lobby.Map != null && IsVisibleInTree() && focused is not LineEdit)
-					{
+                    if (Lobby.Map != null && IsVisibleInTree() && focused is not LineEdit)
+                    {
                         LegacyRunner.Play(Lobby.Map, Lobby.Speed, Lobby.StartFrom, Lobby.Modifiers);
                     }
                     break;
@@ -342,8 +361,25 @@ public partial class MapList : Panel, ISkinnable
         }
     }
 
-    public void Select(Map map, bool playIfPreSelected = true)
+    public bool Select(Map map, bool playIfPreSelected = true)
     {
+        if (map == null)
+        {
+            return false;
+        }
+
+        if (selectedMapID == map.Name)
+        {
+            if (playIfPreSelected)
+            {
+                LegacyRunner.Play(map, Lobby.Speed, Lobby.StartFrom, Lobby.Modifiers);
+            }
+
+            Focus(map);
+            SceneManager.Space?.UpdateMap(map);
+            return false;
+        }
+
         if (selectedMapID != null && selectedMapID != map.Name && mapButtons.TryGetValue(selectedMapID, out MapButton value))
         {
             value.Deselect();
@@ -352,16 +388,13 @@ public partial class MapList : Panel, ISkinnable
 
         MapManager.Select(map);
 
-        if (selectedMapID == map.Name && playIfPreSelected)
-        {
-            LegacyRunner.Play(Lobby.Map, Lobby.Speed, Lobby.StartFrom, Lobby.Modifiers);
-        }
 
         selectedMapID = map.Name;
 
         Focus(map);
 
-        SceneManager.Space.UpdateMap(map);
+        SceneManager.Space?.UpdateMap(map);
+        return true;
     }
 
     public void Focus(Map map)
@@ -438,7 +471,8 @@ public partial class MapList : Panel, ISkinnable
         button.HoveredSizeOffset = buttonHoverSize;
         button.SelectedSizeOffset = buttonSelectSize;
 
-        button.MouseHovered += (hovered) => {
+        button.MouseHovered += (hovered) =>
+        {
             if (hovered)
             {
                 hoveredButton = button;
@@ -450,10 +484,16 @@ public partial class MapList : Panel, ISkinnable
                 button.UpdateOutline(hovered ? 0.5f : 0);
             }
         };
-        button.Pressed += () => {
+        button.Pressed += () =>
+        {
             if (dragDistance < 500)
             {
-                Select(button.Map);
+                bool selectionChanged = Select(button.Map);
+
+                if (selectionChanged)
+                {
+                    SoundManager.StartMapSelectionPlayback(button.Map);
+                }
 
                 button.Select();
                 button.UpdateOutline(1.0f);
